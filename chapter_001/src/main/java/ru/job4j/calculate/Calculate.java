@@ -8,22 +8,22 @@ package ru.job4j.calculate; //ru.job4j.calculate - является элемен
  */
 public class Calculate {    //название класса, в котором набор команд описывающих поведение программы, код
 
-/**
- * Оптсание Метода
- * Конструктор, вывод строки в консоль
- * @param args = args
- */
-	public static void main(String[] args) {
-		System.out.println("Hello World");
-	}
-	
-/**
- * Method echo.
- * @param name Your name.
- * @return Echo plus your name.
- */
- public String echo(String name) {
-    return "Echo, echo, echo : " + name;
- }
-	
+    /**
+     * Описание Метода
+     * Конструктор, вывод строки в консоль
+     * @param args = args
+     */
+    public static void main(String[] args) {
+        System.out.println("Hello World");
+    }
+
+    /**
+     * Method echo.
+     * @param name Your name.
+     * @return Echo plus your name.
+     */
+    public String echo(String name) {
+        return "Echo, echo, echo : " + name;
+    }
+
 }
