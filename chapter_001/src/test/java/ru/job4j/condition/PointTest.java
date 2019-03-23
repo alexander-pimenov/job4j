@@ -10,5 +10,7 @@ public class PointTest {
         Point point = new Point();
         double result = point.distance(0, 0, 0, 10);
         assertThat(result, is(10D));
+        System.out.println("distance = "+result);
     }
+
 }
