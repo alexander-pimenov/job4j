@@ -11,7 +11,6 @@ public class ArrayCharTest {
         ArrayChar word = new ArrayChar("Hello");
         boolean result = word.startWith("He");
         assertThat(result, is(true));
-        //System.out.println(result);
     }
 
     @Test
@@ -19,6 +18,5 @@ public class ArrayCharTest {
         ArrayChar word = new ArrayChar("Hello");
         boolean result = word.startWith("Hi");
         assertThat(result, is(false));
-        //System.out.println(result);
     }
 }

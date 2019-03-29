@@ -10,7 +10,6 @@ public class CheckTest {
         boolean[] input = new boolean[] {true, true, true};
         boolean result = check.mono(input);
         assertThat(result, is(true));
-        //System.out.println(result);
     }
 
     @Test
@@ -19,7 +18,6 @@ public class CheckTest {
         boolean[] input = new boolean[] {true, false, true};
         boolean result = check.mono(input);
         assertThat(result, is(false));
-        //System.out.println(result);
     }
     @Test
     public void whenDataMonoByFalseThenTrue() {
@@ -27,6 +25,5 @@ public class CheckTest {
         boolean[] input = new boolean[] {false, false, false};
         boolean result = check.mono(input);
         assertThat(result, is(true));
-        //System.out.println(result);
     }
 }
