@@ -2,6 +2,7 @@ package ru.job4j.array;
 
 /**
  * Обертка над строкой.
+ * Метод toCharArray() создает из строки массив чаров (от англ. - char).
  */
 public class ArrayChar {
     private char[] data;

@@ -16,7 +16,7 @@ public class BoardTest {
         final String line = System.getProperty("line.separator");
         String expected = String.format("X X%s X %sX X%s", line, line, line);
         assertThat(result, is(expected));
-        //System.out.println(result);
+       //System.out.println(result);
     }
 
     @Test
