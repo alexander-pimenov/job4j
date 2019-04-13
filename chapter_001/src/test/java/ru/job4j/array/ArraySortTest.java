@@ -19,6 +19,7 @@ public class ArraySortTest {
         int[] result = newAr.merge(a, b);
         assertThat(result, is(expect));
     }
+
     @Test
     /*
      * здесь тест проверяет слияние двух отсортированных массивов из 4 элементов
