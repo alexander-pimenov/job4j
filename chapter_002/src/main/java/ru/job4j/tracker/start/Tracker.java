@@ -49,14 +49,14 @@ public class Tracker {
     /**
      * Метод реализующий редактирование заявок.
      *
-     * @param id, id items элемента
+     * @param id,   id items элемента
      * @param item, измененный
      */
     public boolean replace(String id, Item item) {
         boolean result = false;
-        for(int i=0; i != this.position; i++){
-            if(this.items[i].getId() != null && this.items[i].getId().equals(id)){
-                this.items[i]=item;
+        for (int i = 0; i != this.position; i++) {
+            if (this.items[i].getId() != null && this.items[i].getId().equals(id)) {
+                this.items[i] = item;
                 this.items[i].setId(id);
                 result = true;
                 break;
