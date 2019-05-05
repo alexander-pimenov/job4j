@@ -1,4 +1,4 @@
-package ru.job4j.models;
+package ru.job4j.tracker.models;
 /*
  * Item описывают бизнес модель заявки.
  * id (уникальный ключ), name - имя, desc - описание, time - время создания заявки.
