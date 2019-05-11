@@ -8,7 +8,7 @@ public class StubInput implements Input {
      * 0 - выбор пункта меня "добавить новую заявку".
      * name - имя заявки
      * desc - описание заявки
-     * 6 - выйти из трекера.
+     * 6, y - выйти из трекера.
      */
     private final String[] value;
 
@@ -34,4 +34,11 @@ public class StubInput implements Input {
     public String ask(String question) {
         return this.value[this.position++];
     }
+
+    @Override
+    public int ask(String question, int[] range) {
+        return Integer.valueOf(this.value[this.position++]);
+        //throw new UnsupportedOperationException("Unsupported operation");
+    }
+
 }

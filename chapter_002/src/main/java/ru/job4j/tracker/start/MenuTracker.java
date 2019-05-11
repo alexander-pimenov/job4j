@@ -58,18 +58,22 @@ public class MenuTracker {
      * @param key ключ операции
      */
     public void select(int key) {
-        if (key < this.actions.size()) {
-            this.actions.get(key).execute(this.input, this.tracker);
-        } else {
-            System.out.println("This menu item is not present."); //Такого пункта меню нет.
-            System.out.println("Select an existing menu item"); //Выберете нужный пункт.
-        }
+        this.actions.get(key).execute(this.input, this.tracker);
+
+/*Т.к. добавили exceptions, то эту проверку закомментировал*/
+//        if (key < this.actions.size()) {
+//            this.actions.get(key).execute(this.input, this.tracker);
+//        } else {
+//            System.out.println("This menu item is not present."); //Такого пункта меню нет.
+//            System.out.println("Select an existing menu item"); //Выберете нужный пункт.
+//        }
     }
 
     /**
      * Метод выводит на экран меню.
      */
     public void show() {
+        System.out.println("-------------- Menu --------------");
         for (UserAction action : this.actions) {
             if (action != null) {
                 System.out.println(action.info());
