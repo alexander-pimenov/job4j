@@ -2,10 +2,10 @@ package ru.job4j.tracker.start;
 
 import ru.job4j.tracker.models.Item;
 
-public class FindItemById implements UserAction {
-    @Override
-    public int key() {
-        return 4;
+public class FindItemById extends BaseAction {
+
+    protected FindItemById(int key, String name) {
+        super(key, name);
     }
 
     @Override
@@ -21,11 +21,5 @@ public class FindItemById implements UserAction {
             System.out.println("There is no item with this Id.");
         }
         System.out.println("-------------- End of search --------------");
-    }
-
-
-    @Override
-    public String info() {
-        return String.format("%s. %s", this.key(), "Find item by Id.");
     }
 }

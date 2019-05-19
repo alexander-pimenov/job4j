@@ -2,10 +2,10 @@ package ru.job4j.tracker.start;
 
 import ru.job4j.tracker.models.Item;
 
-public class UpdateItem implements UserAction {
-    @Override
-    public int key() {
-        return 2;
+public class UpdateItem extends BaseAction {
+
+    protected UpdateItem(int key, String name) {
+        super(key, name);
     }
 
     @Override
@@ -21,10 +21,5 @@ public class UpdateItem implements UserAction {
         } else {
             System.out.println(String.format("There is no items with this Id %s", id));
         }
-    }
-
-    @Override
-    public String info() {
-        return String.format("%s. %s", this.key(), "Edit item.");
     }
 }

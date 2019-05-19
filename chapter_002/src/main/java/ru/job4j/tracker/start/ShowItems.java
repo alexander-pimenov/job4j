@@ -2,12 +2,10 @@ package ru.job4j.tracker.start;
 
 import ru.job4j.tracker.models.Item;
 
-public class ShowItems implements UserAction {
+public class ShowItems extends BaseAction {
 
-
-    @Override
-    public int key() {
-        return 1;
+    protected ShowItems(int key, String name) {
+        super(key, name);
     }
 
     @Override
@@ -19,10 +17,5 @@ public class ShowItems implements UserAction {
                     item.getId(), item.getName(), item.getDesc()));
         }
         System.out.println("--------------- End of list ---------------");
-    }
-
-    @Override
-    public String info() {
-        return String.format("%s. %s", this.key(), "Show all items.");
     }
 }

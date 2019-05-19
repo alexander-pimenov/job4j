@@ -2,10 +2,10 @@ package ru.job4j.tracker.start;
 
 import ru.job4j.tracker.models.Item;
 
-public class DeleteItem implements UserAction {
-    @Override
-    public int key() {
-        return 3;
+public class DeleteItem extends BaseAction {
+
+    public DeleteItem(int key, String name) {
+        super(key, name);
     }
 
     @Override
@@ -21,17 +21,5 @@ public class DeleteItem implements UserAction {
         } else {
             System.out.println(String.format("There is no items with this Id %s", id));
         }
-
-//        boolean deleted = tracker.delete(id);
-//        if (deleted) {
-//            System.out.println("------------ Item was deleted --------------");
-//        } else {
-//            System.out.println(String.format("There is no items with Id %s", id));
-//        }
-    }
-
-    @Override
-    public String info() {
-        return String.format("%s. %s", this.key(), "Delete item.");
     }
 }

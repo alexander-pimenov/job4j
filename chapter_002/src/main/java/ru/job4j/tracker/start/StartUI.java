@@ -67,13 +67,22 @@ public class StartUI {
         for (int i = 0; i < menu.getActionsLentgh(); i++) {
             range[i] = i;
         }
+
+
+///*преобразование List<Integer> в int[], чтоб использовать в menu.select(input.ask("select:", rangeInt));*/
 //        List<Integer> range = new ArrayList<>();
 //        for (int i=0; i<menu.getActionsLentgh(); i++){
 //            range.add(i);
 //        }
+//        int [] rangeInt = new int[range.size()];
+//        for (int i=0; i<range.size(); i++){
+//            rangeInt[i]=range.get(i);
+//        }
+
+
         do {
             menu.show();
-            menu.select(input.ask("select:", range));
+            menu.select(input.ask("Please select number:", range));
         } while (!"y".equals(this.input.ask("Exit?(y): ")));
 
 //        boolean exit = false;

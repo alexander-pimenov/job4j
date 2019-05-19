@@ -2,10 +2,10 @@ package ru.job4j.tracker.start;
 
 import ru.job4j.tracker.models.Item;
 
-public class FindItemsByName implements UserAction {
-    @Override
-    public int key() {
-        return 5;
+public class FindItemsByName extends BaseAction {
+
+    protected FindItemsByName(int key, String name) {
+        super(key, name);
     }
 
     @Override
@@ -24,11 +24,5 @@ public class FindItemsByName implements UserAction {
             System.out.println(String.format("There is no items with this name %s.", name));
         }
         System.out.println("------------- End of search ---------------");
-    }
-
-
-    @Override
-    public String info() {
-        return String.format("%s. %s", this.key(), "Find items by name.");
     }
 }

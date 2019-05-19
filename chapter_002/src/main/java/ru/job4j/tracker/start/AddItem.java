@@ -2,11 +2,10 @@ package ru.job4j.tracker.start;
 
 import ru.job4j.tracker.models.Item;
 
-public class AddItem implements UserAction {
+public class AddItem extends BaseAction {
 
-    @Override
-    public int key() {
-        return 0;
+    public AddItem(int key, String name) {
+        super(key, name);
     }
 
     @Override
@@ -22,8 +21,4 @@ public class AddItem implements UserAction {
 
     }
 
-    @Override
-    public String info() {
-        return String.format("%s. %s", this.key(), "Add new Item.");
-    }
 }
