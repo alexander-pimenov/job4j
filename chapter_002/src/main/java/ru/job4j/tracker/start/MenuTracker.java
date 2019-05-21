@@ -48,18 +48,18 @@ public class MenuTracker {
     /**
      * Метод заполняет массив. Регистрация событий.
      */
-    public void fillActions() {
+    public void fillActions(StartUI ui) {
         this.actions.add(new AddItem(0, "Add new Item."));
         this.actions.add(new ShowItems(1,"Show all items."));
         this.actions.add(new UpdateItem(2,"Edit item."));
         this.actions.add(new DeleteItem(3, "Delete item."));
         this.actions.add(new FindItemById(4, "Find item by Id."));
         this.actions.add(new FindItemsByName(5, "Find items by name."));
-        this.actions.add(new ExitProgram(6,"Exit Program." ));
+        this.actions.add(new ExitProgram(6,"Exit Program.", ui));
     }
 
     /**
-     * Метод в зависимости от указанного ключа, выполняет соотвествующие действие.
+     * Метод в зависимости от указанного ключа, выполняет соответствующее действие.
      * key это индекс в меню, совершенно любым он не может быть,
      * поэтому были введены исключения
      *

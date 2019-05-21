@@ -59,10 +59,12 @@ public class StartUI {
     /**
      * Основой цикл программы.
      */
+    private boolean working = true;
+
     public void init() {
 
         MenuTracker menu = new MenuTracker(this.input, this.tracker);
-        menu.fillActions();
+        menu.fillActions(this);
         int[] range = new int[menu.getActionsLentgh()];
         for (int i = 0; i < menu.getActionsLentgh(); i++) {
             range[i] = i;
@@ -83,7 +85,7 @@ public class StartUI {
         do {
             menu.show();
             menu.select(input.ask("Please select number:", range));
-        } while (!"y".equals(this.input.ask("Exit?(y): ")));
+        } while (this.working);
 
 //        boolean exit = false;
 //        while (!exit) {
@@ -110,6 +112,13 @@ public class StartUI {
 //                exit = true;
 //            }
 //        }
+    }
+
+    public void stop() {
+        if ("y".equals(this.input.ask("Do you want exit the program?(y): "))){
+            System.out.println("Goodbye!");
+            this.working = false;//основная строка для выхода из прогарммы!
+        }
     }
 
     /**
