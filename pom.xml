@@ -15,8 +15,10 @@
 
     <modules>
         <module>chapter_001</module>
-        <module>puzzle</module>
         <module>chapter_002</module>
+        <module>puzzle</module>
+        <module>chess</module>
+		
     </modules>
 
     <dependencies>

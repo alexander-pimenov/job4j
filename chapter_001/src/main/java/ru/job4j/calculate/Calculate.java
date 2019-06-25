@@ -14,7 +14,19 @@ public class Calculate {    //название класса, в котором �
      * @param args = args
      */
     public static void main(String[] args) {
+        /*проверяю в какое число преобразуются буквы*/
+        int i,j,k;
+        i='Ф';
+        j='п';
+        k='д';
+
         System.out.println("Hello World");
+        System.out.format("мы ввели: %s,  %s,  %s %n",i,j,k);
+       // System.out.println();
+
+        //int key = Integer.valueOf('i');
+        int key = 'i';
+        System.out.println(key);
     }
 
     /**
@@ -25,5 +37,7 @@ public class Calculate {    //название класса, в котором �
     public String echo(String name) {
         return "Echo, echo, echo : " + name;
     }
+
+
 
 }
