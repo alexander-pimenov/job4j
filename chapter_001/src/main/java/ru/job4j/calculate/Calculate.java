@@ -19,10 +19,18 @@ public class Calculate {    //название класса, в котором �
         i='Ф';
         j='п';
         k='д';
+//        int x=8;
+//        int y=4;
+//        int length = Math.max(Math.abs(x-y), Math.abs(y-x));
+
 
         System.out.println("Hello World");
         System.out.format("мы ввели: %s,  %s,  %s %n",i,j,k);
        // System.out.println();
+//        System.out.println("Math.abs");
+//        System.out.println("Math.abs(x-y)"+Math.abs(x-y));
+//        System.out.println("Math.abs(y-x)"+Math.abs(y-x));
+//        System.out.println("length = "+ length);
 
         //int key = Integer.valueOf('i');
         int key = 'i';
