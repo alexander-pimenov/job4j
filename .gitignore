@@ -26,5 +26,6 @@ target
 .idea
 *.iml
 samples
+/chapter_001/src/main/java/ru/job4j/samples/
 udemy
 out
