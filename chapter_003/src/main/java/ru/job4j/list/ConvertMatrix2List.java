@@ -1,7 +1,6 @@
 package ru.job4j.list;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class ConvertMatrix2List {
@@ -24,24 +23,24 @@ public class ConvertMatrix2List {
 //        }
     }
 
-    //main метод использовал для проверки
-    public static void main(String[] args) {
-
-        int[][] inputMatrixArray = {
-                {1, 2, 3},
-                {3, 4, 5},
-                {5, 6, 7}
-        };
-
-        //показать, что имеем
-        System.out.println(Arrays.deepToString(inputMatrixArray));
-
-        ConvertMatrix2List list = new ConvertMatrix2List();
-        List<Integer> listFromMatrixArray = list.toList(inputMatrixArray);
-
-        //показать результат
-        System.out.println(listFromMatrixArray);
-
-    }
+//    //main метод использовал для проверки
+//    public static void main(String[] args) {
+//
+//        int[][] inputMatrixArray = {
+//                {1, 2, 3},
+//                {3, 4, 5},
+//                {5, 6, 7}
+//        };
+//
+//        //показать, что имеем
+//        System.out.println(Arrays.deepToString(inputMatrixArray));
+//
+//        ConvertMatrix2List list = new ConvertMatrix2List();
+//        List<Integer> listFromMatrixArray = list.toList(inputMatrixArray);
+//
+//        //показать результат
+//        System.out.println(listFromMatrixArray);
+//
+//    }
 }
 
