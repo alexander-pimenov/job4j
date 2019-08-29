@@ -11,7 +11,7 @@ public class RunCoffeeMachine {
         //в параметрах cm.changes() сначала вводим value(купюру), а затем price(стоимость кофе)
         //иначе получим NegativeArraySizeException
         try {
-            result = cm.changes(60, 35);
+            result = cm.changes(64, 35);
         } catch (NegativeArraySizeException e) {
             System.out.println("Не достаточно денег");
         }
