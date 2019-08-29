@@ -20,7 +20,7 @@ public class MenuTracker {
      */
     private Tracker tracker;
     /**
-     * хранит ссылку на массив типа UserAction.
+     * хранит ссылку на список типа UserAction.
      * это те действия, которые описаны в нашей системе
      */
     private List<UserAction> actions = new ArrayList<>();
@@ -37,11 +37,11 @@ public class MenuTracker {
     }
 
     /**
-     * Метод для получения массива меню.
+     * Метод для получения списка меню.
      *
      * @return длину массива
      */
-    public int getActionsLentgh() {
+    public int getActionsLength() {
         return this.actions.size();
     }
 

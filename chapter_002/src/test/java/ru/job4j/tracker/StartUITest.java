@@ -150,7 +150,7 @@ public class StartUITest {
         //   создаём StartUI и вызываем метод init()
         new StartUI(input, tracker).init();
         // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
-        assertThat(tracker.findAll()[0].getName(), is("test name"));
+        assertThat(tracker.findAll().get(0).getName(), is("test name"));
     }
 
     /**
@@ -186,11 +186,11 @@ public class StartUITest {
         new StartUI(input, tracker).init();
 
         // проверяем, что количество элементов в трекере уменьшилось.
-        assertThat(tracker.findAll().length, is(2));
+        assertThat(tracker.findAll().size(), is(2));
 
         // проверяем, что массив в трекере содержит 2 элемента, введённые под номером item2 и item3.
-        assertThat(tracker.findAll()[0].getId(), is(item2.getId()));
-        assertThat(tracker.findAll()[1].getId(), is(item3.getId()));
+        assertThat(tracker.findAll().get(0).getId(), is(item2.getId()));
+        assertThat(tracker.findAll().get(1).getId(), is(item3.getId()));
     }
 
     /**

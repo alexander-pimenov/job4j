@@ -4,6 +4,8 @@ import org.junit.Test;
 import ru.job4j.tracker.models.Item;
 import ru.job4j.tracker.start.Tracker;
 
+import java.util.List;
+
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -51,15 +53,15 @@ public class TrackerTest {
         tracker.add(new Item("test2", "testDescription2", 122L));
         tracker.add(new Item("test3", "testDescription3", 123L));
         tracker.add(new Item("test3", "testDescription4", 124L));
-        Item[] items = tracker.findAll();
-        boolean b = tracker.delete(items[0].getId());
+        List<Item> items = tracker.findAll();
+        boolean b = tracker.delete(items.get(0).getId());
 
-        assertThat(tracker.findAll().length, is(3));
+        assertThat(tracker.findAll().size(), is(3));
         assertThat(b, is(true));
 
-        assertThat(tracker.findAll()[0].getId(), is(items[1].getId()));
-        assertThat(tracker.findAll()[1].getId(), is(items[2].getId()));
-        assertThat(tracker.findAll()[2].getId(), is(items[3].getId()));
+        assertThat(tracker.findAll().get(0).getId(), is(items.get(1).getId()));
+        assertThat(tracker.findAll().get(1).getId(), is(items.get(2).getId()));
+        assertThat(tracker.findAll().get(2).getId(), is(items.get(3).getId()));
     }
 
     /**
@@ -72,10 +74,10 @@ public class TrackerTest {
         tracker.add(new Item("test2", "testDescription2", 122L));
         tracker.add(new Item("test3", "testDescription3", 123L));
         tracker.add(new Item("test4", "testDescription4", 124L));
-        Item[] resalt = tracker.findByName("test2");
-        assertThat(tracker.findAll()[1].getName(), is("test2"));
+        List<Item> resalt = tracker.findByName("test2");
+        assertThat(tracker.findAll().get(1).getName(), is("test2"));
         /*т.к. разультат сводится в массив resalt, то искомое значение одно и оно на 0 позиции*/
-        assertThat(resalt[0].getName(), is("test2"));
+        assertThat(resalt.get(0).getName(), is("test2"));
     }
 
     /**
@@ -89,16 +91,16 @@ public class TrackerTest {
         tracker.add(new Item("test3", "testDescription3", 123L));
         tracker.add(new Item("test4", "testDescription4", 124L));
         tracker.add(new Item("test3", "testDescription5", 125L));
-        Item[] resalt = tracker.findByName("test3");
+        List<Item> resalt = tracker.findByName("test3");
 
         /*т.к. разультат сводится в массив resalt, в результате имеем три ячейки с одинаковыми Name*/
-        assertThat(resalt[0].getName(), is("test3"));
-        assertThat(resalt[1].getName(), is("test3"));
-        assertThat(resalt[2].getName(), is("test3"));
+        assertThat(resalt.get(0).getName(), is("test3"));
+        assertThat(resalt.get(1).getName(), is("test3"));
+        assertThat(resalt.get(2).getName(), is("test3"));
 
         /*в самом трекере ячейки с одинаковым Name остаются на своих местах, и имеют свои индексы ячеек*/
-        assertThat(tracker.findAll()[1].getName(), is("test3"));
-        assertThat(tracker.findAll()[2].getName(), is("test3"));
-        assertThat(tracker.findAll()[4].getName(), is("test3"));
+        assertThat(tracker.findAll().get(1).getName(), is("test3"));
+        assertThat(tracker.findAll().get(2).getName(), is("test3"));
+        assertThat(tracker.findAll().get(4).getName(), is("test3"));
     }
 }

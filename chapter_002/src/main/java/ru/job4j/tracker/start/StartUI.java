@@ -2,6 +2,8 @@ package ru.job4j.tracker.start;
 
 import ru.job4j.tracker.models.Item;
 
+import java.util.List;
+
 /**
  * @version $Id$
  * @since 0.1
@@ -65,15 +67,15 @@ public class StartUI {
 
         MenuTracker menu = new MenuTracker(this.input, this.tracker);
         menu.fillActions(this);
-        int[] range = new int[menu.getActionsLentgh()];
-        for (int i = 0; i < menu.getActionsLentgh(); i++) {
+        int[] range = new int[menu.getActionsLength()];
+        for (int i = 0; i < menu.getActionsLength(); i++) {
             range[i] = i;
         }
 
 
 ///*преобразование List<Integer> в int[], чтоб использовать в menu.select(input.ask("select:", rangeInt));*/
 //        List<Integer> range = new ArrayList<>();
-//        for (int i=0; i<menu.getActionsLentgh(); i++){
+//        for (int i=0; i<menu.getActionsLength(); i++){
 //            range.add(i);
 //        }
 //        int [] rangeInt = new int[range.size()];
@@ -138,7 +140,7 @@ public class StartUI {
      */
     private void showAllItems() {
         System.out.println("------------ Показать все заявки --------------");
-        Item[] items = this.tracker.findAll();
+        List<Item> items = this.tracker.findAll();
         for (Item item : items) {
             System.out.println(String.format("Name: %s Description: %s Id: %s",
                     item.getName(), item.getDesc(), item.getId()));
@@ -207,7 +209,7 @@ public class StartUI {
     private void findItemsByName() {
         System.out.println("------------ Поиск заявки по её имени --------------");
         String name = this.input.ask("Введите имя заявки :");
-        Item[] items = this.tracker.findByName(name);
+        List<Item> items = this.tracker.findByName(name);
         System.out.println("------------ Ваша(и) заявка(и) ------------");
         for (Item item : items) {
             System.out.println(String.format("Name: %s Description: %s Id: %s \n",
