@@ -12,7 +12,7 @@ public class MultiMaxTest {
         MultiMax check = new MultiMax();
         int result = check.max(1, 4, 2);
         assertThat(result, is(4));
-        System.out.println("max is = "+result);
+        System.out.println("max is = " + result);
     }
 
     @Test
@@ -20,7 +20,7 @@ public class MultiMaxTest {
         MultiMax check = new MultiMax();
         int result = check.max(4, 3, 2);
         assertThat(result, is(4));
-        System.out.println("max is = "+result);
+        System.out.println("max is = " + result);
     }
 
     @Test
@@ -28,14 +28,15 @@ public class MultiMaxTest {
         MultiMax check = new MultiMax();
         int result = check.max(1, 3, 4);
         assertThat(result, is(4));
-        System.out.println("max is = "+result);
+        System.out.println("max is = " + result);
     }
+
     @Test
     public void whenEveryOneEqual() {
         MultiMax check = new MultiMax();
         int result = check.max(4, 4, 4);
         assertThat(result, is(4));
-        System.out.println("max is = "+result);
+        System.out.println("max is = " + result);
     }
 
 

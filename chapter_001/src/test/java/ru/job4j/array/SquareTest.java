@@ -15,8 +15,9 @@ public class SquareTest {
         assertThat(rst, is(expect));
         //System.out.println(Arrays.toString(rst));
     }
+
     @Test
-    public void whenBound4Then1_4_9_16() {
+    public void whenBound4Then14916() {
         int bound = 4;
         Square square = new Square();
         int[] rst = square.calculate(bound);
@@ -24,8 +25,9 @@ public class SquareTest {
         assertThat(rst, is(expect));
         //System.out.println(Arrays.toString(rst));
     }
+
     @Test
-    public void whenBound5Then1_4_9_16_25() {
+    public void whenBound5Then1491625() {
         int bound = 5;
         Square square = new Square();
         int[] rst = square.calculate(bound);

@@ -47,7 +47,7 @@ public class MatrixCheckTest {
     public void whenDataMonoByTrueThenTrue2on2() {
         MatrixCheck check = new MatrixCheck();
         boolean[][] input = new boolean[][]{
-                {false, true,},
+                {false, true},
                 {true, false},
         };
         boolean result = check.mono(input);
