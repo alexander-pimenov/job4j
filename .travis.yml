@@ -2,7 +2,10 @@
 language: java
 
 jdk:
-- jdk1.8.0_201
+- jdk-12.0.2
+
+#jdk:
+#- jdk1.8.0_201
 #jdk:
   #- openjdk11
 
