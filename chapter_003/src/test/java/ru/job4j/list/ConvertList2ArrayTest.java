@@ -20,7 +20,7 @@ public class ConvertList2ArrayTest {
         int[][] expect = {
                 {1, 2, 3},
                 {4, 5, 6},
-                {7, 0 ,0}
+                {7, 0, 0}
         };
         assertThat(result, is(expect));
     }
@@ -29,28 +29,28 @@ public class ConvertList2ArrayTest {
     public void when10ElementsThen12() {
         ConvertList2Array list = new ConvertList2Array();
         int[][] result = list.toArray(
-                Arrays.asList(1, 2, 3, 4, 5, 6, 7,8,9,10),
+                Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10),
                 4
         );
         int[][] expect = {
                 {1, 2, 3},
                 {4, 5, 6},
-                {7, 8 ,9},
-                {10, 0 ,0}
+                {7, 8, 9},
+                {10, 0, 0}
         };
         assertThat(result, is(expect));
     }
 
     @Test
-    public void when3ArraysInListConvertTo1ListInteger(){
+    public void when3ArraysInListConvertTo1ListInteger() {
         ConvertList2Array convertList = new ConvertList2Array();
         List<int[]> list = new ArrayList<>();
-        list.add(new int[]{1,2,3});
-        list.add(new int[]{4,5,6,7});
-        list.add(new int[]{8,9});
+        list.add(new int[]{1, 2, 3});
+        list.add(new int[]{4, 5, 6, 7});
+        list.add(new int[]{8, 9});
 
         List<Integer> result = convertList.convert(list);
-        List<Integer> expect = Arrays.asList(1,2,3,4,5,6,7,8,9);
+        List<Integer> expect = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9);
 
         assertThat(result, is(expect));
 

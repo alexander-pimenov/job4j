@@ -76,7 +76,7 @@ public class TrackerTest {
         tracker.add(new Item("test4", "testDescription4", 124L));
         List<Item> resalt = tracker.findByName("test2");
         assertThat(tracker.findAll().get(1).getName(), is("test2"));
-        /*т.к. разультат сводится в массив resalt, то искомое значение одно и оно на 0 позиции*/
+        /*т.к. разультат сводится в список (массив) resalt, то искомое значение одно и оно на 0 позиции*/
         assertThat(resalt.get(0).getName(), is("test2"));
     }
 

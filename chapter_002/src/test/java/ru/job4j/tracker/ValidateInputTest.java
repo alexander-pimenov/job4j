@@ -8,6 +8,7 @@ import ru.job4j.tracker.start.ValidateInput;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.Arrays;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -21,25 +22,29 @@ import static org.hamcrest.Matchers.is;
  */
 public class ValidateInputTest {
 
+    // буфер для хранения данных вывода, результата
     private final ByteArrayOutputStream mem = new ByteArrayOutputStream();
+    // поле ссылки на дефолтный вывод в консоль
     private final PrintStream out = System.out;
 
     @Before
     public void loadMem() {
+        System.out.println("execute before method");
         System.setOut(new PrintStream(this.mem));
     }
 
     @After
     public void loadSys() {
         System.setOut(this.out);
+        System.out.println("execute after method");
     }
 
     @Test
     public void whenInvalidInput() {
         ValidateInput input = new ValidateInput(
-                new StubInput(new String[]{"invalid","1"})
+                new StubInput(Arrays.asList("invalid", "1"))
         );
-        input.ask("Enter", new int[]{2});
+        input.ask("Enter", Arrays.asList(1));
         assertThat(
                 this.mem.toString(),
                 is(
@@ -49,17 +54,17 @@ public class ValidateInputTest {
     }
 
 
-//    @Test
-//    public void whenInvalidInput10() {
-//        ValidateInput input = new ValidateInput(
-//                new StubInput(new String[]{"10", "1"})
-//        );
-//        input.ask("Enter", new int[]{1});
-//        assertThat(
-//                this.mem.toString(),
-//                is(
-//                        String.format("Please select key from menu.%n")
-//                )
-//        );
-//    }
+    @Test
+    public void whenInvalidInput10() {
+        ValidateInput input = new ValidateInput(
+                new StubInput(Arrays.asList("-9", "1"))
+        );
+        input.ask("Enter", Arrays.asList(1));
+        assertThat(
+                this.mem.toString(),
+                is(
+                        String.format("Please select key from menu.%n")
+                )
+        );
+    }
 }

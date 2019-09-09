@@ -23,7 +23,7 @@ public class SortUserTest {
         User user6 = new User("Svetlana", 55, "Kaluga");
         User user7 = new User("Roman", 35, "Omsk");
         User user8 = new User("Svetlana", 55, "Voronezh");
-        List<User> users = Arrays.asList(user1,user2,user3,user4,user5,user6,user7,user8);
+        List<User> users = Arrays.asList(user1, user2, user3, user4, user5, user6, user7, user8);
 
         Set<User> result = sortUser.sort(users);
         Set<User> expect = new TreeSet<>();
@@ -52,7 +52,7 @@ public class SortUserTest {
         User user6 = new User("Svetlana", 55, "Kaluga");
         User user7 = new User("Roman", 35, "Omsk");
         User user8 = new User("Svetlana", 55, "Voronezh");
-        List<User> users = Arrays.asList(user1,user2,user3,user4,user5,user6,user7,user8);
+        List<User> users = Arrays.asList(user1, user2, user3, user4, user5, user6, user7, user8);
         sortUser.sortNameLength(users);
         List<User> expect = new ArrayList<>();
         expect.add(user1);
@@ -82,7 +82,7 @@ public class SortUserTest {
         User user6 = new User("Svetlana", 55, "Kaluga");
         User user7 = new User("Roman", 35, "Omsk");
         User user8 = new User("Svetlana", 55, "Voronezh");
-        List<User> users = Arrays.asList(user1,user2,user3,user4,user5,user6,user7,user8);
+        List<User> users = Arrays.asList(user1, user2, user3, user4, user5, user6, user7, user8);
         sortUser.sortByAllField(users);
         List<User> expect = new ArrayList<>();
         expect.add(user5);

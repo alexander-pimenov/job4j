@@ -1,5 +1,7 @@
 package ru.job4j.tracker.start;
 
+import java.util.List;
+
 public class StubInput implements Input {
     /**
      * Это поле содержит последовательность ответов пользователя.
@@ -10,15 +12,15 @@ public class StubInput implements Input {
      * desc - описание заявки
      * 6, y - выйти из трекера.
      */
-    private final String[] value;
+    private final List<String> value;
 
     /**
      * Поле считает количество вызовом метода ask.
      * При каждом вызове надо передвинуть указатель на новое число.
      */
-    private int position;
+    private int position = 0;
 
-    public StubInput(final String[] value) {
+    public StubInput(final List<String> value) {
         this.value = value;
     }
 
@@ -32,13 +34,38 @@ public class StubInput implements Input {
      */
     @Override
     public String ask(String question) {
-        return this.value[this.position++];
+        return this.value.get(this.position++);
     }
 
     @Override
-    public int ask(String question, int[] range) {
-        return Integer.valueOf(this.value[this.position++]);
+    public int ask(String question, List<Integer> range) {
+        int key = Integer.valueOf(this.value.get(this.position++));
+        boolean exist = false; //по умолчанию считаем, что данные введены с ошибкой
+        // значение проходит через диапазон меню
+        for (int value : range) {
+            if (value == key) {
+                exist = true;
+                break;
+            }
+        }
+        if (!exist) {
+            throw new MenuOutException("Out of menu range.");
+        }
+
+        return key;
+        //Integer.parseInt(this.ask(question));
+
         //throw new UnsupportedOperationException("Unsupported operation");
     }
-
 }
+
+
+//    @Override
+//    public int ask(String question, List<Integer> range) {
+//
+//        return Integer.parseInt(this.ask(question));
+//
+//        //throw new UnsupportedOperationException("Unsupported operation");
+//    }
+
+

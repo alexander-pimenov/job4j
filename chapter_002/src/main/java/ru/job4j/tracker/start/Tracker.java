@@ -4,6 +4,7 @@ import ru.job4j.tracker.models.Item;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Random;
 
 /**
@@ -13,7 +14,7 @@ import java.util.Random;
 public class Tracker {
 
     /**
-     * Список (ArrayList) для хранения заявок
+     * Поле список (ArrayList) для хранения заявок
      */
     private final List<Item> items = new ArrayList<>();
 
@@ -27,16 +28,6 @@ public class Tracker {
      */
     private static final Random RN = new Random();
 
-    /**
-     * Метод реализующий добавление заявки в хранилище
-     *
-     * @param item новая заявка
-     */
-    public Item add(Item item) {
-        item.setId(this.generateId());
-        this.items.add(this.position++, item);
-        return item;
-    }
 
     /**
      * Метод генерирует уникальный ключ для заявки.
@@ -46,8 +37,26 @@ public class Tracker {
      */
     private String generateId() {
         //Реализовать метод генерации
-        return String.valueOf(System.currentTimeMillis() + RN.nextInt());
+        return String.valueOf(System.currentTimeMillis() + RN.nextInt(100));
     }
+
+    /**
+     * Метод реализующий добавление заявки в хранилище
+     *
+     * @param item новая заявка
+     */
+    public Item add(Item item) {
+        item.setId(this.generateId());
+        this.items.add(item);
+        return item;
+    }
+
+    //public Item add(Item item) {
+//        item.setId(this.generateId());
+//        this.items.add(this.position++, item);
+//        return item;
+//    }
+
 
     /**
      * Метод реализующий редактирование заявок.
@@ -78,16 +87,29 @@ public class Tracker {
 
     public boolean delete(String id) {
         boolean result = false;
-        for (int index = 0; index < items.size(); index++) {
-            if (this.items.get(index) != null && this.items.get(index).getId().equals(id)) {
-                this.items.remove(index);
-                position--;
+        ListIterator<Item> current = this.items.listIterator();
+        while (current.hasNext()) {
+            if (current.next().getId().equals(id)) {
+                current.remove();
                 result = true;
                 break;
             }
         }
         return result;
     }
+//    public boolean delete(String id) {
+//        boolean result = false;
+//        for (int index = 0; index < items.size(); index++) {
+//            if (this.items.get(index) != null && this.items.get(index).getId().equals(id)) {
+//                this.items.remove(index);
+//                position--;
+//                result = true;
+//                break;
+//            }
+//        }
+//        return result;
+//    }
+
 
     /**
      * Метод реализующий получение списка всех заявок.

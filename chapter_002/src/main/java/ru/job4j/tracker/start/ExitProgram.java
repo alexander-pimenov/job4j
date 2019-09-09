@@ -4,8 +4,8 @@ public class ExitProgram extends BaseAction {
 
     private final StartUI ui;
 
-    public ExitProgram(int key, String name, StartUI ui){
-        super(key,name);
+    public ExitProgram(int key, String name, StartUI ui) {
+        super(key, name);
         this.ui = ui;
     }
 

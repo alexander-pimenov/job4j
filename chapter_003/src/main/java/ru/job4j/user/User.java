@@ -44,12 +44,13 @@ public class User implements Comparable<User> {
 
     @Override
     public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", age=" + age +
-                ", city='" + city + '\'' +
-                '}' + "\n";
+        return "User{"
+                + "id="
+                + id + ", name='"
+                + name + '\''
+                + ", age=" + age
+                + ", city='" + city + '\''
+                + '}' + "\n";
     }
 
     //для сравнения User по возрасту, если возраст одинаков, то сравниваем по имени

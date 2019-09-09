@@ -5,13 +5,14 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
 public class UserConvertTest {
 
     @Test
-    public void whenListConvertHashMap(){
+    public void whenListConvertHashMap() {
         UserConvert userConvert = new UserConvert();
         List<User> userList = new ArrayList<>();
         userList.add(new User(11, "Vova", "Moscow"));

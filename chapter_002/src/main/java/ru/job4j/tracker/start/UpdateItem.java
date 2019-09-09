@@ -16,7 +16,7 @@ public class UpdateItem extends BaseAction {
         String desc = input.ask("Please, enter item's description change:");
         Item item = new Item(name, desc, 123L);
         if (tracker.replace(id, item)) {
-            System.out.println("----- Item witn Id : " + item.getId() + " changed -----");
+            System.out.println("----- Item with Id : " + item.getId() + " changed -----");
             System.out.println("------------ Updating complete ------------");
         } else {
             System.out.println(String.format("There is no items with this Id %s", id));

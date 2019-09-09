@@ -23,3 +23,16 @@ public class DeleteItem extends BaseAction {
         }
     }
 }
+
+//Можно добавить подтверждение удаления заявки:
+// String youSure = input.ask("Удалить заявку " + item.getName() + " " + item.getDescription() + " ? (yes/no) ");
+//            if (youSure.equals("yes")) {
+//                if (tracker.delete(id)) {
+//                  System.out.println("------------ Your item to delete: ------------");
+//                  System.out.println(String.format("Id: %s Name: %s Description: %s ",
+//                    item.getId(), item.getName(), item.getDesc()));
+//                  System.out.println("------------ Item was deleted --------------");
+//                } else {
+//                    System.out.println(String.format("There is no items with this Id %s", id));
+//                }
+//            }

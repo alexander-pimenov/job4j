@@ -20,7 +20,9 @@ public class ListCompare implements Comparator<String> {
             result = Character.compare(left.charAt(index), right.charAt(index));
 
             //тут достаточно проверить, что результат не 0 и сделать break
-            if (result != 0) break;
+            if (result != 0) {
+                break;
+            }
 
 //            if (result < 0) {
 //                result = -1;
