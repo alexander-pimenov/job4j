@@ -42,9 +42,9 @@ public class Logic {
                         this.figures[index] = this.figures[index].copy(dest);
                     }
                 }
-            }else{
-                    throw new FigureNotFoundException("Фигура не найдена!");
-                }
+            } else {
+                throw new FigureNotFoundException("Фигура не найдена!");
+            }
         } catch (ImpossibleMoveException ime) {
             System.out.println(ime.getMessage());
         } catch (OccupiedWayException owe) {
