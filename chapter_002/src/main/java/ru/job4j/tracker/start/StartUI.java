@@ -48,10 +48,10 @@ public class StartUI {
     }
 
     public void stop() {
-        if ("y".equals(this.input.ask("Do you want exit the program?(y): "))) {
-            System.out.println("Goodbye!");
-            this.working = false; //основная строка для выхода из прогарммы!
-        }
+//        if ("y".equals(this.input.ask("Do you want exit the program?(y): "))) {
+//            System.out.println("Goodbye!");
+//        }
+        this.working = false; //основная строка для выхода из программы!
     }
 
     /**

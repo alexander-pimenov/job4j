@@ -92,23 +92,24 @@ public class StartUITest {
         assertThat(
                 this.mem.toString(),
                 is(
-                        new StringBuilder()
-                                .append(menu)
-                                .append("-------------- Show all items --------------")
-                                .append(LS)
-                                .append("Name: name1 Description: desc1 Id: " + item1.getId())
-                                .append(LS)
-                                .append("Name: name2 Description: desc2 Id: " + item2.getId())
-                                .append(LS)
-                                .append("Name: name3 Description: desc3 Id: " + item3.getId())
-                                .append(LS)
-                                .append("------------")
-                                .append(LS)
-                                .append(menu)
-                                .toString()
+                        String.valueOf(menu)
+                                + "-------------- Show all items --------------"
+                                + LS
+                                + "Id: " + item1.getId() + " Name: name1 Description: desc1"
+                                + LS
+                                + "Id: " + item2.getId() + " Name: name2 Description: desc2"
+                                + LS
+                                + "Id: " + item3.getId() + " Name: name3 Description: desc3"
+                                + LS
+                                + "--------------- End of list ---------------"
+                                + LS
+                                + menu
+                                + "The selected menu item is Exit."
+                                + LS
                 )
         );
     }
+
 
     /**
      * Тест проверяющий вывод в консоль всех итемов с одинаковым именем,
@@ -134,22 +135,22 @@ public class StartUITest {
         assertThat(
                 this.mem.toString(),
                 is(
-                        new StringBuilder()
-                                .append(menu)
-                                .append("------------ Find task by Name --------------")
-                                .append(LS)
-                                .append("------------ Your items ------------")
-                                .append(LS)
-                                .append("Name: name1 Description: desc1 Id: " + item1.getId() + " \n")
-                                .append(LS)
-                                .append("Name: name1 Description: desc2 Id: " + item2.getId() + " \n")
-                                .append(LS)
-                                .append("Name: name1 Description: desc4 Id: " + item4.getId() + " \n")
-                                .append(LS)
-                                .append("------------- End of search ---------------")
-                                .append(LS)
-                                .append(menu)
-                                .toString()
+                        String.valueOf(menu)
+                                + "------------ Find task by Name --------------"
+                                + LS
+                                + "------------ Your items ------------"
+                                + LS
+                                + "Id: " + item1.getId() + " Name: name1 Description: desc1"
+                                + LS
+                                + "Id: " + item2.getId() + " Name: name1 Description: desc2"
+                                + LS
+                                + "Id: " + item4.getId() + " Name: name1 Description: desc4"
+                                + LS
+                                + "------------- End of search ---------------"
+                                + LS
+                                + menu
+                                + "The selected menu item is Exit."
+                                + LS
                 )
         );
     }
@@ -223,194 +224,27 @@ public class StartUITest {
     }
 }
 
+//До преобразования в String, так предложила IDEA, использовал StringBuilder:
+//                is(
+//                        new StringBuilder()
+//                                .append(menu)
+//                                .append("------------ Find task by Name --------------")
+//                                .append(LS)
+//                                .append("------------ Your items ------------")
+//                                .append(LS)
+//                                .append("Id: " + item1.getId() + " Name: name1 Description: desc1")
+//                                .append(LS)
+//                                .append("Id: " + item2.getId() + " Name: name1 Description: desc2")
+//                                .append(LS)
+//                                .append("Id: " + item4.getId() + " Name: name1 Description: desc4")
+//                                .append(LS)
+//                                .append("------------- End of search ---------------")
+//                                .append(LS)
+//                                .append(menu)
+//                                .append("The selected menu item is Exit.")
+//                                .append(LS)
+//                                .toString()
+//                )
+//        );
 
 
-
-
-//-------------- Menu --------------
-//0 : Add new Item.
-//1 : Show all items.
-//2 : Edit item.
-//3 : Delete item.
-//4 : Find item by Id.
-//5 : Find items by name.
-//6 : Exit Program.
-//Please select number:
-//0
-//------------ Adding new item --------------
-//Please, provide item name:
-//qqq
-//Please, provide item description:
-//a
-//------------ New Item with Id : 1568973085690
-//------------ New Item with Name : qqq
-//------------ New Item with Description : a
-//-------------- Menu --------------
-//0 : Add new Item.
-//1 : Show all items.
-//2 : Edit item.
-//3 : Delete item.
-//4 : Find item by Id.
-//5 : Find items by name.
-//6 : Exit Program.
-//Please select number:
-//6
-//The selected menu item is Exit.
-//Do you want exit the program?(y):
-//y
-//Goodbye!
-
-//"C:\Program Files\Java\jdk1.8.0_201\bin\java.exe" "-javaagent:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2018.3.4\lib\idea_rt.jar=64597:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2018.3.4\bin" -Dfile.encoding=UTF-8 -classpath "C:\Program Files\Java\jdk1.8.0_201\jre\lib\charsets.jar;C:\Program Files\Java\jdk1.8.0_201\jre\lib\deploy.jar;C:\Program Files\Java\jdk1.8.0_201\jre\lib\ext\access-bridge-64.jar;C:\Program Files\Java\jdk1.8.0_201\jre\lib\ext\cldrdata.jar;C:\Program Files\Java\jdk1.8.0_201\jre\lib\ext\dnsns.jar;C:\Program Files\Java\jdk1.8.0_201\jre\lib\ext\jaccess.jar;C:\Program Files\Java\jdk1.8.0_201\jre\lib\ext\jfxrt.jar;C:\Program Files\Java\jdk1.8.0_201\jre\lib\ext\localedata.jar;C:\Program Files\Java\jdk1.8.0_201\jre\lib\ext\nashorn.jar;C:\Program Files\Java\jdk1.8.0_201\jre\lib\ext\sunec.jar;C:\Program Files\Java\jdk1.8.0_201\jre\lib\ext\sunjce_provider.jar;C:\Program Files\Java\jdk1.8.0_201\jre\lib\ext\sunmscapi.jar;C:\Program Files\Java\jdk1.8.0_201\jre\lib\ext\sunpkcs11.jar;C:\Program Files\Java\jdk1.8.0_201\jre\lib\ext\zipfs.jar;C:\Program Files\Java\jdk1.8.0_201\jre\lib\javaws.jar;C:\Program Files\Java\jdk1.8.0_201\jre\lib\jce.jar;C:\Program Files\Java\jdk1.8.0_201\jre\lib\jfr.jar;C:\Program Files\Java\jdk1.8.0_201\jre\lib\jfxswt.jar;C:\Program Files\Java\jdk1.8.0_201\jre\lib\jsse.jar;C:\Program Files\Java\jdk1.8.0_201\jre\lib\management-agent.jar;C:\Program Files\Java\jdk1.8.0_201\jre\lib\plugin.jar;C:\Program Files\Java\jdk1.8.0_201\jre\lib\resources.jar;C:\Program Files\Java\jdk1.8.0_201\jre\lib\rt.jar;C:\projects\job4j\chapter_002\target\classes" ru.job4j.tracker.start.StartUI
-//-------------- Menu --------------
-//0 : Add new Item.
-//1 : Show all items.
-//2 : Edit item.
-//3 : Delete item.
-//4 : Find item by Id.
-//5 : Find items by name.
-//6 : Exit Program.
-//Please select number:
-//0
-//------------ Adding new item --------------
-//Please, provide item name:
-//qqq
-//Please, provide item description:
-//q
-//------------ New Item with Id : 1567506544952
-//------------ New Item with Name : qqq
-//------------ New Item with Description : q
-//-------------- Menu --------------
-//0 : Add new Item.
-//1 : Show all items.
-//2 : Edit item.
-//3 : Delete item.
-//4 : Find item by Id.
-//5 : Find items by name.
-//6 : Exit Program.
-//Please select number:
-//0
-//------------ Adding new item --------------
-//Please, provide item name:
-//aaa
-//Please, provide item description:
-//a
-//------------ New Item with Id : 1565855892686
-//------------ New Item with Name : aaa
-//------------ New Item with Description : a
-//-------------- Menu --------------
-//0 : Add new Item.
-//1 : Show all items.
-//2 : Edit item.
-//3 : Delete item.
-//4 : Find item by Id.
-//5 : Find items by name.
-//6 : Exit Program.
-//Please select number:
-//0
-//------------ Adding new item --------------
-//Please, provide item name:
-//zzz
-//Please, provide item description:
-//z
-//------------ New Item with Id : 1569310568653
-//------------ New Item with Name : zzz
-//------------ New Item with Description : z
-//-------------- Menu --------------
-//0 : Add new Item.
-//1 : Show all items.
-//2 : Edit item.
-//3 : Delete item.
-//4 : Find item by Id.
-//5 : Find items by name.
-//6 : Exit Program.
-//Please select number:
-//1
-//-------------- Show all items --------------
-//Id: 1567506544952 Name: qqq Description: q
-//Id: 1565855892686 Name: aaa Description: a
-//Id: 1569310568653 Name: zzz Description: z
-//--------------- End of list ---------------
-//-------------- Menu --------------
-//0 : Add new Item.
-//1 : Show all items.
-//2 : Edit item.
-//3 : Delete item.
-//4 : Find item by Id.
-//5 : Find items by name.
-//6 : Exit Program.
-//Please select number:
-//5
-//------------ Find task by Name --------------
-//Please, enter the item's name that you want to find :
-//
-//qqq
-//There is no items with this name .
-//------------- End of search ---------------
-//-------------- Menu --------------
-//0 : Add new Item.
-//1 : Show all items.
-//2 : Edit item.
-//3 : Delete item.
-//4 : Find item by Id.
-//5 : Find items by name.
-//6 : Exit Program.
-//Please select number:
-//Please enter correct data again.
-//Please select number:
-//1
-//-------------- Show all items --------------
-//Id: 1567506544952 Name: qqq Description: q
-//Id: 1565855892686 Name: aaa Description: a
-//Id: 1569310568653 Name: zzz Description: z
-//--------------- End of list ---------------
-//-------------- Menu --------------
-//0 : Add new Item.
-//1 : Show all items.
-//2 : Edit item.
-//3 : Delete item.
-//4 : Find item by Id.
-//5 : Find items by name.
-//6 : Exit Program.
-//Please select number:
-//5
-//------------ Find task by Name --------------
-//Please, enter the item's name that you want to find :
-//qqq
-//------------ Your items ------------
-//Id: 1567506544952 Name: qqq Description: q
-//------------- End of search ---------------
-//-------------- Menu --------------
-//0 : Add new Item.
-//1 : Show all items.
-//2 : Edit item.
-//3 : Delete item.
-//4 : Find item by Id.
-//5 : Find items by name.
-//6 : Exit Program.
-//Please select number:
-//6
-//The selected menu item is Exit.
-//Do you want exit the program?(y):
-//y
-//Goodbye!
-//
-//Process finished with exit code 0
-
-//    //"Меню" для проверки вывода в консоль, чтобы уменьшить код в is()
-//    private final StringBuilder menu = new StringBuilder()
-//            .append("-------------- Menu --------------")
-//            .append(System.lineSeparator())
-//            .append("0 : Add new Item.")
-//            .append(System.lineSeparator())
-//            .append("1 : Show all items.")
-//            .append(System.lineSeparator())
-//            .append("2 : Edit item.")
-//            .append(System.lineSeparator())
-//            .append("3 : Delete item.")
-//            .append(System.lineSeparator())
-//            .append("4 : Find item by Id.")
-//            .append(System.lineSeparator())
-//            .append("5 : Find items by name.")
-//            .append(System.lineSeparator())
-//            .append("6 : Exit Program.")
-//            .append(System.lineSeparator());
