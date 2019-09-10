@@ -20,7 +20,6 @@
         <module>chess</module>
         <module>chapter_003</module>
 
-
     </modules>
 
     <dependencies>
