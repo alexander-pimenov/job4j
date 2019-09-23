@@ -32,7 +32,7 @@ public class Account {
         this.value += amount;
     }
 
-    /*Метод уменьшающий деньги на счете*/
+    /*Метод уменьшающий деньги на счете  */
     public void substractMoney(double amount) {
         this.value -= amount;
     }
