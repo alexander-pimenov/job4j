@@ -1,10 +1,7 @@
 package ru.job4j.bank;
 
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 public class Bank {
     /**/
@@ -50,7 +47,7 @@ public class Bank {
         }
     }
 
-    /*Получить список счетов для пользователя.*/
+    /*Получить список счетов для пользователя по данным паспорта.*/
     public List<Account> getUserAccounts(String passport) {
         List<Account> result = new ArrayList<>();
         for (User user : this.userAccounts.keySet()) {
@@ -61,38 +58,45 @@ public class Bank {
         return result;
     }
 
+    /*Поиск пользователя по данным паспорта*/
+    private User findUser(String passport) {
+        User result = null;
+        Set<User> keys = this.userAccounts.keySet();
+        for (User key : keys) {
+            if (key != null && key.getPassport().equals(passport)) {
+                result = key;
+                break;
+            }
+        }
+        return result;
+    }
+
+    /*Поиск аккаунта (одного счета) пользователя по данным паспорта и реквизитов счета*/
+    private Account findAccount(String passport, String requisite) {
+        Account resultAccount = null;
+        for (Account account : getUserAccounts(passport)) {
+            if (account.getRequisites().equals(requisite)) {
+                resultAccount = account;
+            }
+        }
+        return resultAccount;
+    }
+
+
     /*Метод для перечисления денег с одного счета на другой счет.
      * Если счет не найден или не хватает денег на счету srcAccount (
      * с которого переводят), то должен вернуть false.*/
     public boolean transferMoney(String srcPassport, String srcRequisite,
                                  String destPassport, String destRequisite, double amount) {
         boolean canTransfer = false;
-        User srcUser = null;
-        User destUser = null;
-        Account srcAccount = null;
-        Account destAccount = null;
         //ищем пользователей с указанными паспортами
-        for (User user : this.userAccounts.keySet()) {
-            if (user.getPassport().equals(srcPassport)) {
-                srcUser = user;
-            }
-            if (user.getPassport().equals(destPassport)) {
-                destUser = user;
-            }
-        }
-        //ищем аккаунты пользователя srcUser
-        for (Account account : getUserAccounts(srcPassport)) {
-            if (account.getRequisites().equals(srcRequisite)) {
-                srcAccount = account;
-            }
-        }
+        User srcUser = findUser(srcPassport);
+        User destUser = findUser(destPassport);
 
+        //ищем аккаунты пользователя srcUser
+        Account srcAccount = findAccount(srcPassport, srcRequisite);
         //ищем аккаунты пользователя destUser
-        for (Account account : getUserAccounts(destPassport)) {
-            if (account.getRequisites().equals(destRequisite)) {
-                destAccount = account;
-            }
-        }
+        Account destAccount = findAccount(destPassport, destRequisite);
 
         if (srcAccount != null && destAccount != null) {
             if (this.userAccounts.containsKey(srcUser)
@@ -115,4 +119,3 @@ public class Bank {
 
 }
 
-//Посмотри, как можно применить методы Map.putIfAbsent и List.indexOf
