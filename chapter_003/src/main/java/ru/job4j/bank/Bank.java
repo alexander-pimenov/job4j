@@ -19,6 +19,7 @@ public class Bank {
         for (User user : this.userAccounts.keySet()) {
             if (user.getPassport().equals(passport)) {
                 result = user;
+                break; //чтобы не вертеть цикл дальше
             }
         }
         return result;
@@ -34,6 +35,7 @@ public class Bank {
         for (User user : this.userAccounts.keySet()) {
             if (user.getPassport().equals(passport)) {
                 this.userAccounts.get(user).add(account);
+                break; //чтобы не вертеть цикл дальше
             }
         }
     }
@@ -43,6 +45,7 @@ public class Bank {
         for (User user : this.userAccounts.keySet()) {
             if (user.getPassport().equals(passport)) {
                 this.userAccounts.get(user).remove(account);
+                break; //чтобы не вертеть цикл дальше
             }
         }
     }
@@ -77,6 +80,7 @@ public class Bank {
         for (Account account : getUserAccounts(passport)) {
             if (account.getRequisites().equals(requisite)) {
                 resultAccount = account;
+                break; //чтобы не вертеть цикл дальше
             }
         }
         return resultAccount;
@@ -89,9 +93,6 @@ public class Bank {
     public boolean transferMoney(String srcPassport, String srcRequisite,
                                  String destPassport, String destRequisite, double amount) {
         boolean canTransfer = false;
-        //ищем пользователей с указанными паспортами
-        User srcUser = findUser(srcPassport);
-        User destUser = findUser(destPassport);
 
         //ищем аккаунты пользователя srcUser
         Account srcAccount = findAccount(srcPassport, srcRequisite);
@@ -99,11 +100,7 @@ public class Bank {
         Account destAccount = findAccount(destPassport, destRequisite);
 
         if (srcAccount != null && destAccount != null) {
-            if (this.userAccounts.containsKey(srcUser)
-                    && this.userAccounts.containsKey(destUser)
-                    && getUserAccounts(srcPassport).contains(srcAccount)
-                    && getUserAccounts(destPassport).contains(destAccount)
-                    && srcAccount.getValue() >= amount) {
+            if (srcAccount.getValue() >= amount) {
                 srcAccount.substractMoney(amount);
                 destAccount.addMoney(amount);
                 canTransfer = true;
