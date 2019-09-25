@@ -32,8 +32,8 @@ public class User implements Comparable<User> {
             return false;
         }
         User user = (User) o;
-        return Objects.equals(name, user.name) &&
-                Objects.equals(passport, user.passport);
+        return Objects.equals(name, user.name)
+                && Objects.equals(passport, user.passport);
 
         /*или такой return:
         return name.equals(user.name) && passport.equals(user.passport);*/
@@ -56,10 +56,10 @@ public class User implements Comparable<User> {
 
     @Override
     public String toString() {
-        return "User{" +
-                "name='" + name + '\'' +
-                ", passport='" + passport + '\'' +
-                '}';
+        return "User{"
+                + "name='" + name + '\''
+                + ", passport='" + passport + '\''
+                + '}';
     }
 
     @Override
