@@ -29,5 +29,9 @@ public class Calculator {
 
                 result -> System.out.println(result)
         );
+
+        System.out.println("Рассмотрим работу ссылки на метод:");
+        calc.multiple(0, 10, 2, MathUtil::add,
+                result -> System.out.println(result));
     }
 }
