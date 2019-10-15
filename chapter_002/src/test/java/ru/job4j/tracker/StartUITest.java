@@ -12,6 +12,7 @@ import ru.job4j.tracker.start.Tracker;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.Arrays;
+import java.util.function.Consumer;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
@@ -27,9 +28,29 @@ public class StartUITest {
     private final Tracker tracker = new Tracker();
     // буфер для хранения данных вывода, буфер для хранения результата
     private final ByteArrayOutputStream mem = new ByteArrayOutputStream();
+
+    // поле ссылки на дефолтный (стандартный) вывод в консоль, сохраним
+    // дефолный вывод в консоль, чтобы потом к нему вернуться.
+    private final PrintStream original = System.out;
+
+    //private final Consumer<String> output = System.out::println;
+    private final Consumer<String> output = new Consumer<>() {
+        private final PrintStream stdout = new PrintStream(mem);
+
+        @Override
+        public void accept(String s) {
+            stdout.println(s);
+        }
+
+        @Override
+        public String toString() {
+            return mem.toString();
+        }
+    };
+
     // поле ссылки на дефолтный вывод в консоль, сохраним дефолный вывод в консоль,
     // чтобы потом к нему вернуться
-    private final PrintStream stdout = System.out;
+    //private final PrintStream stdout = System.out;
 
     private final static String LS = System.lineSeparator();
 
@@ -57,13 +78,15 @@ public class StartUITest {
     @Before
     public void loadOutputBefore() {
         System.out.println("execute before method");
+        //Заменяем стандартный вывод на вывод в пямять для тестирования.
         System.setOut(new PrintStream(this.mem));
     }
 
-    //Метод реализует обратный вывод в консоль, возврат к стандартному выводу в консоль
+    //Метод реализует обратный вывод в консоль, возврат к стандартному выводу в консоль.
     @After
     public void backOutputAfter() {
-        System.setOut(this.stdout);
+        //System.setOut(this.stdout);
+        System.setOut(original);
         System.out.println("execute after method");
     }
 
@@ -88,9 +111,10 @@ public class StartUITest {
         //создаём StubInput с последовательностью действий(выводим все имеющиеся заявки в консоль)
         Input input = new StubInput(Arrays.asList("1", "6"));
         // создаём StartUI и вызываем метод init()
-        new StartUI(input, tracker).init();
+        new StartUI(input, tracker, output).init();
         assertThat(
-                this.mem.toString(),
+                //this.mem.toString(),
+                this.output.toString(),
                 is(
                         String.valueOf(menu)
                                 + "-------------- Show all items --------------"
@@ -131,9 +155,9 @@ public class StartUITest {
         //создаём StubInput с последовательностью действий(выводим все имеющиеся заявки в консоль)
         Input input = new StubInput(Arrays.asList("5", "name1", "6"));
         // создаём StartUI и вызываем метод init()
-        new StartUI(input, tracker).init();
+        new StartUI(input, tracker, output).init();
         assertThat(
-                this.mem.toString(),
+                this.output.toString(),
                 is(
                         String.valueOf(menu)
                                 + "------------ Find task by Name --------------"
@@ -163,7 +187,7 @@ public class StartUITest {
         //создаём StubInput с последовательностью действий
         Input input = new StubInput(Arrays.asList("0", "test name", "desc", "6"));
         //   создаём StartUI и вызываем метод init()
-        new StartUI(input, tracker).init(); //создаём StartUI и вызываем метод init()
+        new StartUI(input, tracker, output).init(); //создаём StartUI и вызываем метод init()
         // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
         assertThat(tracker.findAll().get(0).getName(), is("test name"));
     }
@@ -178,7 +202,7 @@ public class StartUITest {
         //создаём StubInput с последовательностью действий(производим замену заявки)
         Input input = new StubInput(Arrays.asList("2", item.getId(), "test replace", "заменили заявку", "6"));
         // создаём StartUI и вызываем метод init()
-        new StartUI(input, tracker).init(); //создаём StartUI и вызываем метод init()
+        new StartUI(input, tracker, output).init(); //создаём StartUI и вызываем метод init()
         // проверяем, что элемент массива в трекере содержит измененное имя, введённое при эмуляции.
         assertThat(tracker.findById(item.getId()).getName(), is("test replace"));
     }
@@ -198,7 +222,7 @@ public class StartUITest {
         //создаём StubInput с последовательностью действий(производим удаление заявки)
         Input input = new StubInput(Arrays.asList("3", item1.getId(), "6"));
         // создаём StartUI и вызываем метод init()
-        new StartUI(input, tracker).init();
+        new StartUI(input, tracker, output).init();
 
         // проверяем, что количество элементов в трекере уменьшилось.
         assertThat(tracker.findAll().size(), is(2));
@@ -218,7 +242,7 @@ public class StartUITest {
         //создаём StubInput с последовательностью действий(производим удаление заявки)
         Input input = new StubInput(Arrays.asList("4", item.getId(), "6"));
         // создаём StartUI и вызываем метод init()
-        new StartUI(input, tracker).init();
+        new StartUI(input, tracker, output).init();
         // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
         assertThat(tracker.findById(item.getId()).getName(), is("name1"));
     }

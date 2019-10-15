@@ -1,6 +1,7 @@
 package ru.job4j.tracker.start;
 
 import ru.job4j.tracker.models.Item;
+import java.util.function.Consumer;
 
 public class ShowItems extends BaseAction {
 
@@ -9,11 +10,12 @@ public class ShowItems extends BaseAction {
     }
 
     @Override
-    public void execute(Input input, Tracker tracker) {
+    public void execute(Input input, Tracker tracker, Consumer<String> output) {
 
         System.out.println("-------------- Show all items --------------");
         for (Item item : tracker.findAll()) { //(Item item : items)
-            System.out.println(String.format("Id: %s Name: %s Description: %s",
+            output.accept(String.format("Id: %s Name: %s Description: %s",
+            //System.out.println(String.format("Id: %s Name: %s Description: %s",
                     item.getId(), item.getName(), item.getDesc()));
         }
         System.out.println("--------------- End of list ---------------");

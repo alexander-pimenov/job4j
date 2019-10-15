@@ -2,6 +2,7 @@ package ru.job4j.tracker.start;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 /**
  * MenuTracker отвечает за выбор меню, за показ этого меню,
@@ -25,6 +26,8 @@ public class MenuTracker {
      */
     private List<UserAction> actions = new ArrayList<>();
 
+    private final Consumer<String> output;
+
     List<Integer> range = new ArrayList<>();
 
     /**
@@ -32,10 +35,12 @@ public class MenuTracker {
      *
      * @param input   объект типа Input
      * @param tracker объект типа Tracker
+     * @param output
      */
-    public MenuTracker(Input input, Tracker tracker) {
+    public MenuTracker(Input input, Tracker tracker, Consumer<String> output) {
         this.input = input;
         this.tracker = tracker;
+        this.output = output;
     }
 
 
@@ -76,7 +81,6 @@ public class MenuTracker {
 //    }
 
 
-
     /**
      * Метод заполняет массив. Регистрация событий.
      */
@@ -98,7 +102,7 @@ public class MenuTracker {
      * @param key ключ операции
      */
     public void select(int key) {
-        this.actions.get(key).execute(this.input, this.tracker);
+        this.actions.get(key).execute(this.input, this.tracker, this.output);
     }
 
     /**
