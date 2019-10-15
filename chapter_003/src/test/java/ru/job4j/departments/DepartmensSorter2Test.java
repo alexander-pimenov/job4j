@@ -13,7 +13,7 @@ public class DepartmensSorter2Test {
     DepartmensSorter2 sorter2 = new DepartmensSorter2();
 
     @Test
-    public void whenSortDeptRightAndAddNames(){
+    public void whenSortDeptRightAndAddNames() {
 
         Set<String> orgsTreeSet = new TreeSet<>();
 
@@ -44,7 +44,7 @@ public class DepartmensSorter2Test {
 
 
     @Test
-    public void whenSortDeptBackAndAddNames(){
+    public void whenSortDeptBackAndAddNames() {
 
         Set<String> orgsTreeSet = new TreeSet<>();
 

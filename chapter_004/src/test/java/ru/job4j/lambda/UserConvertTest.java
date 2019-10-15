@@ -24,18 +24,18 @@ public class UserConvertTest {
         assertThat(data, is(expected));
     }
 
-    @Test (expected = NullPointerException.class)
+    @Test(expected = NullPointerException.class)
     public void whenExceptionThrows() throws Exception {
         List<String> names = Arrays.asList("Petr", "Nick", "Ben");
         Wrapper<Exception> ex = null;
-        names.forEach(n->{
-            try{
+        names.forEach(n -> {
+            try {
                 UserConvert.badMethod();
-            } catch (Exception e){
+            } catch (Exception e) {
                 ex.set(e);
             }
         });
-        if (!ex.isEmpty()){
+        if (!ex.isEmpty()) {
             throw ex.get();
         }
     }
