@@ -59,26 +59,9 @@ public class Address implements Comparable<Address> {
                 '}';
     }
 
-//    @Override
-//    public int compareTo(Address o) {
-//        if (this.city == null) {
-//            return -1;
-//        }
-//        if (o.city == null) {
-//            return 1;
-//        }
-//        return this.city.compareTo(o.city);
-//    }
-
     @Override
     public int compareTo(Address o) {
         int result;
-//        if (this.city == null) {
-//            return -1;
-//        }
-//        if (o.city == null) {
-//            return 1;
-//        }
         result = this.city.compareTo(o.city);
         if (result != 0) return result;
         result = this.street.compareTo(o.street);
@@ -88,5 +71,17 @@ public class Address implements Comparable<Address> {
         result = Integer.compare(apartment, o.apartment);
         return result;
     }
+
+    //Упрощенный вариант, сортировка только по полю city
+    //    @Override
+//    public int compareTo(Address o) {
+//        if (this.city == null) {
+//            return -1;
+//        }
+//        if (o.city == null) {
+//            return 1;
+//        }
+//        return this.city.compareTo(o.city);
+//    }
 
 }

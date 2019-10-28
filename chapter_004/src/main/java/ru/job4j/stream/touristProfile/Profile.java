@@ -3,11 +3,11 @@ package ru.job4j.stream.touristProfile;
 public class Profile {
     private Address address;
 
-    public Profile(Address address) {
+    Profile(Address address) {
         this.address = address;
     }
 
-    public Address getAddress() {
+    Address getAddress() {
         return address;
     }
 }
