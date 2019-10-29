@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 public class Profiles {
     public List<Address> collect(List<Profile> profiles) {
-        return profiles.stream().map(Profile::getAddress).distinct().sorted().collect(Collectors.toList());
+        return profiles.stream().map(Profile::getAddress).sorted().distinct().collect(Collectors.toList());
     }
 }
 
@@ -32,7 +32,7 @@ public class Profiles {
 //        profile.stream().map(Profile::getAddress).forEach(System.out::println);
 //        System.out.println("====================");
 //
-//        profile.stream().map(Profile::getAddress).distinct().sorted().forEach(System.out::println);
+//        profile.stream().map(Profile::getAddress).sorted().distinct().forEach(System.out::println);
 //        System.out.println("====================");
 //        //System.out.println(collect(profile));
 //    }
