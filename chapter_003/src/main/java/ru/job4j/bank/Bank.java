@@ -14,7 +14,7 @@ public class Bank {
     /*Добавление пользователя.
      * Если указанный пользователь не существует в банке,
      * добавляет пользователя с пустым списком счетов.*/
-    public void addUser(User user) {
+    void addUser(User user) {
         this.userAccounts.putIfAbsent(user, new ArrayList<>());
     }
 
@@ -29,18 +29,18 @@ public class Bank {
 //        return result;
 //    }
 
-    public User getUser1(String passport) {
+    User getUser1(String passport) {
         return this.userAccounts.keySet().stream()
                 .filter(user -> user.getPassport().equals(passport))
                 .findAny().orElse(null);
     }
 
     /*Удаление пользователя.*/
-    public void deleteUser(User user) {
+    void deleteUser(User user) {
         this.userAccounts.remove(user);
     }
 
-    /*Добавить счет пользователю.*/
+//    /*Добавить счет пользователю.*/
 //    public void addAccountToUser(String passport, Account account) {
 //        for (User user : this.userAccounts.keySet()) {
 //            if (user.getPassport().equals(passport)) {
@@ -50,12 +50,13 @@ public class Bank {
 //        }
 //    }
 
-    public void addAccountToUser1(String passport, Account account) {
+    /*Добавить счет пользователю.*/
+    void addAccountToUser1(String passport, Account account) {
         this.getUserAccounts1(passport).add(account);
     }
 
 
-    /*Удалить один счет пользователя.*/
+//    /*Удалить один счет пользователя.*/
 //    public void deleteAccountFromUser(String passport, Account account) {
 //        for (User user : this.userAccounts.keySet()) {
 //            if (user.getPassport().equals(passport)) {
@@ -65,12 +66,13 @@ public class Bank {
 //        }
 //    }
 
-    public void deleteAccountFromUser1(String passport, Account account) {
+    /*Удалить один счет пользователя.*/
+    void deleteAccountFromUser1(String passport, Account account) {
         this.getUserAccounts1(passport).remove(account);
     }
 
 
-    /*Получить список счетов для пользователя по данным паспорта.*/
+//    /*Получить список счетов для пользователя по данным паспорта.*/
 //    public List<Account> getUserAccounts(String passport) {
 //        List<Account> result = new ArrayList<>();
 //        for (User user : this.userAccounts.keySet()) {
@@ -81,12 +83,13 @@ public class Bank {
 //        return result;
 //    }
 
-    public List<Account> getUserAccounts1(String passport) {
+    /*Получить список счетов для пользователя по данным паспорта.*/
+    List<Account> getUserAccounts1(String passport) {
         return this.userAccounts.get(findUser1(passport));
     }
 
 
-    /*Поиск пользователя по данным паспорта*/
+//    /*Поиск пользователя по данным паспорта*/
 //    private User findUser(String passport) {
 //        User result = null;
 //        Set<User> keys = this.userAccounts.keySet();
@@ -99,13 +102,14 @@ public class Bank {
 //        return result;
 //    }
 
+    /*Поиск пользователя по данным паспорта*/
     private User findUser1(String passport) {
         Stream<User> userStream = this.userAccounts.keySet().stream();
         return userStream.filter(user -> user.getPassport().equals(passport))
                 .findFirst().orElse(null);
     }
 
-    /*Поиск аккаунта (одного счета) пользователя по данным паспорта и реквизитов счета*/
+//    /*Поиск аккаунта (одного счета) пользователя по данным паспорта и реквизитов счета*/
 //    private Account findAccount(String passport, String requisite) {
 //        Account resultAccount = null;
 //        for (Account account : getUserAccounts(passport)) {
@@ -117,6 +121,7 @@ public class Bank {
 //        return resultAccount;
 //    }
 
+    /*Поиск аккаунта (одного счета) пользователя по данным паспорта и реквизитов счета*/
     private Account findAccount1(String passport, String requisite) {
 
         Stream<Account> accountStream = getUserAccounts1(passport).stream();
@@ -130,7 +135,7 @@ public class Bank {
      * Если счет не найден или не хватает денег на счету srcAccount (
      * с которого переводят), то должен вернуть false.*/
     public boolean transferMoney(String srcPassport, String srcRequisite,
-                                 String destPassport, String destRequisite, double amount) {
+                          String destPassport, String destRequisite, double amount) {
         boolean canTransfer = false;
 
         //ищем аккаунты пользователя srcUser

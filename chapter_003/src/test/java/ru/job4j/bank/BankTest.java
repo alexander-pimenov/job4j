@@ -30,6 +30,7 @@ public class BankTest {
         bank.addUser(ivanov);
         assertThat(bank.getUser1("1111-5678"), is(petrov));
         assertThat(bank.getUser1("2222-5678"), is(ivanov));
+
     }
 
 //    @Test
