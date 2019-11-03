@@ -18,18 +18,7 @@ public class Bank {
         this.userAccounts.putIfAbsent(user, new ArrayList<>());
     }
 
-//    public User getUser(String passport) {
-//        User result = null;
-//        for (User user : this.userAccounts.keySet()) {
-//            if (user.getPassport().equals(passport)) {
-//                result = user;
-//                break; //чтобы не вертеть цикл дальше
-//            }
-//        }
-//        return result;
-//    }
-
-    User getUser1(String passport) {
+    User getUser(String passport) {
         return this.userAccounts.keySet().stream()
                 .filter(user -> user.getPassport().equals(passport))
                 .findAny().orElse(null);
@@ -40,91 +29,32 @@ public class Bank {
         this.userAccounts.remove(user);
     }
 
-//    /*Добавить счет пользователю.*/
-//    public void addAccountToUser(String passport, Account account) {
-//        for (User user : this.userAccounts.keySet()) {
-//            if (user.getPassport().equals(passport)) {
-//                this.userAccounts.get(user).add(account);
-//                break; //чтобы не вертеть цикл дальше
-//            }
-//        }
-//    }
-
     /*Добавить счет пользователю.*/
-    void addAccountToUser1(String passport, Account account) {
-        this.getUserAccounts1(passport).add(account);
+    void addAccountToUser(String passport, Account account) {
+        this.getUserAccounts(passport).add(account);
     }
-
-
-//    /*Удалить один счет пользователя.*/
-//    public void deleteAccountFromUser(String passport, Account account) {
-//        for (User user : this.userAccounts.keySet()) {
-//            if (user.getPassport().equals(passport)) {
-//                this.userAccounts.get(user).remove(account);
-//                break; //чтобы не вертеть цикл дальше
-//            }
-//        }
-//    }
 
     /*Удалить один счет пользователя.*/
-    void deleteAccountFromUser1(String passport, Account account) {
-        this.getUserAccounts1(passport).remove(account);
+    void deleteAccountFromUser(String passport, Account account) {
+        this.getUserAccounts(passport).remove(account);
     }
-
-
-//    /*Получить список счетов для пользователя по данным паспорта.*/
-//    public List<Account> getUserAccounts(String passport) {
-//        List<Account> result = new ArrayList<>();
-//        for (User user : this.userAccounts.keySet()) {
-//            if (user.getPassport().equals(passport)) {
-//                result = this.userAccounts.get(user);
-//            }
-//        }
-//        return result;
-//    }
 
     /*Получить список счетов для пользователя по данным паспорта.*/
-    List<Account> getUserAccounts1(String passport) {
-        return this.userAccounts.get(findUser1(passport));
+    List<Account> getUserAccounts(String passport) {
+        return this.userAccounts.get(findUser(passport));
     }
 
-
-//    /*Поиск пользователя по данным паспорта*/
-//    private User findUser(String passport) {
-//        User result = null;
-//        Set<User> keys = this.userAccounts.keySet();
-//        for (User key : keys) {
-//            if (key != null && key.getPassport().equals(passport)) {
-//                result = key;
-//                break;
-//            }
-//        }
-//        return result;
-//    }
-
     /*Поиск пользователя по данным паспорта*/
-    private User findUser1(String passport) {
+    private User findUser(String passport) {
         Stream<User> userStream = this.userAccounts.keySet().stream();
         return userStream.filter(user -> user.getPassport().equals(passport))
                 .findFirst().orElse(null);
     }
 
-//    /*Поиск аккаунта (одного счета) пользователя по данным паспорта и реквизитов счета*/
-//    private Account findAccount(String passport, String requisite) {
-//        Account resultAccount = null;
-//        for (Account account : getUserAccounts(passport)) {
-//            if (account.getRequisites().equals(requisite)) {
-//                resultAccount = account;
-//                break; //чтобы не вертеть цикл дальше
-//            }
-//        }
-//        return resultAccount;
-//    }
-
     /*Поиск аккаунта (одного счета) пользователя по данным паспорта и реквизитов счета*/
-    private Account findAccount1(String passport, String requisite) {
+    private Account findAccount(String passport, String requisite) {
 
-        Stream<Account> accountStream = getUserAccounts1(passport).stream();
+        Stream<Account> accountStream = getUserAccounts(passport).stream();
 
         return accountStream.filter(acc -> acc.getRequisites()
                 .equals(requisite))
@@ -139,9 +69,9 @@ public class Bank {
         boolean canTransfer = false;
 
         //ищем аккаунты пользователя srcUser
-        Account srcAccount = findAccount1(srcPassport, srcRequisite);
+        Account srcAccount = findAccount(srcPassport, srcRequisite);
         //ищем аккаунты пользователя destUser
-        Account destAccount = findAccount1(destPassport, destRequisite);
+        Account destAccount = findAccount(destPassport, destRequisite);
 
         if (srcAccount != null && destAccount != null) {
             if (srcAccount.getValue() >= amount) {
@@ -157,6 +87,5 @@ public class Bank {
     public String toString() {
         return "Bank{" + "accounts=" + userAccounts + "}";
     }
-
 }
 
