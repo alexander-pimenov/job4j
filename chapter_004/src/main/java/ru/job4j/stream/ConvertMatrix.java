@@ -7,7 +7,8 @@ import java.util.stream.Stream;
 
 public class ConvertMatrix {
 
-    /*метод для перобразования матрицы чисел в список чисел*/
+    /*метод для перобразования матрицы чисел в список чисел
+    * еще особенность flatMap в том, что он сохраняет порядок.*/
     List<Integer> convert(Integer[][] matrix) {
         return Stream.of(matrix).flatMap(e -> Arrays.stream((e))).collect(Collectors.toList());
     }

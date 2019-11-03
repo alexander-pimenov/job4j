@@ -2,9 +2,13 @@ package ru.job4j.bank;
 
 
 import java.util.*;
+import java.util.stream.Stream;
 
 public class Bank {
-    /**/
+    /* Основное поле с данными.
+     * У каждого пользователя набор уникальных аккаунтов,
+     * уникальность аккаунта определяется по реквизитам.
+     */
     private Map<User, ArrayList<Account>> userAccounts = new TreeMap<>();
 
     /*Добавление пользователя.
@@ -25,6 +29,12 @@ public class Bank {
         return result;
     }
 
+    public User getUser1(String passport) {
+        return this.userAccounts.keySet().stream()
+                .filter(user -> user.getPassport().equals(passport))
+                .findAny().orElse(null);
+    }
+
     /*Удаление пользователя.*/
     public void deleteUser(User user) {
         this.userAccounts.remove(user);
@@ -40,6 +50,11 @@ public class Bank {
         }
     }
 
+    public void addAccountToUser1(String passport, Account account) {
+        this.getUserAccounts1(passport).add(account);
+    }
+
+
     /*Удалить один счет пользователя.*/
     public void deleteAccountFromUser(String passport, Account account) {
         for (User user : this.userAccounts.keySet()) {
@@ -49,6 +64,11 @@ public class Bank {
             }
         }
     }
+
+    public void deleteAccountFromUser1(String passport, Account account) {
+        this.getUserAccounts1(passport).remove(account);
+    }
+
 
     /*Получить список счетов для пользователя по данным паспорта.*/
     public List<Account> getUserAccounts(String passport) {
@@ -60,6 +80,11 @@ public class Bank {
         }
         return result;
     }
+
+    public List<Account> getUserAccounts1(String passport) {
+        return this.userAccounts.get(findUser1(passport));
+    }
+
 
     /*Поиск пользователя по данным паспорта*/
     private User findUser(String passport) {
@@ -74,6 +99,12 @@ public class Bank {
         return result;
     }
 
+    private User findUser1(String passport) {
+        Stream<User> userStream = this.userAccounts.keySet().stream();
+        return userStream.filter(user -> user.getPassport().equals(passport))
+                .findFirst().orElse(null);
+    }
+
     /*Поиск аккаунта (одного счета) пользователя по данным паспорта и реквизитов счета*/
     private Account findAccount(String passport, String requisite) {
         Account resultAccount = null;
@@ -86,6 +117,14 @@ public class Bank {
         return resultAccount;
     }
 
+    private Account findAccount1(String passport, String requisite) {
+
+        Stream<Account> accountStream = getUserAccounts1(passport).stream();
+
+        return accountStream.filter(acc -> acc.getRequisites()
+                .equals(requisite))
+                .findFirst().orElse(null);
+    }
 
     /*Метод для перечисления денег с одного счета на другой счет.
      * Если счет не найден или не хватает денег на счету srcAccount (
@@ -95,9 +134,9 @@ public class Bank {
         boolean canTransfer = false;
 
         //ищем аккаунты пользователя srcUser
-        Account srcAccount = findAccount(srcPassport, srcRequisite);
+        Account srcAccount = findAccount1(srcPassport, srcRequisite);
         //ищем аккаунты пользователя destUser
-        Account destAccount = findAccount(destPassport, destRequisite);
+        Account destAccount = findAccount1(destPassport, destRequisite);
 
         if (srcAccount != null && destAccount != null) {
             if (srcAccount.getValue() >= amount) {
