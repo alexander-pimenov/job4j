@@ -5,6 +5,7 @@ import org.junit.Test;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +25,7 @@ public class SchoolTest {
             new Student("Ivanov", 75),
             new Student("Sidorov", 65),
             new Student("Fedorov", 45)
+
     );
 
     private final School school = new School();
@@ -61,6 +63,48 @@ public class SchoolTest {
         expected.put("Ivanov", new Student("Ivanov", 75));
         expected.put("Sidorov", new Student("Sidorov", 65));
         expected.put("Fedorov", new Student("Fedorov", 45));
+
+        assertThat(result, is(expected));
+    }
+
+    /*Метод возвращает список студентов у которых балл аттестата больше bound.
+    * в методе использовали takeWhile()*/
+    @Test
+    public void whenCollectStudentsAboveBound() {
+        List<Student> result = school.levelOf(studentsSurnameAndScore, 55);
+
+        List<Student> expected = new ArrayList<>();
+        expected.add( new Student("Ivanov", 75));
+        expected.add( new Student("Sidorov", 65));
+        expected.add( new Student("Petrov", 55));
+
+        assertThat(result, is(expected));
+    }
+
+    /*Метод возвращает список студентов у которых балл аттестата больше bound.
+    * в методе использовали dropWhile()*/
+    @Test
+    public void whenCollectStudentsAboveBoundWithDropWhile() {
+        List<Student> result = school.levelOfWithDrop(studentsSurnameAndScore, 55);
+
+        List<Student> expected = new ArrayList<>();
+        expected.add( new Student("Petrov", 55));
+        expected.add( new Student("Sidorov", 65));
+        expected.add( new Student("Ivanov", 75));
+
+        assertThat(result, is(expected));
+    }
+
+    /*Метод возвращает список студентов у которых балл аттестата больше bound.
+    * в методе использовали filter()*/
+    @Test
+    public void whenCollectStudentsAboveBoundWithFilter() {
+        List<Student> result = school.levelOfWithFilter(studentsSurnameAndScore, 55);
+
+        List<Student> expected = new ArrayList<>();
+        expected.add( new Student("Petrov", 55));
+        expected.add( new Student("Sidorov", 65));
+        expected.add( new Student("Ivanov", 75));
 
         assertThat(result, is(expected));
     }
