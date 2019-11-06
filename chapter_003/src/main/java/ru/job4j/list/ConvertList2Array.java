@@ -4,7 +4,9 @@ package ru.job4j.list;
  * и солбцов cells*/
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ConvertList2Array {
     public int[][] toArray(List<Integer> list, int rows) {
@@ -25,14 +27,17 @@ public class ConvertList2Array {
     }
 
     public List<Integer> convert(List<int[]> list) {
-        List<Integer> result = new ArrayList<>();
+//        List<Integer> result = new ArrayList<>();
+//
+//        for (int[] array : list) {
+//            for (int element : array) {
+//                result.add(element);
+//            }
+//        }
+//        return result;
 
-        for (int[] array : list) {
-            for (int element : array) {
-                result.add(element);
-            }
-        }
-        return result;
+        return list.stream().flatMapToInt(Arrays::stream)
+                .boxed().collect(Collectors.toList());
     }
 
     //    Для проверки использовал не только Test, но и main метод
