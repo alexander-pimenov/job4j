@@ -19,8 +19,9 @@ public class PriorityQueue {
     //сортируя по значению поля priority
     public void put(Task task) {
 //        //добавить вставку в связный список
-//        int index = tasks.size();
-//        for (int i = 0; i < tasks.size(); i++) {
+//        var index = tasks.size(); //var=int
+//        for (int i = 0; i < tasks.size(); i++)
+//        {
 //            if (task.getPriority() < tasks.get(i).getPriority()) {
 //                index = i;
 //                //index = tasks.indexOf(tasks.get(i));
