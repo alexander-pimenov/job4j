@@ -51,9 +51,9 @@ public class PriorityQueue {
 
     @Override
     public String toString() {
-        return "PriorityQueue{" +
-                "tasks=" + tasks +
-                '}';
+        return "PriorityQueue{"
+                + "tasks=" + tasks
+                + '}';
     }
 }
 
