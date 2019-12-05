@@ -68,43 +68,43 @@ public class SchoolTest {
     }
 
     /*Метод возвращает список студентов у которых балл аттестата больше bound.
-    * в методе использовали takeWhile()*/
+     * в методе использовали takeWhile()*/
     @Test
     public void whenCollectStudentsAboveBound() {
         List<Student> result = school.levelOf(studentsSurnameAndScore, 55);
 
         List<Student> expected = new ArrayList<>();
-        expected.add( new Student("Ivanov", 75));
-        expected.add( new Student("Sidorov", 65));
-        expected.add( new Student("Petrov", 55));
+        expected.add(new Student("Ivanov", 75));
+        expected.add(new Student("Sidorov", 65));
+        expected.add(new Student("Petrov", 55));
 
         assertThat(result, is(expected));
     }
 
     /*Метод возвращает список студентов у которых балл аттестата больше bound.
-    * в методе использовали dropWhile()*/
+     * в методе использовали dropWhile()*/
     @Test
     public void whenCollectStudentsAboveBoundWithDropWhile() {
         List<Student> result = school.levelOfWithDrop(studentsSurnameAndScore, 55);
 
         List<Student> expected = new ArrayList<>();
-        expected.add( new Student("Petrov", 55));
-        expected.add( new Student("Sidorov", 65));
-        expected.add( new Student("Ivanov", 75));
+        expected.add(new Student("Petrov", 55));
+        expected.add(new Student("Sidorov", 65));
+        expected.add(new Student("Ivanov", 75));
 
         assertThat(result, is(expected));
     }
 
     /*Метод возвращает список студентов у которых балл аттестата больше bound.
-    * в методе использовали filter()*/
+     * в методе использовали filter()*/
     @Test
     public void whenCollectStudentsAboveBoundWithFilter() {
         List<Student> result = school.levelOfWithFilter(studentsSurnameAndScore, 55);
 
         List<Student> expected = new ArrayList<>();
-        expected.add( new Student("Petrov", 55));
-        expected.add( new Student("Sidorov", 65));
-        expected.add( new Student("Ivanov", 75));
+        expected.add(new Student("Petrov", 55));
+        expected.add(new Student("Sidorov", 65));
+        expected.add(new Student("Ivanov", 75));
 
         assertThat(result, is(expected));
     }

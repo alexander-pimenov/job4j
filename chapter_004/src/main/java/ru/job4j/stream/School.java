@@ -25,11 +25,11 @@ public class School {
 
     //метод возвращает список студентов у которых балл аттестата больше bound.
     //в методе использовали takeWhile()
-    List<Student> levelOf(List<Student> students, int bound){
+    List<Student> levelOf(List<Student> students, int bound) {
         return students.stream()
                 .sorted(Comparator.comparing(Student::getScore).reversed())//reversed чтобы верхушка была больше низа
                 .flatMap(Stream::ofNullable)
-                .takeWhile(student->student.getScore()>=bound)
+                .takeWhile(student -> student.getScore() >= bound)
                 .collect(Collectors.toList());
     }
 
@@ -43,6 +43,7 @@ public class School {
                 .dropWhile(v -> v.getScore() < bound)
                 .collect(Collectors.toList());
     }
+
     //метод возвращает список студентов у которых балл аттестата больше bound.
     //в методе использовали filter()
     List<Student> levelOfWithFilter(List<Student> students, int bound) {

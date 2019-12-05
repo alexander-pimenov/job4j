@@ -1,4 +1,4 @@
-package ru.job4j.stream.touristProfile;
+package ru.job4j.stream.touristprofile;
 
 public class Profile {
     private Address address;

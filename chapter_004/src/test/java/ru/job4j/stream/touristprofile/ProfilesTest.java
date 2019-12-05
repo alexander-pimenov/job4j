@@ -1,4 +1,4 @@
-package ru.job4j.stream.touristProfile;
+package ru.job4j.stream.touristprofile;
 
 import org.junit.Test;
 

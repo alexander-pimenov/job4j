@@ -1,4 +1,4 @@
-package ru.job4j.stream.touristProfile;
+package ru.job4j.stream.touristprofile;
 
 import java.util.Objects;
 
@@ -35,13 +35,17 @@ public class Address implements Comparable<Address> {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Address address = (Address) o;
-        return home == address.home &&
-                apartment == address.apartment &&
-                Objects.equals(city, address.city) &&
-                Objects.equals(street, address.street);
+        return home == address.home
+                && apartment == address.apartment
+                && Objects.equals(city, address.city)
+                && Objects.equals(street, address.street);
     }
 
     @Override
@@ -51,23 +55,27 @@ public class Address implements Comparable<Address> {
 
     @Override
     public String toString() {
-        return "Address{" +
-                "city='" + city + '\'' +
-                ", street='" + street + '\'' +
-                ", home=" + home +
-                ", apartment=" + apartment +
-                '}';
+        return "Address{" + "city='" + city + '\''
+                + ", street='" + street + '\''
+                + ", home=" + home
+                + ", apartment=" + apartment + '}';
     }
 
     @Override
     public int compareTo(Address o) {
         int result;
         result = this.city.compareTo(o.city);
-        if (result != 0) return result;
+        if (result != 0) {
+            return result;
+        }
         result = this.street.compareTo(o.street);
-        if (result != 0) return result;
+        if (result != 0) {
+            return result;
+        }
         result = Integer.compare(home, o.home);
-        if (result != 0) return result;
+        if (result != 0) {
+            return result;
+        }
         result = Integer.compare(apartment, o.apartment);
         return result;
     }

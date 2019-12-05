@@ -8,8 +8,8 @@
     <url>http://job4j.ru/</url>
 
     <properties>
-        <maven.compiler.source>12</maven.compiler.source>
-        <maven.compiler.target>12</maven.compiler.target>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -33,39 +33,42 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.openjfx/javafx-fxml -->
 
+        <!-- https://mvnrepository.com/artifact/org.openjfx/javafx-fxml -->
+        <!--
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
             <version>12</version>
         </dependency>
-
+        -->
 
         <!-- https://mvnrepository.com/artifact/org.openjfx/javafx-graphics -->
-
+        <!--
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-graphics</artifactId>
             <version>12</version>
         </dependency>
-
+        -->
 
         <!-- https://mvnrepository.com/artifact/org.openjfx/javafx-base -->
-
+        <!--
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-base</artifactId>
             <version>12</version>
         </dependency>
+        -->
 
         <!-- https://mvnrepository.com/artifact/org.openjfx/javafx-controls -->
-
+        <!--
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
             <version>12</version>
         </dependency>
+        -->
 
         <!--Checkstyle - это инструмент разработки, помогающий программистам писать код Java, соответствующий стандарту кодирования.-->
         <!-- https://mvnrepository.com/artifact/com.puppycrawl.tools/checkstyle -->
@@ -93,8 +96,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
                 <configuration>
-                    <source>12</source>
-                    <target>12</target>
+                    <source>11</source>
+                    <target>11</target>
                 </configuration>
             </plugin>
             <plugin>
@@ -106,7 +109,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>2.17</version>
+                <version>3.0.0</version>
                 <executions>
                     <execution>
                         <id>validate</id>

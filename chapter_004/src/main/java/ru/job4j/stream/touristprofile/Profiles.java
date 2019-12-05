@@ -1,4 +1,4 @@
-package ru.job4j.stream.touristProfile;
+package ru.job4j.stream.touristprofile;
 
 import java.util.List;
 import java.util.stream.Collectors;
