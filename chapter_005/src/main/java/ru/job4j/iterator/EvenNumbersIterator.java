@@ -3,6 +3,12 @@ package ru.job4j.iterator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+/**
+ * Создаем итератор возвращающий только четные цифры.
+ * Итератор может принимать список произвольных чисел.
+ */
+
+
 public class EvenNumbersIterator implements Iterator {
     private final int[] values;
     private int index = 0;
@@ -23,6 +29,9 @@ public class EvenNumbersIterator implements Iterator {
         }
         return result;
     }
+/*
+    //В этом методе используется цикл while(),
+    //как его избежать, смотри код метода next() ниже.
 
     @Override
     public Object next() {
@@ -33,5 +42,18 @@ public class EvenNumbersIterator implements Iterator {
             index++;
         }
         return values[index++];
+    }
+*/
+
+    //Чтобы избежать цикла while() в методе next(),
+    //перепишем код:
+    @Override
+    public Object next() {
+        if (!hasNext()) {
+            throw new NoSuchElementException();
+        }
+        var result = values[index];
+        index++;
+        return result;
     }
 }
