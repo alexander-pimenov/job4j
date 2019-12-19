@@ -52,8 +52,12 @@ public class EvenNumbersIterator implements Iterator {
         if (!hasNext()) {
             throw new NoSuchElementException();
         }
-        var result = values[index];
-        index++;
-        return result;
+//        Этот код еще упрощаем. В одну строку.
+//        var result = values[index];
+//        index++;
+//        return result;
+        //Сначала считает index, потом получит значение,
+        //а потом уже увеличит на 1.
+        return values[index++];
     }
 }
