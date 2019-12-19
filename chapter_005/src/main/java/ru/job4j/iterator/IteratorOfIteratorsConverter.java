@@ -35,12 +35,14 @@ public class IteratorOfIteratorsConverter {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                if (inner.hasNext()) {
-                    return inner.next();
-                } else {
-                    inner = it.next();
-                    return inner.next();
-                }
+//                Этот блок можно убрать.
+//                if (inner.hasNext()) {
+//                    return inner.next();
+//                } else {
+//                    inner = it.next();
+//                    return inner.next();
+//                }
+                return inner.next();
             }
         };
     }
