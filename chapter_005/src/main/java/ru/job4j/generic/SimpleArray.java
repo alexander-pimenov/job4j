@@ -27,7 +27,7 @@ public class SimpleArray<T> implements Iterable<T> {
     /**
      * Добавляет указанный элемент (model) в первую свободную ячейку.
      *
-     * @param model
+     * @param model элемент, который добавляем в хранилище (в массив).
      */
     public void add(T model) {
         sizeCheck(this.cursor);
@@ -67,8 +67,8 @@ public class SimpleArray<T> implements Iterable<T> {
     /**
      * Возвращает элемент, расположенный по указанному индексу.
      *
-     * @param index
-     * @return
+     * @param index по этому индексу получаем значение.
+     * @return возвращаем объект типа Т.
      */
     public T get(int index) {
         sizeCheck(index);
