@@ -73,9 +73,12 @@ public class SimpleArray<T> implements Iterable<T> {
     public T get(int index) {
         sizeCheck(index);
 
-        if (this.objects[index] == null) {
-            throw new NoSuchElementException();
-        }
+// Этот участок закоммнтирован, чтоб мы могли получать null из SimpleArray,
+// а не получать NoSuchElementException.
+//
+//        if (this.objects[index] == null) {
+//            throw new NoSuchElementException();
+//        }
         return (T) this.objects[index];
     }
 
