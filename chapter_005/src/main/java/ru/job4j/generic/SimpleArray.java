@@ -73,7 +73,7 @@ public class SimpleArray<T> implements Iterable<T> {
     public T get(int index) {
         sizeCheck(index);
 
-// Этот участок закоммнтирован, чтоб мы могли получать null из SimpleArray,
+// Этот участок закомментирован, чтоб мы могли получать null из SimpleArray,
 // а не получать NoSuchElementException.
 //
 //        if (this.objects[index] == null) {
@@ -82,8 +82,15 @@ public class SimpleArray<T> implements Iterable<T> {
         return (T) this.objects[index];
     }
 
+    /**
+     * Метод проверяет, находится ли index обрабатываемого элемента (в аргументе это position)
+     * в пределах диапазона массива.
+     * Если нет, то выбрасываем исключение IndexOutOfBoundsException (Выход за пределы массива).
+     *
+     * @param position проверяемый индекс.
+     */
     private void sizeCheck(int position) {
-        if (position >= this.size) {
+        if (position < 0 || position >= this.size) {
             throw new IndexOutOfBoundsException();
         }
     }
