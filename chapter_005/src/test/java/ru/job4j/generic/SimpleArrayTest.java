@@ -107,6 +107,7 @@ public class SimpleArrayTest {
         int[] result = new int[2];
         result[0] = simpleArray.get(0);
         result[1] = simpleArray.get(1);
+
         int[] expected = {1, 2};
 
         assertThat(result, is(expected));
@@ -140,11 +141,12 @@ public class SimpleArrayTest {
 
         simpleArray.add(1);
         simpleArray.add(2);
+        //добавляем 3-й элемент, а размер списка равен 2
         simpleArray.add(3);
     }
 
     @Test
-    public void whenAddElementsRemoveOneShouldGetNull() {
+    public void whenAddElementsThenRemoveOneShouldGetNullAtTheEnd() {
         SimpleArray<Integer> simpleArray = new SimpleArray<>(5);
 
         simpleArray.add(1);
@@ -174,9 +176,11 @@ public class SimpleArrayTest {
         simpleArray.add(1);
         simpleArray.add(2);
         simpleArray.add(3);
+        //System.out.println(simpleArray);
 
         SimpleArray<Integer> result = simpleArray;
         result.set(1, 100);
+        //System.out.println(result);
 
         assertThat(result.get(1), is(100));
     }
@@ -190,7 +194,6 @@ public class SimpleArrayTest {
         simpleArray.add(3);
 
         simpleArray.set(5, 100);
-
     }
 
     @Test
@@ -230,7 +233,7 @@ public class SimpleArrayTest {
         iterator.next();
     }
 
-    // Было внесено изменение в код get(), убрал проверку
+    // Нижний тест закомментирован, т.к. было внесено изменение в код get(), убрал проверку
 //
 //        if (this.objects[index] == null) {
 //            throw new NoSuchElementException();

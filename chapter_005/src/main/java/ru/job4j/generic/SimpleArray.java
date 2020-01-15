@@ -109,9 +109,9 @@ public class SimpleArray<T> implements Iterable<T> {
             public T next() {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
-                } else {
-                    return (T) objects[position++];
                 }
+                //return вернет объект и потом увеличит индекс позиции на 1
+                return (T) objects[position++];
             }
         };
     }
