@@ -8,8 +8,11 @@ import java.util.NoSuchElementException;
  * Класс SimpleArrayList.
  */
 
-public class SimpleArrayList<E> implements Iterable<E>{
+public class SimpleArrayList<E> implements Iterable<E> {
+    //В этом поле храним размер нашего списка.
     private int size;
+
+    //Голова списка, нужна чтобы мы могли добавлять элементы.
     private Node<E> first;
 
     /**
@@ -67,6 +70,7 @@ public class SimpleArrayList<E> implements Iterable<E>{
     public Iterator<E> iterator() {
         return new Iterator<>() {
             private int cursor = 0;
+            Node<E> temp = first;
 
             @Override
             public boolean hasNext() {
@@ -78,11 +82,11 @@ public class SimpleArrayList<E> implements Iterable<E>{
                 if (!hasNext()) {
                     throw new IndexOutOfBoundsException();
                 }
+                E value = temp.getData();
+                temp = temp.next;
 
-                int i = cursor;
-                E nextElement = get(i);
                 cursor++;
-                return nextElement;
+                return value;
             }
         };
     }
@@ -92,11 +96,26 @@ public class SimpleArrayList<E> implements Iterable<E>{
      */
     private static class Node<E> {
 
-        E data;
-        Node<E> next;
+        E data; //значение хранящееся в текущем узле
+        Node<E> next; //ссылка на следующий элемент
+
+        /**
+         * Создадим конструктор, который будет приниматьна на вход значение.
+         * Т.к. при создании нового узла мы будем подавать на вход ему значение.
+         *
+         * @param data значение хранимого элемента в SimpleArrayList<E>.
+         */
 
         Node(E data) {
             this.data = data;
+        }
+
+        public E getData() {
+            return data;
+        }
+
+        public Node<E> getNext() {
+            return next;
         }
     }
 }

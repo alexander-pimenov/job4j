@@ -1,11 +1,14 @@
 package ru.job4j.list;
 
+import com.google.common.collect.ImmutableList;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+import static com.google.common.collect.ImmutableList.copyOf;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
 
@@ -73,6 +76,10 @@ public class SimpleArrayListTest {
         Integer next2 = itr.next();
         assertThat(next2, is(2));
 
+        //Вызвали итератор 3-й раз
+        Integer next3 = itr.next();
+        assertThat(next3, is(1));
+
         //Проверяем размер списка.
         assertThat(list.getSize(), is(3));
     }
@@ -84,7 +91,8 @@ public class SimpleArrayListTest {
         assertThat(next1, is(3));
         Integer next2 = itr.next();
         assertThat(next2, is(2));
-        itr.next();
+        Integer next3 = itr.next();
+        assertThat(next3, is(1));
         itr.next();
     }
 }
