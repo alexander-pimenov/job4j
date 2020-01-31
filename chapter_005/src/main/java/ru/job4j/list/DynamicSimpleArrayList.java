@@ -59,6 +59,7 @@ public class DynamicSimpleArrayList<E> implements Iterable<E> {
      */
     @SuppressWarnings("unchecked")
     public E get(int index) {
+
         if (index >= this.size) {
             throw new ArrayIndexOutOfBoundsException();
         }
@@ -112,26 +113,5 @@ public class DynamicSimpleArrayList<E> implements Iterable<E> {
                 return (E) DynamicSimpleArrayList.this.container[this.position++];
             }
         };
-    }
-
-    public static void main(String[] args) {
-        DynamicSimpleArrayList<Integer> list = new DynamicSimpleArrayList<>();
-
-        list.add(5);
-        list.add(15);
-        list.add(25);
-        list.add(35);
-        System.out.println("==========");
-        System.out.println(list.size());
-        System.out.println("==========");
-        System.out.println(list.get(3));
-        System.out.println(list.get(0));
-        System.out.println("==========");
-        Iterator<Integer> iterator = list.iterator();
-        while (iterator.hasNext()){
-            //list.add(50); // для проверки на модификацию коллекции
-            System.out.println(iterator.next());
-            //list.add(50); // для проверки на модификацию коллекции
-        }
     }
 }
