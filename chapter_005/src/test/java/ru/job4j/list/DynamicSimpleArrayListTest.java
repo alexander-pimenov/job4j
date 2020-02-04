@@ -20,6 +20,16 @@ public class DynamicSimpleArrayListTest {
         list = new DynamicSimpleArrayList<>();
     }
 
+    @Test
+    public void whenCreateNewArrayListThenSizeZero(){
+        assertThat(list.size(), is(0));
+    }
+
+    @Test
+    public void whenCreateNewArrayListWithCapacity20ThenSizeZero(){
+        DynamicSimpleArrayList<Object> list2 = new DynamicSimpleArrayList<>(20);
+        assertThat(list2.size(), is(0));
+    }
 
     @Test
     public void whenAddThreeElementsThenUseGetOneResultTen() {

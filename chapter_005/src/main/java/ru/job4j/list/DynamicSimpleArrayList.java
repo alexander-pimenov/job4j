@@ -36,17 +36,13 @@ public class DynamicSimpleArrayList<E> implements Iterable<E> {
 
     /**
      * Метод добавляющий новый элемент в конец массива
-     * и увеличивает наш массив, если необходимо.
-     * Увеличение в 1,5 раза.
      *
      * @param value новый добавляемый элемент.
      */
     public void add(E value) {
-        if (size == this.container.length) {
-            this.container = Arrays.copyOf(this.container, this.container.length * 3 / 2);
-        }
+        grow();
         this.container[size] = value;
-        size++;
+        this.size++;
         modCount++;
     }
 
@@ -64,6 +60,17 @@ public class DynamicSimpleArrayList<E> implements Iterable<E> {
             throw new ArrayIndexOutOfBoundsException();
         }
         return (E) this.container[index];
+    }
+
+    /**
+     * Метод увеличивает наш массив, если необходимо,
+     * в 1,5 раза.
+     */
+    public void grow() {
+        if (size == this.container.length) {
+            this.container = Arrays.copyOf(this.container, this.container.length * 3 / 2);
+        }
+
     }
 
     /**
