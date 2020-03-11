@@ -8,7 +8,7 @@ import java.util.NoSuchElementException;
  * Класс SimpleArrayList.
  */
 
-public class SimpleArrayList<E> implements Iterable<E> {
+public class SimpleSinglyLinkedList<E> implements Iterable<E> {
     //В этом поле храним размер нашего списка.
     private int size;
 

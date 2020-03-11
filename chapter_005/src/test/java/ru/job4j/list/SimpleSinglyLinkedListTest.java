@@ -1,10 +1,8 @@
 package ru.job4j.list;
 
-import com.google.common.collect.ImmutableList;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -12,12 +10,12 @@ import static com.google.common.collect.ImmutableList.copyOf;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
 
-public class SimpleArrayListTest {
-    private SimpleArrayList<Integer> list;
+public class SimpleSinglyLinkedListTest {
+    private SimpleSinglyLinkedList<Integer> list;
 
     @Before
     public void beforeTest() {
-        list = new SimpleArrayList<>();
+        list = new SimpleSinglyLinkedList<>();
         list.add(1);
         list.add(2);
         list.add(3);
