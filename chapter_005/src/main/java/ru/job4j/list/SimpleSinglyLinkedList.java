@@ -5,7 +5,7 @@ import java.util.NoSuchElementException;
 
 /**
  * Контейнер для данных, базирующийся на односвязном списке.
- * Класс SimpleArrayList.
+ * Класс SimpleSinglyLinkedList (было имя SimpleArrayList).
  */
 
 public class SimpleSinglyLinkedList<E> implements Iterable<E> {

@@ -1,7 +1,5 @@
 package ru.job4j.list;
 
-import org.antlr.v4.runtime.misc.NotNull;
-
 import java.util.Arrays;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
