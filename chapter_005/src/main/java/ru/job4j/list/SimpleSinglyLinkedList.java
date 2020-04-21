@@ -27,6 +27,41 @@ public class SimpleSinglyLinkedList<E> implements Iterable<E> {
     }
 
     /**
+     * Метод вставляет в КОНЕЦ списка данные.
+     */
+    public void addLast(E data) {
+        Node<E> newLink = new Node<>(data, null);
+        if (first == null) {
+            first = newLink;
+            this.size++;
+            return;
+        }
+        Node<E> tail = first;
+        while (tail.next != null) {
+            tail = tail.next;
+        }
+        tail.next = newLink;
+        this.size++;
+    }
+
+    /**
+     * Метод для перевертывания Односвязного списка.
+     */
+    public void revert() {
+        Node<E> temp = first;
+        Node<E> previous = null;
+        Node<E> current = null;
+        while (temp != null) {
+            current = temp;
+            temp = temp.next;
+            current.next = previous;
+            previous = current;
+            first = current;
+        }
+    }
+
+
+    /**
      * Метод реализующий удаления ПЕРВОГО элемента в списке
      * и возвращающий его значение.
      * (очень похоже на Stack - удаляем из начала.)
@@ -108,6 +143,11 @@ public class SimpleSinglyLinkedList<E> implements Iterable<E> {
 
         Node(E data) {
             this.data = data;
+        }
+
+        public Node(E data, Node<E> next) {
+            this.data = data;
+            this.next = next;
         }
 
         public E getData() {

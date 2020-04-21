@@ -6,9 +6,9 @@ import org.junit.Test;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import static com.google.common.collect.ImmutableList.copyOf;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 public class SimpleSinglyLinkedListTest {
     private SimpleSinglyLinkedList<Integer> list;
@@ -92,5 +92,34 @@ public class SimpleSinglyLinkedListTest {
         Integer next3 = itr.next();
         assertThat(next3, is(1));
         itr.next();
+    }
+
+    @Test
+    public void whenAddThenIter() {
+        SimpleSinglyLinkedList<Integer> linked = new SimpleSinglyLinkedList<>();
+        linked.addLast(1);
+        linked.addLast(2);
+        linked.addLast(3);
+
+        Iterator<Integer> it = linked.iterator();
+        assertTrue(it.hasNext());
+        assertThat(it.next(), is(1));
+        assertThat(it.next(), is(2));
+        assertThat(it.next(), is(3));
+    }
+
+    @Test
+    public void whenAddAndRevertThenIter() {
+        SimpleSinglyLinkedList<Integer> linked = new SimpleSinglyLinkedList<>();
+        linked.addLast(1);
+        linked.addLast(2);
+        linked.addLast(3);
+
+        linked.revert();
+        Iterator<Integer> it = linked.iterator();
+
+        assertThat(it.next(), is(3));
+        assertThat(it.next(), is(2));
+        assertThat(it.next(), is(1));
     }
 }
