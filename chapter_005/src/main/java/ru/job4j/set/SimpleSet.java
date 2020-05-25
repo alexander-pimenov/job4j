@@ -12,27 +12,28 @@ public class SimpleSet<E> implements Iterable<E> {
     }
 
     /**
+     * Метод проверяющий наличие элементов в Set
+     *
+     * @param value Добавляемый элемент
+     * @return булево значение
+     */
+    public boolean contains(E value) {
+        for(E setItem : simpleArrayList) {
+            if(setItem == value) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Метод добавляющий элементы в Set и делающий проверку на наличие дубликатов,
      * и отсутствие дубликата null.
      * Если Set содержит такой же элемент, то он не будет добавлен.
      * @param e объект
      */
     public void add(E e) {
-        boolean isNew = true;
-        for (E element : simpleArrayList) {
-            //проверка на содержание в коллекции null и что будет
-            //если хотим добавить null
-            if (element == null) {
-                if (e == null) {
-                    isNew = false;
-                    break;
-                }
-            } else if (element.equals(e)) { //проверка, если объекты совпадают
-                isNew = false;
-                break;
-            }
-        }
-        if (isNew) { //запись в сет, если разные объекты
+        if (!contains(e)) { //запись в сет, если разные объекты
             this.simpleArrayList.add(e);
         }
     }
