@@ -22,9 +22,10 @@ public class SimpleSetTest {
     }
 
     @Test
-    public void whenAddThreeDifferentElementThenSizeTgree(){
+    public void whenAddThreeDifferentElementThenSizeThree(){
         assertThat(set.size(), is(3));
     }
+
 
     @Test
     public void whenHaveThreeDifferentAndAddTwoSameElementsThenHaveThreeAgain(){
@@ -59,7 +60,9 @@ public class SimpleSetTest {
 
     @Test
     public void whenSetHasNullElementAndCallIterator(){
+
         set.add(null);
+
         Iterator<Integer> iterator = set.iterator();
         assertThat(iterator.hasNext(), is(true));
         assertThat(iterator.next(), is(1));
@@ -68,6 +71,14 @@ public class SimpleSetTest {
         assertNull(iterator.next());
         assertThat(iterator.hasNext(), is(false));
 
+        assertThat(set.size(), is(4));
+    }
+
+    @Test
+    public void whenAddThreeNullElementsToInitialSetupThenSizeFour(){
+        set.add(null);
+        set.add(null);
+        set.add(null);
         assertThat(set.size(), is(4));
     }
 }

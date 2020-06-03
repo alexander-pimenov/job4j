@@ -18,9 +18,17 @@ public class SimpleSet<E> implements Iterable<E> {
      * @return булево значение
      */
     public boolean contains(E value) {
-        for(E setItem : simpleArrayList) {
-            if(setItem == value) {
-                return true;
+        for (E setItem : simpleArrayList) {
+            //проверка на содержание в коллекции null и что будет
+            //если хотим добавить null
+            if (setItem == null) {
+                if (value == null) {
+                    return true;
+                }
+            } else {
+                if (setItem.equals(value)) {
+                    return true;
+                }
             }
         }
         return false;
@@ -30,6 +38,7 @@ public class SimpleSet<E> implements Iterable<E> {
      * Метод добавляющий элементы в Set и делающий проверку на наличие дубликатов,
      * и отсутствие дубликата null.
      * Если Set содержит такой же элемент, то он не будет добавлен.
+     *
      * @param e объект
      */
     public void add(E e) {
@@ -40,9 +49,10 @@ public class SimpleSet<E> implements Iterable<E> {
 
     /**
      * Метод возвращающий размер нашего Set
+     *
      * @return int
      */
-    public int size(){
+    public int size() {
         return this.simpleArrayList.size();
     }
 
