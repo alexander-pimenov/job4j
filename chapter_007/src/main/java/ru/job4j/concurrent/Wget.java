@@ -8,9 +8,9 @@ public class Wget {
                         for (int i = 0; i <= 101; i++) {
                             if (i != 101) {
                                 System.out.print("\rLoading : " + i + "%");
-                            }
-                            else {
+                            } else {
                                 //Небольшая задержка перед выводом результата
+                                //об успешной загрузке
                                 Thread.sleep(1000);
                                 System.out.print("\rLoaded successfully.");
                             }
