@@ -17,7 +17,6 @@ public class ThreadState {
         Thread first = new Thread(
                 () -> {
                     System.out.println("Нить " + Thread.currentThread().getName() + ", ёё  - состояние " + Thread.currentThread().getState());
-//                    System.out.println(Thread.currentThread().getState());
                 }
         );
 
@@ -25,7 +24,6 @@ public class ThreadState {
         Thread second = new Thread(
                 () -> {
                     System.out.println("Нить " + Thread.currentThread().getName() + ", ёё - состояние " + Thread.currentThread().getState());
-//                    System.out.println(Thread.currentThread().getState());
                 }
         );
 
@@ -42,14 +40,14 @@ public class ThreadState {
         System.out.println("==================================");
 
         int a = 0;
-        //В цикле мы проверяем состояние запущенной нити.
+        //В цикле мы проверяем состояние запущенной нити, используем нить first.
         while (first.getState() != Thread.State.TERMINATED) {
             System.out.println("итерация a" + a + " " + " вызов из " + Thread.currentThread().getName() + " -> " + first.getName() + " " + first.getState());
             a++;
         }
 
         int b = 0;
-        //В цикле мы проверяем состояние запущенной нити.
+        //В цикле мы проверяем состояние запущенной нити, используем нить second.
         while (second.getState() != Thread.State.TERMINATED) {
             System.out.println("итерация b" + b + " " + " вызов из " + Thread.currentThread().getName() + " -> " + second.getName() + " " + second.getState());
             b++;
@@ -62,6 +60,6 @@ public class ThreadState {
         System.out.println("Вызов из " + Thread.currentThread().getName() + " нити -> " + first.getName() + " - " + first.getState());
         System.out.println("Вызов из " + Thread.currentThread().getName() + " нити -> " + second.getName() + " - " + second.getState());
 
-        System.out.println(Thread.currentThread().getName() + " " + Thread.currentThread().getState());
+        //System.out.println(Thread.currentThread().getName() + " " + Thread.currentThread().getState());
     }
 }
