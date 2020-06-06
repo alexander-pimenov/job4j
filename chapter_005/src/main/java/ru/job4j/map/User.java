@@ -2,6 +2,10 @@ package ru.job4j.map;
 
 import java.util.Calendar;
 
+/**
+ * Класс, в котором не переопределены ни hashCode() ни equals()
+ */
+
 public class User {
     private String name;
     private int children;
@@ -15,4 +19,5 @@ public class User {
         this.children = children;
         this.birthday = birthday;
     }
+
 }

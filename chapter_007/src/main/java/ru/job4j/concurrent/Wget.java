@@ -12,7 +12,8 @@ public class Wget {
                                 //Небольшая задержка перед выводом результата
                                 //об успешной загрузке
                                 Thread.sleep(1000);
-                                System.out.print("\rLoaded successfully.");
+                                //символ сердечка "\u2764" в юникоде
+                                System.out.print("\rLoaded successfully. " + "\u2764");
                             }
                             Thread.sleep(100);
                         }

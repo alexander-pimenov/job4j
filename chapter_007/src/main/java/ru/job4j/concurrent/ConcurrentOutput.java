@@ -25,11 +25,13 @@ public class ConcurrentOutput {
         another.start();
         second.start();
         third.start();
+        System.out.println("=======================");
 
         another.run();
         second.run();
         third.run();
 
+        System.out.println("=======================");
         Thread.sleep(3000);
         System.out.println("main метод -> " + Thread.currentThread().getName());
     }

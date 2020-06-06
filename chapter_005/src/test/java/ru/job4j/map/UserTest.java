@@ -7,8 +7,6 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.Assert.*;
-
 public class UserTest {
 
     @Test
@@ -16,6 +14,8 @@ public class UserTest {
         //создаем два объекта с одинаковыми полями
         User user1 = new User("Alex", 2, new GregorianCalendar(1990, Calendar.APRIL, 15));
         User user2 = new User("Alex", 2, new GregorianCalendar(1990, Calendar.APRIL, 15));
+
+        System.out.println("Сравним два объекта: они равны? - " + user1.equals(user2));
 
         //Посмотрим на хэшкоды наших объектов
         //Т.к. алгоритм генерации хешкода для объекта работает с участием генератора случайных чисел,
@@ -39,6 +39,14 @@ public class UserTest {
 
         System.out.println("достали объект по ключу user1 -> " + map.get(user1));
         System.out.println("достали объект по ключу user2 -> " + map.get(user2));
+
+        //Результат вывода:
+        //Сравним два объекта: они равны? - false
+        //hash-code user1: 2083562754
+        //hash-code user2: 920011586
+        //{ru.job4j.map.User@7c30a502=java.lang.Object@39ba5a14, ru.job4j.map.User@36d64342=java.lang.Object@511baa65}
+        //достали объект по ключу user1 -> java.lang.Object@39ba5a14
+        //достали объект по ключу user2 -> java.lang.Object@511baa65
     }
 
 }
