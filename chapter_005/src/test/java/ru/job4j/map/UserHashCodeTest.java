@@ -37,5 +37,8 @@ public class UserHashCodeTest {
         //{ru.job4j.map.UserHashCode@8f8177f3=java.lang.Object@19dfb72a, ru.job4j.map.UserHashCode@8f8177f3=java.lang.Object@17c68925}
         //достали объект по ключу user1 -> java.lang.Object@19dfb72a
         //достали объект по ключу user2 -> java.lang.Object@17c68925
+
+
+
     }
 }
