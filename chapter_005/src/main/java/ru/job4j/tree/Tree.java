@@ -1,6 +1,7 @@
 package ru.job4j.tree;
 
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Optional;
 import java.util.Queue;
 
@@ -49,4 +50,30 @@ public class Tree<E> implements SimpleTree<E> {
         }
         return rsl;
     }
+
+    /**
+     * Определяет бинарность дерева
+     * Если дочерних элементов <=2
+     * дерево бинароное
+     *
+     * @return признак бинарного дерева
+     */
+    public boolean isBinary() {
+        boolean rsl = true;
+        Queue<Node<E>> data = new LinkedList<>();
+        data.offer(this.root);
+        while (!data.isEmpty()) {
+            Node<E> el = data.poll();
+            List<Node<E>> children = el.getChildren();
+            if (children.size() > 2) {
+                rsl = false;
+                break;
+            }
+            for (Node<E> child : children) {
+                data.offer(child);
+            }
+        }
+        return rsl;
+    }
+
 }
