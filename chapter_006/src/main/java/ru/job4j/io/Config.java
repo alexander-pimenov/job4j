@@ -6,6 +6,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.StringJoiner;
 
+/**
+ * Читаем файл конфигурации.
+ */
 public class Config {
     private final String path;
     private final Map<String, String> values = new HashMap<String, String>();
@@ -15,7 +18,7 @@ public class Config {
     }
 
     /*Метод читает из файла все ключи и значения разделенные знаком "=" в карту values.
-    * Не читает пустые строки и строки начинающиеся с ##*/
+     * Не читает пустые строки и строки начинающиеся с ##*/
     public void load() {
         try (BufferedReader read = new BufferedReader(new FileReader(this.path))) {
             read.lines()
@@ -46,6 +49,9 @@ public class Config {
 
     public static void main(String[] args) {
 //        System.out.println(new Config("app1.properties")); //файл не читался
+        //Положил файл в папку resources и вычитал его от туда.
+        //Но папка ресурсов не предназначена для создания в ней файлов из программы
+        //создавайте файлы в корне модуля или проекта
         System.out.println(new Config(Config.class.getResource("/app1.properties").getFile()));
     }
 }
