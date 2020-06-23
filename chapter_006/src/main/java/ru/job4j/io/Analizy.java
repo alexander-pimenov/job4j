@@ -9,8 +9,7 @@ public class Analizy {
     /*метод вычисляющий интервалы, когда сервер был не доступен*/
     public void unavailable(String source, String target) {
         List<String> listOfInterval = new LinkedList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader(source));
-             BufferedWriter writer = new BufferedWriter(new FileWriter(target))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(source))) {
             String currentLine;
             /*вычитывание данных из лог файла*/
             while ((currentLine = reader.readLine()) != null) {
@@ -27,7 +26,15 @@ public class Analizy {
                 }
             }
             /*запись данных в файл*/
-            for (String line : listOfInterval) {
+            saveIntervals(listOfInterval, target);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void saveIntervals(List<String> intervals, String target) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(target))) {
+            for (String line : intervals) {
                 writer.write(line);
             }
         } catch (IOException e) {
