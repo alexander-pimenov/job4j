@@ -5,21 +5,30 @@ import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 public class Search {
+    public static void main(String[] args) {
 
-    public static void main(String[] args) throws IOException {
-        /*Программа выводит содержимое всей директории.*/
-        Path start = Paths.get(".");
+        Path start = Paths.get(".").toAbsolutePath();
 
-        search(start, "csv").forEach(System.out::println);
+        try {
+            search(start, s -> s.endsWith(".csv")
+            //        || s.endsWith(".sample")
+            ).forEach(System.out::println);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    /*Метод возвращает список файлов с искомым расширением*/
-    public static List<Path> search(Path root, String ext) throws IOException {
-        SearchFiles searcher = new SearchFiles(ext);
+    /* Метод возвращающий полное название файла (т.е. содержит путь к нему).
+     * В предикате можно указывать несколько условий.
+     * Изменив return можно получать только название файлов без пути к ним*/
+    public static List<Path> search(Path root, Predicate<String> condition) throws IOException {
+        SearchFiles searcher = new SearchFiles(condition);
         Files.walkFileTree(root, searcher);
-        return searcher.getPaths();
+        return searcher.getFullPaths();
+//        return searcher.getPaths();
     }
 }
 
@@ -29,46 +38,45 @@ public class Search {
  * нет, то можно просто расширить реализацию класса SimpleFileVisitor,
  * переопределив лишь необходимые методы.*/
 class SearchFiles extends SimpleFileVisitor<Path> {
-    private PathMatcher matcher;
-    private List<Path> paths = new ArrayList<>();
+    private Predicate<String> condition;
+    private List<Path> fullPaths = new ArrayList<>(); //собирает название файла и путь к нему
+    private List<Path> paths = new ArrayList<>(); //собирает только имя искомого файла
 
-    SearchFiles(String ext) {
-        String pattern = "glob:*." + ext;
-        try {
-            this.matcher = FileSystems.getDefault().getPathMatcher(pattern);
-        } catch (IllegalArgumentException iae) {
-            System.exit(1);
-        }
+    SearchFiles(Predicate<String> condition) {
+        this.condition = condition;
     }
 
-    List<Path> getPaths() {
+    public List<Path> getFullPaths() {
+        return fullPaths;
+    }
+
+    public List<Path> getPaths() {
         return paths;
     }
 
-    public FileVisitResult visitFile(Path path,
-                                     BasicFileAttributes fileAttributes) {
-        find(path);
+    @Override
+    public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+        find(file);
+        return FileVisitResult.CONTINUE;
+    }
+
+    @Override
+    public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
+        find(dir);
         return FileVisitResult.CONTINUE;
     }
 
     private void find(Path path) {
         Path name = path.getFileName();
-        if (matcher.matches(name)) {
+        if (condition.test(path.toFile().getName())) {
+
             //Path parent = path.getParent();
             //System.out.println("Directory name:" + parent);
             //Path fileName = path.getFileName();
             //System.out.println("Matching file:" + fileName);
 
-            /*сохраняем имя файла в список*/
-            paths.add(name);
+            paths.add(name); //собирает только имя файла
+            fullPaths.add(path); //собирает полный путь файла
         }
     }
-
-    public FileVisitResult preVisitDirectory(Path path,
-                                             BasicFileAttributes fileAttributes) {
-        find(path);
-        return FileVisitResult.CONTINUE;
-    }
 }
-
-

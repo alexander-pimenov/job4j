@@ -10,10 +10,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 
-public class SearchTest {
+public class Search3Test {
     @Rule
     public TemporaryFolder folder = new TemporaryFolder();
 
@@ -29,17 +29,21 @@ public class SearchTest {
         File file7 = folder.newFile("TempFolder/test7.bbb");
         File folderQQQ = folder.newFolder("TempFolder", "QQQ");
         File file8 = folder.newFile("TempFolder/QQQ/test8.ccc");
-        File folderZZZ = folder.newFolder("TempFolder", "ZZZ");
+        File folderZZZ = folder.newFolder("TempFolder","ZZZ");
         File file9 = folder.newFile("TempFolder/ZZZ/test9.abc");
 
         /* Чтобы в метод search() передать путь по которому искать файлы,
          * определим путь где создадутся временные файлы и потом
          * передадим его в параметр метода*/
         String parent = file1.getParent();
+        //System.out.println(parent);
 
-        List<Path> listExtABC = Search.search(Paths.get(parent), s -> s.endsWith(".abc"));
+        List<Path> listExtABC = Search3.search(Paths.get(parent), "abc");
+        List<Path> listExtBBB = Search3.search(Paths.get(parent), "bbb");
         //System.out.println(listExtABC);
 
-        assertThat(listExtABC.size(), is(4));
+        assertThat(listExtABC.toString(),is(List.of("test9.abc", "test1.abc", "test2.abc", "test3.abc" ).toString()));
+        assertThat(listExtBBB.size(),is(2));
+
     }
 }
