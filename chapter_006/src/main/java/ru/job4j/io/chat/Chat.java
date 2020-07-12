@@ -14,10 +14,10 @@ public class Chat {
     public static void main(String[] args) {
 
         Chat chat = new Chat();
-        chat.chatCall();
+        chat.doChat();
     }
 
-    public void chatCall() {
+    public void doChat() {
         StringJoiner joiner = new StringJoiner(LN); //указал разделитель
         joiner.add("Добрый день! Я - Бот, Ваш помощник!");
         joiner.add("Введите Ваш вопрос.");
@@ -31,14 +31,15 @@ public class Chat {
         String botMessage = "Давайте начнем!";
         System.out.println(botMessage);
         writeLog("Bot", botMessage);
-        while (true) {
+
+        do {
             userMessage = input.nextLine();
             writeLog("User", userMessage);
             if (FINISH.equalsIgnoreCase(userMessage)) {
                 botMessage = "До свидания!";
                 System.out.println(botMessage);
                 writeLog("Bot", botMessage);
-                break;
+                chatWithBot = false;
             }
             if (STOP.equalsIgnoreCase(userMessage)) {
                 chatWithBot = false;
@@ -56,7 +57,7 @@ public class Chat {
                 botMessage = "Продолжаем разговор!";
                 System.out.println(botMessage);
             }
-        }
+        } while (!userMessage.equalsIgnoreCase(FINISH));
     }
 
     private void writeLog(String who, String message) {
