@@ -7,6 +7,12 @@ import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+/**
+ * Сервер работает пока не будет введено Bye или exit.
+ * При вводе Bye вызываем server.close(),
+ * а при вводе exit выходим из цикла с помощью break
+ */
+
 public class EchoServer2 {
     public static void main(String[] args) throws IOException {
         try (ServerSocket server = new ServerSocket(9000)) {
@@ -17,10 +23,6 @@ public class EchoServer2 {
                              new InputStreamReader(socket.getInputStream()))) {
                     String str = in.readLine();
                     System.out.println(str);
-                    if (str.startsWith("GET") && str.contains("exit")) {
-                        System.out.println("Server close.");
-                        break;
-                    }
                     if (str.startsWith("GET") && ((str.contains("msg=Bye")) || str.contains("msg=bye"))) {
                         out.write("Server close.\r\n".getBytes());
                         System.out.println("Server close.");
