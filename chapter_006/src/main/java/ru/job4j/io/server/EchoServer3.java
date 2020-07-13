@@ -8,11 +8,12 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class EchoServer3 {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args){
         try (ServerSocket server = new ServerSocket(9000)) {
             boolean flag = false;
             while (!flag) {
                 Socket socket = server.accept();
+                Thread.sleep(100);
                 try (OutputStream out = socket.getOutputStream();
                      BufferedReader in = new BufferedReader(
                              new InputStreamReader(
@@ -32,11 +33,15 @@ public class EchoServer3 {
                             answer = argument;
                         }
                         out.write("HTTP/1.1 200 OK\r\n".getBytes());
-                        out.write((answer + "\r\n").getBytes());
+                        out.write((answer + "\r\n\n").getBytes());
                         System.out.println(str);
                     }
                 }
             }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
