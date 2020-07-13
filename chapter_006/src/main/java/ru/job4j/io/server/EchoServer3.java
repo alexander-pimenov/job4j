@@ -32,8 +32,8 @@ public class EchoServer3 {
                         } else {
                             answer = argument;
                         }
-                        out.write("HTTP/1.1 200 OK\r\n".getBytes());
-                        out.write((answer + "\r\n\n").getBytes());
+                        out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
+                        out.write((answer + "\r\n").getBytes());
                         System.out.println(str);
                     }
                 }
