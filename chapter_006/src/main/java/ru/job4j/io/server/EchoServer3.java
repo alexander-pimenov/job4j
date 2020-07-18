@@ -20,8 +20,11 @@ public class EchoServer3 {
                              new BufferedReader(
                                      new InputStreamReader(
                                              socket.getInputStream()))) {
+
                     String str = in.readLine();
-                    if (!str.isEmpty()) {
+                    System.out.println(str);
+                    //Парсим первую строку запроса
+                    if (str != null && !str.isEmpty()) { //
                         String[] line = str.split("\\s");
                         int index = line[1].lastIndexOf('=');
                         String argument = line[1].substring(index + 1);
@@ -34,6 +37,13 @@ public class EchoServer3 {
                         } else {
                             answer = argument;
                         }
+                        System.out.println("=====start of request information=====");
+                        while (!str.isEmpty()) {
+                            System.out.println(str);
+                            str = in.readLine();
+                        }
+                        System.out.println("=====end of request information=====");
+
                         /*Для того, чтобы браузер выводил ответ сервера,
                          * оформим ответ в соответствии с правилами ответа HTTP протокола.
                          */
@@ -48,7 +58,7 @@ public class EchoServer3 {
                         out.flush();
 //                        out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
 //                        out.write((answer + "\r\n").getBytes());
-                        System.out.println(str);
+//                        System.out.println(str);
                     }
                 }
             }
