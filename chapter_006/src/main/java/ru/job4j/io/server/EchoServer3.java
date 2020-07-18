@@ -21,7 +21,7 @@ public class EchoServer3 {
                                      new InputStreamReader(
                                              socket.getInputStream()))) {
 
-                    String str = in.readLine();
+                    String str = in.readLine(); //Читаем первую строку сообщения от Клиента
                     System.out.println(str);
                     //Парсим первую строку запроса
                     if (str != null && !str.isEmpty()) { //
@@ -37,6 +37,8 @@ public class EchoServer3 {
                         } else {
                             answer = argument;
                         }
+
+                        /*Вывод информации о пришедшем сообщении, о request от Клиента.*/
                         System.out.println("=====start of request information=====");
                         while (!str.isEmpty()) {
                             System.out.println(str);
@@ -54,8 +56,9 @@ public class EchoServer3 {
                                         + "<h2>Hello from Server.</h2>\r\n"
                                         + "<p>" + answer + "</p>\r\n"
                                         + "<p> #This is the server response# </p>\r\n";
-                        out.write(response);
+                        out.write(response); //Отправляет ответ(response) Клиенту
                         out.flush();
+
 //                        out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
 //                        out.write((answer + "\r\n").getBytes());
 //                        System.out.println(str);
