@@ -1,23 +1,25 @@
 package ru.job4j.io.server;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 
 public class EchoServer3 {
-    public static void main(String[] args){
+    public static void main(String[] args) {
         try (ServerSocket server = new ServerSocket(9000)) {
             boolean flag = false;
+            System.out.println("Server started");
             while (!flag) {
                 Socket socket = server.accept();
                 Thread.sleep(100);
-                try (OutputStream out = socket.getOutputStream();
-                     BufferedReader in = new BufferedReader(
-                             new InputStreamReader(
-                                     socket.getInputStream()))) {
+                try (BufferedWriter out =
+                             new BufferedWriter(
+                                     new OutputStreamWriter(
+                                             socket.getOutputStream()));
+                     BufferedReader in =
+                             new BufferedReader(
+                                     new InputStreamReader(
+                                             socket.getInputStream()))) {
                     String str = in.readLine();
                     if (!str.isEmpty()) {
                         String[] line = str.split("\\s");
@@ -32,8 +34,20 @@ public class EchoServer3 {
                         } else {
                             answer = argument;
                         }
-                        out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
-                        out.write((answer + "\r\n").getBytes());
+                        /*Для того, чтобы браузер выводил ответ сервера,
+                         * оформим ответ в соответствии с правилами ответа HTTP протокола.
+                         */
+                        String response =
+                                "HTTP/1.1 200 OK\r\n"
+                                        + "Content-Type: text/html\r\n"
+                                        + "\r\n" //пустая строка
+                                        + "<h2>Hello from Server.</h2>\r\n"
+                                        + "<p>" + answer + "</p>\r\n"
+                                        + "<p> #This is the server response# </p>\r\n";
+                        out.write(response);
+                        out.flush();
+//                        out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
+//                        out.write((answer + "\r\n").getBytes());
                         System.out.println(str);
                     }
                 }
