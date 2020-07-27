@@ -10,12 +10,24 @@ import java.util.function.Predicate;
 public class Search {
     public static void main(String[] args) {
 
+        String path = "c:/projects/lessons-job4j/chapter_001";
+
         Path start = Paths.get(".").toAbsolutePath();
 
+//        try {
+//            search(start, s -> s.endsWith(".csv")
+//            //        || s.endsWith(".sample")
+//            ).forEach(System.out::println);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
         try {
-            search(start, s -> s.endsWith(".csv")
-            //        || s.endsWith(".sample")
-            ).forEach(System.out::println);
+            search(Paths.get(path), s->
+                    s.equals("pom.xml")
+//                            ||s.endsWith(".xml")
+//                          ||s.contains("xml")
+                    )
+                    .forEach(System.out::println);
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -10,11 +10,14 @@ public class Search2 {
 
     public static void main(String[] args) throws IOException {
         /*Программа выводит содержимое всей директории.*/
-        Path start = Paths.get(".");
+//        Path start = Paths.get(".");
+        Path start = Paths.get("C:/projects/lessons-job4j/chapter_001");
 
-        search(start, "csv").forEach(System.out::println);
+//        search(start, "csv").forEach(System.out::println);
+        search(start, "xml").forEach(System.out::println);
         System.out.println("====================");
-        search2(start, "csv").forEach(p -> System.out.println(p.toString()));
+//        search2(start, "csv").forEach(p -> System.out.println(p.toString()));
+        search2(start, "xml").forEach(p -> System.out.println(p.toString()));
     }
 
     /*Метод возвращает список файлов с искомым расширением*/
@@ -70,7 +73,8 @@ class SearchFiles2 extends SimpleFileVisitor<Path> {
             //System.out.println("Matching file:" + fileName);
 
             /*сохраняем имя файла в список*/
-            paths.add(name);
+//            paths.add(name); //будет сохраняться только имя файла
+            paths.add(path); //будет сохраняться файл с указанием его пути
 
             /*сохраняем не только имя файла, но и название его директории*/
             searchers.add(new Searcher2(parent.toString(), fileName.toString()));

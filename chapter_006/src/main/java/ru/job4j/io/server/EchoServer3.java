@@ -6,10 +6,16 @@ import java.net.Socket;
 
 public class EchoServer3 {
     public static void main(String[] args) {
-        try (ServerSocket server = new ServerSocket(9000)) {
+        try (ServerSocket server = new ServerSocket(9000)) { //Создав объект типа  ServerSocket необходимо выяснить, что с сервером кто-то хочет соединиться.
             boolean flag = false;
             System.out.println("Server started");
             while (!flag) {
+                /*server.accept() - ожидает, когда к нему обратиться клиент.
+                 * Здесь программа переходит в режим ожидания.
+                 * Искомый ждёт пока кто-либо не захочет подсоединится к нему,
+                 * и когда это происходит возвращает объект типа Socket, то есть
+                 * воссозданный клиентский сокет. И вот когда сокет клиента создан
+                 * на стороне сервера, можно начинать двухстороннее общение. */
                 Socket socket = server.accept();
                 Thread.sleep(100);
                 try (BufferedWriter out =
@@ -53,9 +59,15 @@ public class EchoServer3 {
                                 "HTTP/1.1 200 OK\r\n"
                                         + "Content-Type: text/html\r\n"
                                         + "\r\n" //пустая строка
+                                        + "<html>\r\n"
+                                        + "<head>\r\n"
+                                        + "</head>\r\n"
+                                        + "<body>\r\n"
                                         + "<h2>Hello from Server.</h2>\r\n"
                                         + "<p>" + answer + "</p>\r\n"
-                                        + "<p> #This is the server response# </p>\r\n";
+                                        + "<p> #This is the server response# </p>\r\n"
+                                        + "</body>\r\n"
+                                        + "</html>\r\n";
                         out.write(response); //Отправляет ответ(response) Клиенту
                         out.flush();
 

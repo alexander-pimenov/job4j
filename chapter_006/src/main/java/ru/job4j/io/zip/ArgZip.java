@@ -1,6 +1,5 @@
 package ru.job4j.io.zip;
 
-import java.io.File;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
