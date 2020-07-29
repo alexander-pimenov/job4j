@@ -60,7 +60,19 @@ public class SearchApp {
 
 // комментарий для себя:
 //-d c:/projects/job4j/chapter_001 -n B.+ -r -o log_found_files_chapter_001.txt
-//есть проблемы с обработкой регулярных выражений, нужно исправлять, но есть и положительный результат с regEx:
-// A*.java, *.xml, M.+,
-// *.* -(запись всех файлов папки)
-// .+ -(запись всех файлов папки)
+// A*.java, *.xml, M.+ - это поиск по маске
+// *.* -(запись всех файлов папки) - попадают абсолютно все файлы, поскольку набор произвольных символов указывается как для имени, так и для расширения файла. - это поиск по маске
+// .+ -(запись всех файлов папки) - это поиск по регулярке
+// bo*.* - ищет все файлы начинающиеся на bo и потом какие-то символы и с любым расширением. - это поиск по маске
+//
+//поиск по регулярному выражению. отработал нормально.
+//-d c:/projects/job4j/chapter_001 -n Matrix.+ -r -o log_found_files_chapter_001_12.txt
+//-d c:/projects/job4j/chapter_001 -n [dD].+.* -r -o log_found_files_chapter_001_6.txt
+//-d c:/projects/job4j/chapter_001 -n .+.xml -r -o log_found_files_chapter_001_7.txt
+//-d c:/projects/job4j/chapter_001 -n [dD].+.java -r -o log_found_files_chapter_001_5.txt
+//-d c:/projects/job4j/chapter_001 -n .+\Q.\Eclass -r -o log_found_files_chapter_001_11.txt - где \Q.\E экранируем точку
+//
+//поиск по маске. отработал нормально
+//-d c:/projects/job4j/chapter_001 -n M*.java -m -o log_found_files_chapter_001_14.txt
+//-d c:/projects/job4j/chapter_001 -n *oin*.java -m -o log_found_files_chapter_001_16.txt
+//-d c:/projects/job4j/chapter_001 -n M*.* -m -o log_found_files_chapter_001_18.txt

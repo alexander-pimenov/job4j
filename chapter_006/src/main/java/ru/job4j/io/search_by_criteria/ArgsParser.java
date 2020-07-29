@@ -31,12 +31,14 @@ public class ArgsParser {
     private void parseArguments() throws Exception {
         int countArguments = 7;
         if (args.length < countArguments) {
-            throw new IllegalArgumentException("Invalid startup options. Fix it.");
+            throw new IllegalArgumentException("Invalid startup options. Fix it.\r\n" +
+                    "Try again, e.g.  -d c:/ -n *.txt -m -o log.txt");
         }
         for (int i = 0; i < args.length; i++) {
             if (args[i].equals("-m")
                     || args[i].equals("-f")
-                    || args[i].equals("-r")) {
+                    || args[i].equals("-r")
+            ) {
                 arguments.put(args[i], "");
             } else if (args[i].equals("-d")
                     || args[i].equals("-n")
@@ -73,8 +75,9 @@ public class ArgsParser {
             if (!argsList.get(4).equals("-f")) {
                 if (!argsList.get(4).equals("-r")) {
                     System.out.println("Args is not valid. Invalid search key.\r\n"
-                            + "There must be one key equal to m or f or r.");
+                            + "There must be one key equal to -m or -f or -r.");
                     result = false;
+
                 }
             }
         }
@@ -93,41 +96,46 @@ public class ArgsParser {
         return arguments.get("-o");
     }
 
+    /*Информация:
+     * при поиске по МАСКЕ используются некоторые символы для обозначения некоторых
+     * условий для поиска.
+     * Например:
+     * Знаком вопроса (?) в шаблоне обозначают любой ОДИНОЧНЫЙ символ;
+     * Знаком звездочка (*) - в шаблоне обозначают любую последовательность
+     * символов произвольной длины, так же символ (*) может задавать
+     * и ПУСТУЮ последовательность.*/
+    /*Метод, настраивающий предикат согласно ключу: -m, -f, -r*/
     public Predicate<String> flagCheck() {
         Predicate<String> filePredicate = null;
         if (arguments.containsKey("-m")) {
-            filePredicate = str -> str.endsWith(getSearchFile())
-                    || str.startsWith(getSearchFile())
-                    || str.contains(getSearchFile())
-                    || str.equalsIgnoreCase(getSearchFile());
-        } else if (arguments.containsKey("-f")) {
-            filePredicate = str -> str.equals(getSearchFile());
-        } else if (arguments.containsKey("-r")) {
             filePredicate = str -> {
                 String pattern = preparePattern(getSearchFile());
                 p = Pattern.compile(pattern, Pattern.UNICODE_CASE | Pattern.CASE_INSENSITIVE);
                 m = p.matcher(str);
                 return m.matches();
             };
+        } else if (arguments.containsKey("-f")) {
+            filePredicate = str -> str.equals(getSearchFile());
+        } else if (arguments.containsKey("-r")) {
+            filePredicate = str -> str.matches(getSearchFile());
         }
         return filePredicate;
     }
 
     private String preparePattern(String pattern) {
-        if (pattern.contains("*.")) {
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < pattern.length(); i++) {
-                char c = pattern.charAt(i);
-                if (c == '*') {
-                    sb.append(".+");
-                } else if (c == '.') {
-                    sb.append("\\.");
-                } else {
-                    sb.append(c);
-                }
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < pattern.length(); i++) {
+            char c = pattern.charAt(i);
+            if (c == '*') {
+                sb.append(".*");
+            } else if (c == '.') {
+                sb.append("\\.");
+            } else if (c == '?') {
+                sb.append(".");
+            } else {
+                sb.append(c);
             }
-            return sb.toString();
         }
-        return pattern;
+        return sb.toString();
     }
 }
