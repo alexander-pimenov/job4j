@@ -117,7 +117,11 @@ public class ArgsParser {
         } else if (arguments.containsKey("-f")) {
             filePredicate = str -> str.equals(getSearchFile());
         } else if (arguments.containsKey("-r")) {
-            filePredicate = str -> str.matches(getSearchFile());
+            filePredicate = str -> {
+                p = Pattern.compile(getSearchFile(),Pattern.UNICODE_CASE | Pattern.CASE_INSENSITIVE);
+                m = p.matcher(str);
+                return m.matches();
+            };
         }
         return filePredicate;
     }

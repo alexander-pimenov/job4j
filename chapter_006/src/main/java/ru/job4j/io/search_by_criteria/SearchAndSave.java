@@ -1,6 +1,5 @@
 package ru.job4j.io.search_by_criteria;
 
-
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -9,6 +8,10 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.function.Predicate;
 
+/*В методе writeResult() можем раскомментировать строку и записывать в лог-файл только
+ * имена найденных файлов, а не полный путь файла.
+ * Так ж мы можем только во время поиска в методе search() сохранять простые имена файлов а не полное их имя.
+ * */
 
 public class SearchAndSave {
     private static final String LN = System.lineSeparator();
@@ -36,7 +39,7 @@ public class SearchAndSave {
         SearchFiles searcher = new SearchFiles(condition);
         Files.walkFileTree(root, searcher);
         return searcher.getFullPaths();
-//        return searcher.getPaths(); //этот вариант если нам нужн искать только имена файлов без пути к ним
+//        return searcher.getPaths(); //***этот вариант если нам нужн искать только имена файлов без пути к ним
     }
 
     /*Метод записи найденных файлов в файл-лог на компьютере*/
@@ -46,7 +49,7 @@ public class SearchAndSave {
                 bw.write("Found files: " + LN);
                 for (Path str : listFiles) {
                     bw.write(str + LN);
-//                    bw.write(str.getFileName() + LN); //этот вариант если нам нужно записать только имена файлов
+//                    bw.write(str.getFileName() + LN); //***этот вариант если нам нужно записать только имена файлов
                 }
                 System.out.println("Save completed.");
             } else {

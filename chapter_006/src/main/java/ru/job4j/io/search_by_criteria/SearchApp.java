@@ -28,7 +28,7 @@ public class SearchApp {
                 exit = true;
             } else {
                 System.out.println("continue");
-                String[] split = input.split("\\s+");
+                String[] split = input.split("\\s+"); //разделитель "\\s+" - это один или более пробелов.
                 try {
                     argsParser = new ArgsParser(split);
                     List<Path> files = SearchAndSave.search(Paths.get(argsParser.getDirectory()), argsParser.flagCheck());
@@ -71,8 +71,10 @@ public class SearchApp {
 //-d c:/projects/job4j/chapter_001 -n .+.xml -r -o log_found_files_chapter_001_7.txt
 //-d c:/projects/job4j/chapter_001 -n [dD].+.java -r -o log_found_files_chapter_001_5.txt
 //-d c:/projects/job4j/chapter_001 -n .+\Q.\Eclass -r -o log_found_files_chapter_001_11.txt - где \Q.\E экранируем точку
+//-d c:/projects/job4j/chapter_001 -n .+ -r -o log_found_files_chapter_001_1.txt - поиск всех файлов в каталоге
 //
 //поиск по маске. отработал нормально
 //-d c:/projects/job4j/chapter_001 -n M*.java -m -o log_found_files_chapter_001_14.txt
 //-d c:/projects/job4j/chapter_001 -n *oin*.java -m -o log_found_files_chapter_001_16.txt
 //-d c:/projects/job4j/chapter_001 -n M*.* -m -o log_found_files_chapter_001_18.txt
+//-d c:/projects/job4j/chapter_001 -n [mM]??.* -m -o log_found_files_chapter_001_8.txt
