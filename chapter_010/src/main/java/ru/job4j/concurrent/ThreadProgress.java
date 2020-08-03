@@ -23,13 +23,11 @@ public class ThreadProgress {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
         //progress.interrupt();
-
     }
 }
 
-class ConsoleProgress implements Runnable{
+class ConsoleProgress implements Runnable {
 
     @Override
     public void run() {

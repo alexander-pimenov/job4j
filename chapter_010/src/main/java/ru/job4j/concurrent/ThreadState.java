@@ -1,7 +1,4 @@
 package ru.job4j.concurrent;
-
-import javax.swing.table.TableCellRenderer;
-
 /**
  * Программа, которая запускает нить и выводит ее состояние.
  * За управление нитями в Java отвечает планировщик задач.
@@ -9,7 +6,6 @@ import javax.swing.table.TableCellRenderer;
  * Это время зависит от текущей ситуации.
  * Если задач много, то переключение между нитями будет частое.
  */
-
 public class ThreadState {
     public static void main(String[] args) {
 

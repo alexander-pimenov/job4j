@@ -38,10 +38,12 @@ public class ConcurrentOutput {
 }
 //Вывод результата в консоль:
 //
+//=======================
 //нить another -> main
 //нить second -> main
 //нить third -> main
+//=======================
 //нить another -> Thread-0
-//нить third -> Thread-2
 //нить second -> Thread-1
+//нить third -> Thread-2
 //main метод -> main

@@ -1,9 +1,7 @@
 package ru.job4j.concurrent;
-
 /**
  * Программа, которая ждет 3 секунды и печатает на консоль слово loaded.
  */
-
 public class ThreadSleep {
     public static void main(String[] args) {
         Thread thread = new Thread(
