@@ -95,7 +95,7 @@ select p.name as product_name,
 	left join type as t
 	on p.type_id=t.id
 	where
-	extract(month from p.expired_date) = extract(month from now())+1;
+	extract(month from p.expired_date) = extract(month from now() + interval '1 month');
 
 --4. Написать запрос, который выводит самый дорогой продукт.
 
