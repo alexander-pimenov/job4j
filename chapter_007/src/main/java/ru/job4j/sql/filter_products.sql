@@ -84,7 +84,7 @@ select * from product where name like '%мороженное%';
 --3. Написать запрос, который выводит все продукты, срок годности которых заканчивается в следующем месяце:
 
 select name from product
-where extract(month from expired_date) = extract(month from now())+1;
+where extract(month from expired_date) = extract(month from now() + interval '1 month');
 
 --или:
 
