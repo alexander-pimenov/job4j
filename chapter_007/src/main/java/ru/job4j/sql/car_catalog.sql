@@ -105,28 +105,21 @@ insert into car (name, body_id, engine_id, transmission_id) values ('Mitsubishi'
  insert into car(name) values ('Car11');
 
 --1. Вывести список всех машин и все привязанные к ним детали.
--- вывод всех колонок после соединения
+-- вывод всех колонок после соединения.
+--//Правильное соединение будет через inner join, т.к. машина не может
+-- существовать без деталей (без кузова, без трансмиссии, без двигателя).
+-- Те машины которые записаны в таблицу без некоторых деталей,
+-- в этом результате не появятся.
 
 select c.name, b.name as body_car, e.name as engine_car,
-	t.name as transmission_car
-	from car c
-		left join body b on c.body_id=b.id
-		left join engine e on c.engine_id=e.id
-		left join transmission t on c.transmission_id=t.id;
+ 	t.name as transmission_car
+		from car c
+			inner join body b on c.body_id=b.id
+			inner join engine e on c.engine_id=e.id
+			inner join transmission t on c.transmission_id=t.id;
 
 --2. Вывести отдельно детали, которые не используются в машине,
 --   кузова, двигатели, коробки передач.
-
-select c.name, b.name as body_car, e.name as engine_car,
-     t.name as transmission_car
-     	from car c
-     		left join body b on c.body_id=b.id
-    		left join engine e on c.engine_id=e.id
-     		left join transmission t on c.transmission_id=t.id
-			where b.name is null or e.name is null or t.name is null;
---			where c.transmission_id is null or c.engine_id is null or c.body_id is null;
-
---или возможно выводить по отдельности:
 
 select c.name, t.name as transmission_car
 	from car as c left join transmission as t on t.id = c.transmission_id
