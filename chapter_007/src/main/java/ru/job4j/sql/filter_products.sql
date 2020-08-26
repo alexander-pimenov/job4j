@@ -69,7 +69,8 @@ select p.name, t.name as type_name, p.price
 	on p.type_id=t.id
 	where t.name='сыр';
 
---2. Написать запрос получения всех продуктов, у кого в имени есть слово "мороженное":
+--2. Написать запрос получения всех продуктов, у кого в имени есть
+--   слово "мороженное":
 
 select p.name, t.name as type_name, p.price, p.expired_date
 	from product as p
@@ -81,7 +82,8 @@ select p.name, t.name as type_name, p.price, p.expired_date
 
 select * from product where name like '%мороженное%';
 
---3. Написать запрос, который выводит все продукты, срок годности которых заканчивается в следующем месяце:
+--3. Написать запрос, который выводит все продукты, срок годности
+--   которых заканчивается в следующем месяце:
 
 select name from product
 where extract(month from expired_date) = extract(month from now() + interval '1 month');
@@ -106,7 +108,8 @@ where p.price =
    (select max(price) from product)
 group by p.name, t.name;
 
---5. Написать запрос, который выводит количество всех продуктов определенного типа.
+--5. Написать запрос, который выводит количество всех продуктов
+--определенного типа.
 --вывод по определенному типу:
 
 select count(*) as "молочные продукты" from product as p left join type as t on p.type_id  = t.id where t.name = 'молочные продукты';
