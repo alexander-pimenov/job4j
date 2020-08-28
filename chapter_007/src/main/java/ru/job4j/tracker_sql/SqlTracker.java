@@ -49,6 +49,9 @@ public class SqlTracker implements Store {
     }
 
     public SqlTracker() {
+        init();
+        createTableItem();
+
     }
 
     /*Для считывания файлов используем ClassLoader*/
@@ -57,7 +60,7 @@ public class SqlTracker implements Store {
      * Инициализация подключения с настройками в файле
      * ресурсов "app.properties"
      */
-    public void init() {
+    private void init() {
         try (InputStream in = SqlTracker.class.getClassLoader().getResourceAsStream("app.properties")) {
             Properties config = new Properties();
             if (in != null) {
@@ -75,7 +78,7 @@ public class SqlTracker implements Store {
         }
     }
 
-    public void createTableItem() {
+    private void createTableItem() {
         try (PreparedStatement preparedStatement = cn.prepareStatement(CREATE_TABLE_ITEM)) {
             preparedStatement.execute();
         } catch (SQLException e) {
@@ -239,8 +242,8 @@ public class SqlTracker implements Store {
                 new ConsoleInput()
         );
         try (SqlTracker sqlTracker = new SqlTracker()) {
-            sqlTracker.init();
-            sqlTracker.createTableItem();
+//            sqlTracker.init();
+//            sqlTracker.createTableItem();
             new StartUI(validate, sqlTracker, System.out::println)
                     .init();
         } catch (Exception e) {
