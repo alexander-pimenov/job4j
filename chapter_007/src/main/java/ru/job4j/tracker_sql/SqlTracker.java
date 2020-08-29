@@ -44,6 +44,7 @@ public class SqlTracker implements Store {
     private static final String QUERY_FIND_BY_NAME = "SELECT * FROM item WHERE name = ?;";
     private static final String QUERY_FIND_BY_ID = "SELECT * FROM item WHERE id = ?;";
 
+    //Вынося Connection в конструктор, позволит нам создать его вне класса SqlTracker.
     public SqlTracker(Connection cn) {
         this.cn = cn;
     }
