@@ -14,7 +14,7 @@ public class SimpleSetTest {
     private SimpleSet<Integer> set;
 
     @Before
-    public void setup(){
+    public void setup() {
         set = new SimpleSet<>();
         set.add(1);
         set.add(2);
@@ -22,20 +22,20 @@ public class SimpleSetTest {
     }
 
     @Test
-    public void whenAddThreeDifferentElementThenSizeThree(){
+    public void whenAddThreeDifferentElementThenSizeThree() {
         assertThat(set.size(), is(3));
     }
 
 
     @Test
-    public void whenHaveThreeDifferentAndAddTwoSameElementsThenHaveThreeAgain(){
+    public void whenHaveThreeDifferentAndAddTwoSameElementsThenHaveThreeAgain() {
         set.add(2);
         set.add(2);
         assertThat(set.size(), is(3));
     }
 
     @Test
-    public void whenCallIterator(){
+    public void whenCallIterator() {
         Iterator<Integer> iterator = set.iterator();
         assertThat(iterator.hasNext(), is(true));
         assertThat(iterator.next(), is(1));
@@ -45,21 +45,21 @@ public class SimpleSetTest {
     }
 
     @Test
-    public void whenSetIsEmptyAndCallIteratorHasNext(){
+    public void whenSetIsEmptyAndCallIteratorHasNext() {
         SimpleSet<Integer> set = new SimpleSet<>();
         Iterator<Integer> iterator = set.iterator();
         assertThat(iterator.hasNext(), is(false));
     }
 
     @Test(expected = NoSuchElementException.class)
-    public void whenSetIsEmptyAndCallIteratorNext(){
+    public void whenSetIsEmptyAndCallIteratorNext() {
         SimpleSet<Integer> set = new SimpleSet<>();
         Iterator<Integer> iterator = set.iterator();
         iterator.next();
     }
 
     @Test
-    public void whenSetHasNullElementAndCallIterator(){
+    public void whenSetHasNullElementAndCallIterator() {
 
         set.add(null);
 
@@ -75,7 +75,7 @@ public class SimpleSetTest {
     }
 
     @Test
-    public void whenAddThreeNullElementsToInitialSetupThenSizeFour(){
+    public void whenAddThreeNullElementsToInitialSetupThenSizeFour() {
         set.add(null);
         set.add(null);
         set.add(null);

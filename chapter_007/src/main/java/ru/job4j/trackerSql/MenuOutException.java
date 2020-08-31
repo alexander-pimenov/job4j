@@ -1,4 +1,4 @@
-package ru.job4j.tracker_sql;
+package ru.job4j.trackerSql;
 
 class MenuOutException extends RuntimeException {
     MenuOutException(String msg) {

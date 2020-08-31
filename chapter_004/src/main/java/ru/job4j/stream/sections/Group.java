@@ -12,42 +12,58 @@ import java.util.stream.Collectors;
  * У каждого студента есть список секций, которые он посещает.
  */
 public class Group {
-    public static void main(String[] args) {
-
-        //Наши студенты
-        Student ivanov = new Student("Ivanov", Set.of("Biology", "Aeromodelling", "Tennis"));
-        Student petrov = new Student("Petrov", Set.of("Tennis", "Aeromodelling", "Badminton"));
-        Student sidorov = new Student("Sidorov", Set.of("Badminton", "Robotics", "Biology"));
-        Student nikolaev = new Student("Nikolaev", Set.of("Biology", "Fencing", "Philosophy"));
-        Student orlova = new Student("Orlova", Set.of("Philosophy", "Tennis", "Robotics"));
-        Student peterson = new Student("Peterson", Set.of("Philosophy", "Badminton"));
-        Student proctor = new Student("Proctor", Set.of("Tennis", "Biology", "Fencing"));
-
-        //Заполним список студентов
-        List<Student> students = Arrays.asList(ivanov, petrov, sidorov, nikolaev, orlova, peterson, proctor);
-
-        //Получим список секций из списка студентов
-        System.out.println("##### Список секций #####");
-
-        var listUnits = students.stream()
-                .flatMap(student -> student.getUnits().stream())
-                .distinct()
-                .collect(Collectors.toList());
-        System.out.println(listUnits);
-        System.out.println("**********************");
-
-        System.out.println("##### method group students by sections #####");
-        Map<String, Set<String>> groupBySections = sections(students);
-        groupBySections.entrySet().forEach(System.out::println);
-        System.out.println("*****Красивый вывод*****");
-        //Или так красиво выводим результат
-        for (Map.Entry<String, Set<String>> itemGroup : groupBySections.entrySet()) {
-            System.out.println("-= " + itemGroup.getKey() + " =-");
-            for (String names : itemGroup.getValue()) {
-                System.out.println(names);
-            }
-        }
-    }
+//    public static void main(String[] args) {
+//
+//        Group group = new Group();
+//
+//        //Наши студенты
+//        Student ivanov = new Student("Ivanov", Set.of("Biology", "Aeromodelling", "Tennis"));
+//        Student petrov = new Student("Petrov", Set.of("Tennis", "Aeromodelling", "Badminton"));
+//        Student sidorov = new Student("Sidorov", Set.of("Badminton", "Robotics", "Biology"));
+//        Student nikolaev = new Student("Nikolaev", Set.of("Biology", "Fencing", "Philosophy"));
+//        Student orlova = new Student("Orlova", Set.of("Philosophy", "Tennis", "Robotics"));
+//        Student peterson = new Student("Peterson", Set.of("Philosophy", "Badminton"));
+//        Student proctor = new Student("Proctor", Set.of("Tennis", "Biology", "Fencing"));
+//
+//        //Заполним список студентов
+//        List<Student> students = Arrays.asList(ivanov, petrov, sidorov, nikolaev, orlova, peterson, proctor);
+//
+//        //Получим список секций из списка студентов
+//        System.out.println("##### Список секций #####");
+//
+//        //var listUnits
+//        final List<String> listUnits = students.stream()
+//                .flatMap(student -> student.getUnits().stream())
+//                .distinct()
+//                .collect(Collectors.toList());
+//        System.out.println(listUnits);
+//        System.out.println("**********************");
+//
+//        System.out.println("##### method group students by sections #####");
+//        Map<String, Set<String>> groupBySections = group.sections(students);
+//        groupBySections.entrySet().forEach(System.out::println);
+//
+//        System.out.println("*****Красивый вывод*****");
+//        //Или так красиво выводим результат
+//        for (Map.Entry<String, Set<String>> itemGroup : groupBySections.entrySet()) {
+//            System.out.println("-= " + itemGroup.getKey() + " =-");
+//            for (String names : itemGroup.getValue()) {
+//                System.out.println(names);
+//            }
+//        }
+//
+//    //Collector.of(
+////      HashSet::new, //поставщик, supplier()
+////      (set, el) -> set.add(el),//аккумулятор accumulator(), накопление, как добавлять данные или через HashSet::add;
+////      (left, right) -> {
+////                      left.addAll(right);
+////                      return left;
+////                       } //для агрегации, combiner(), сумматор
+////       )));
+//
+//
+//
+//    }
 
     /**
      * Метод, который группирует студентов по секциям.
@@ -70,25 +86,14 @@ public class Group {
      * В нашем случае там нужны только имена студентов.)
      */
     //public static Map<String, Set<String>> sections(List<Student> students) {
-    public static Map<String, Set<String>> sections(List<Student> students) {
+    Map<String, Set<String>> sections(List<Student> students) {
         Map<String, Set<String>> collect = students.stream()
                 .flatMap(student -> student.getUnits().stream()
                         .map(b -> new Holder(b, student.getName()))) // собираем объект Holder с unit и name
                 //.peek(System.out::println) //нужно лишь, чтобы видеть поток Holder
-                .collect(       //собираем карту
-                        Collectors.groupingBy(Holder::getKey, //определяем группировку - группируем по названию секции
-                                Collectors.mapping((Holder::getValue), //собираем имена студентов в Сет.
-                                        Collectors.toSet())));
+                .collect(Collectors.groupingBy(Holder::getKey, //собираем карту, определяем группировку - группируем по названию секции
+                        Collectors.mapping((Holder::getValue), //собираем имена студентов в Сет.
+                                Collectors.toSet())));
         return collect;
     }
 }
-
-
-//Collector.of(
-//      HashSet::new, //поставщик, supplier()
-//      (set, el) -> set.add(el),//аккумулятор accumulator(), накопление, как добавлять данные или через HashSet::add;
-//      (left, right) -> {
-//                      left.addAll(right);
-//                      return left;
-//                       } //для агрегации, combiner(), сумматор
-//       )));

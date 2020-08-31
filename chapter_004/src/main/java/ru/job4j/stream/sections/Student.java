@@ -3,21 +3,21 @@ package ru.job4j.stream.sections;
 import java.util.Objects;
 import java.util.Set;
 
-public class Student implements Comparable<Student> {
+class Student implements Comparable<Student> {
 
     private String name;
     private Set<String> units;
 
-    public Student(String name, Set<String> units) {
+    Student(String name, Set<String> units) {
         this.name = name;
         this.units = units;
     }
 
-    public String getName() {
+    String getName() {
         return name;
     }
 
-    public Set<String> getUnits() {
+    Set<String> getUnits() {
         return units;
     }
 
@@ -41,8 +41,8 @@ public class Student implements Comparable<Student> {
             return false;
         }
         Student student = (Student) o;
-        return Objects.equals(name, student.name) &&
-                Objects.equals(units, student.units);
+        return Objects.equals(name, student.name)
+                && Objects.equals(units, student.units);
     }
 
     @Override

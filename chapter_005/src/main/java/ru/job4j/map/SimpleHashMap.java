@@ -24,20 +24,35 @@ public class SimpleHashMap<K, V> implements SimpleMap<K, V> {
         return this.hashTable.length;
     }
 
+    /**
+     * Метод вычисляющий hash ключа.
+     * ^ и >>>16 дают хорошее распределение объектов-ключ по бакетам
+     * 16 - количество бакетов в начале использования HashMap.
+     *
+     * @param key ключ-объект
+     * @return числовое соответствие объекта
+     */
     private int hash(K key) {
-        int hash = 31;
-        hash = hash * 17 + key.hashCode();
-        return (key == null) ? 0: (hash = key.hashCode())^(hash>>>16);
+        int hash;
+        hash = key.hashCode() ^ key.hashCode() >>> 16;
+        return (key == null) ? 0 : (hash);
+//        Эту часть кода закомментировал, т.к. верхние три строчки лучще подходят для вычисления
+//        хэша ключа-объекта.
+//        int hash = 31;
+//        hash = hash * 17 + key.hashCode();
+        //checkstyle указывает на то чтобы избегал внутренних назначений, поэтому переписал этот участок кода
+//        return (key == null) ? 0 : (hash = key.hashCode()) ^ (hash >>> 16);
     }
 
     /**
      * Определяет индекс в массиве по хэшу ключа
+     * (другими словами - номер корзины в массиве)
      *
      * @param hash значение хэша ключа
      * @return индекс в массиве
      */
     private int indexFor(int hash) {
-        return hash & (hashTable.length-1);
+        return hash & (hashTable.length - 1);
     }
 
     /**
@@ -86,6 +101,7 @@ public class SimpleHashMap<K, V> implements SimpleMap<K, V> {
 
     /**
      * Метод получения объекта из карты по ключу
+     *
      * @param key значение ключа
      * @return получаемый объект
      */
@@ -107,6 +123,7 @@ public class SimpleHashMap<K, V> implements SimpleMap<K, V> {
 
     /**
      * Метод удаления объекта из карты по ключу
+     *
      * @param key значение ключа
      * @return булево значение
      */
@@ -125,6 +142,7 @@ public class SimpleHashMap<K, V> implements SimpleMap<K, V> {
 
     /**
      * Метод получения размера карты по количеству элементов в ней.
+     *
      * @return целочисленное число разера карты
      */
     @Override
@@ -134,9 +152,9 @@ public class SimpleHashMap<K, V> implements SimpleMap<K, V> {
 
     @Override
     public String toString() {
-        return "SimpleHashMap{" +
-                "hashTable=" + Arrays.toString(hashTable) +
-                '}';
+        return "SimpleHashMap{"
+                + "hashTable=" + Arrays.toString(hashTable)
+                + '}';
     }
 
     public Iterator<Node<K, V>> iterator() {
@@ -202,12 +220,16 @@ public class SimpleHashMap<K, V> implements SimpleMap<K, V> {
 
         @Override
         public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
             Node<?, ?> node = (Node<?, ?>) o;
-            return hash == node.hash &&
-                    Objects.equals(key, node.key) &&
-                    Objects.equals(value, node.value);
+            return hash == node.hash
+                    && Objects.equals(key, node.key)
+                    && Objects.equals(value, node.value);
         }
 
         @Override

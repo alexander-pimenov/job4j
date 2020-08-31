@@ -16,7 +16,7 @@ public class AnalizeTest {
     List<Analize.User> currList = new ArrayList<>();
 
     @Before
-    public void setUp(){
+    public void setUp() {
         prevList.add(new Analize.User(1, "Nick"));
         prevList.add(new Analize.User(2, "Bob"));
         prevList.add(new Analize.User(3, "Alex"));

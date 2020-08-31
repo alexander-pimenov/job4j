@@ -34,9 +34,10 @@ public class SimpleStack<E> extends SimpleDoublyLinkedList<E> {
 
     /**
      * Метод возвращает размер стека
+     *
      * @return размер стека
      */
-    public int size (){
+    public int size() {
         return linked.getSize();
     }
 }

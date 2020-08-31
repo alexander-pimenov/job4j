@@ -28,13 +28,14 @@ public class UserEqualsTest {
         System.out.println("достали объект по ключу user1 -> " + map.get(user1));
         System.out.println("достали объект по ключу user2 -> " + map.get(user2));
 
-        //Результат вывода: - хэш-коды каждый раз будут различны
+        //Результат вывода: - хэш-коды каждый раз будут различны, т.к. хэш-код не переопределен
+        //в классе UserEquals, а взят из класса Object, как есть.
         //Сравним два объекта: они равны? - true
-        //hash-code user1: 434091818
-        //hash-code user2: 398887205
+        //hash-code user1: 434091818 //при разных запусках, меняется значение
+        //hash-code user2: 398887205 //при разных запусках, меняется значение
         //{ru.job4j.map.UserEquals@17c68925=java.lang.Object@7e0ea639, ru.job4j.map.UserEquals@19dfb72a=java.lang.Object@3d24753a}
-        //достали объект по ключу user1 -> java.lang.Object@3d24753a
-        //достали объект по ключу user2 -> java.lang.Object@7e0ea639
+        //достали объект по ключу user1 -> java.lang.Object@3d24753a //при разных запусках, меняется значение
+        //достали объект по ключу user2 -> java.lang.Object@7e0ea639 //при разных запусках, меняется значение
     }
 
 }

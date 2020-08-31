@@ -21,6 +21,12 @@ public class UserHashCode {
         this.birthday = birthday;
     }
 
+    /**
+     * Переопределяем метод hashCode(),
+     * используя класс Objects и поля нашего
+     * класса User: name, children, birthday
+     * @return числовое соответствие нашего объекта
+     */
     @Override
     public int hashCode() {
         return Objects.hash(name, children, birthday);

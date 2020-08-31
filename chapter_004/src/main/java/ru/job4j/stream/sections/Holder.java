@@ -5,20 +5,20 @@ package ru.job4j.stream.sections;
  * Он будет содержать пару - имя секции и имя студента.
  */
 
-public class Holder {
-    String key; //имя секции
-    String value; //имя студента
+class Holder {
+    private String key; //имя секции unit
+    private String value; //имя студента
 
-    public Holder(String key, String value) {
+    Holder(String key, String value) {
         this.key = key;
         this.value = value;
     }
 
-    public String getKey() {
+    String getKey() {
         return key;
     }
 
-    public String getValue() {
+    String getValue() {
         return value;
     }
 

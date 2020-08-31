@@ -35,7 +35,6 @@ public class GroupTest {
         expected.put("Philosophy", Set.of("Orlova, Nikolaev, Peterson"));
         expected.put("Robotics", Set.of("Orlova, Sidorov"));
 
-
         assertThat(resultGrouping.toString(), is(expected.toString()));
     }
 }

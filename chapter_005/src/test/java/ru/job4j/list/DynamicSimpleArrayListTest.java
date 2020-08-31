@@ -21,12 +21,12 @@ public class DynamicSimpleArrayListTest {
     }
 
     @Test
-    public void whenCreateNewArrayListThenSizeZero(){
+    public void whenCreateNewArrayListThenSizeZero() {
         assertThat(list.size(), is(0));
     }
 
     @Test
-    public void whenCreateNewArrayListWithCapacity20ThenSizeZero(){
+    public void whenCreateNewArrayListWithCapacity20ThenSizeZero() {
         DynamicSimpleArrayList<Object> list2 = new DynamicSimpleArrayList<>(20);
         assertThat(list2.size(), is(0));
     }
