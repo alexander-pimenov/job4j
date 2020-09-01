@@ -1,4 +1,4 @@
-package ru.job4j.trackerSql;
+package ru.job4j.trackersql;
 
 import java.util.ArrayList;
 import java.util.List;

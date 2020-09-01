@@ -16,10 +16,10 @@ import java.util.Properties;
  */
 public class ImportDB {
     private static final String CREATE_TABLE_QUERY =
-            "CREATE TABLE IF NOT EXISTS users(" +
-                    "id serial primary key," +
-                    "name varchar(255)," +
-                    "email varchar(255));";
+            "CREATE TABLE IF NOT EXISTS users("
+                    + "id serial primary key,"
+                    + "name varchar(255),"
+                    + "email varchar(255));";
     private Properties cfg;
     private String dump;
 
@@ -53,8 +53,8 @@ public class ImportDB {
             statement.execute(CREATE_TABLE_QUERY);
 
             for (User user : users) {
-                try (PreparedStatement ps = cnt.prepareStatement("INSERT INTO users (name, email)" +
-                        "values (?, ?);")) {
+                try (PreparedStatement ps = cnt.prepareStatement(
+                        "INSERT INTO users (name, email) values (?, ?);")) {
                     ps.setString(1, user.name);
                     ps.setString(2, user.email);
                     ps.execute();

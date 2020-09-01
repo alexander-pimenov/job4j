@@ -8,10 +8,18 @@ public class Wget2 {
                         for (int i = 4; i <= 105; i++) {
                             if (i != 105) {
                                 //Loading ... |. Последний символ должен меняться: - \ | / - эффект вращающегося круга
-                                if (i % 4 == 0) System.out.print("\rLoading : " + (i - 4) + "% " + "|");
-                                if (i % 4 == 1) System.out.print("\rLoading : " + (i - 4) + "% " + "/");
-                                if (i % 4 == 2) System.out.print("\rLoading : " + (i - 4) + "% " + "\u2014"); //"\u2014"-длинное тире
-                                if (i % 4 == 3) System.out.print("\rLoading : " + (i - 4) + "% " + "\\");
+                                if (i % 4 == 0) {
+                                    System.out.print("\rLoading : " + (i - 4) + "% " + "|");
+                                }
+                                if (i % 4 == 1) {
+                                    System.out.print("\rLoading : " + (i - 4) + "% " + "/");
+                                }
+                                if (i % 4 == 2) {
+                                    System.out.print("\rLoading : " + (i - 4) + "% " + "\u2014");
+                                } //"\u2014"-длинное тире
+                                if (i % 4 == 3) {
+                                    System.out.print("\rLoading : " + (i - 4) + "% " + "\\");
+                                }
                             } else {
                                 //Небольшая задержка перед выводом результата
                                 //об успешной загрузке

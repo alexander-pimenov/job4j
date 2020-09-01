@@ -28,7 +28,7 @@ public class Search2 {
     }
 
     /*Метод возвращает список файлов с искомым расширением. Файл содержит в себе название директории,
-    * где он лежит и его название с расширением.*/
+     * где он лежит и его название с расширением.*/
     public static List<Searcher2> search2(Path root, String ext) throws IOException {
         SearchFiles2 searcher = new SearchFiles2(ext);
         Files.walkFileTree(root, searcher);
@@ -108,9 +108,9 @@ class Searcher2 {
 
     @Override
     public String toString() {
-        return "{" +
-                "nameDir='" + nameDir + '\'' +
-                ", nameFile='" + nameFile + '\'' +
-                '}';
+        return "{"
+                + "nameDir='" + nameDir + '\''
+                + ", nameFile='" + nameFile + '\''
+                + '}';
     }
 }

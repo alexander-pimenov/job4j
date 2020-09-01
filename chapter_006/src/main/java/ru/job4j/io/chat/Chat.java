@@ -62,8 +62,8 @@ public class Chat {
 
     private void writeLog(String who, String message) {
         String log = "log.txt";
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter
-                (log, true))) {
+        try (BufferedWriter bw = new BufferedWriter(
+                new FileWriter(log, true))) {
             bw.write(new Date() + " " + who + ": " + message + LN);
         } catch (IOException e) {
             e.printStackTrace();

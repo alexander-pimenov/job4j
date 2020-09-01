@@ -1,4 +1,4 @@
-package ru.job4j.trackerSql;
+package ru.job4j.trackersql;
 
 public abstract class BaseAction implements UserAction {
     /**

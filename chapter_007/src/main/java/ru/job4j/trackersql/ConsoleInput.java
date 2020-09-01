@@ -1,4 +1,4 @@
-package ru.job4j.trackerSql;
+package ru.job4j.trackersql;
 
 import java.util.List;
 import java.util.Scanner;
@@ -6,14 +6,15 @@ import java.util.Scanner;
 /**
  * Консольный ввод данных
  */
-public class ConsoleInput implements Input{
+public class ConsoleInput implements Input {
     private Scanner scanner = new Scanner(System.in);
 
     /**
      * Метод возвращает ответ на вопрос
+     *
      * @param question вопрос
      * @return ответ
-     * */
+     */
     public String ask(String question) {
         System.out.println(question);
         return scanner.nextLine();

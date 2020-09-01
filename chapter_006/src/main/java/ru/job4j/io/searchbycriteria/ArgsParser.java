@@ -1,4 +1,4 @@
-package ru.job4j.io.search_by_criteria;
+package ru.job4j.io.searchbycriteria;
 
 import java.io.File;
 import java.util.Arrays;
@@ -31,8 +31,8 @@ public class ArgsParser {
     private void parseArguments() throws Exception {
         int countArguments = 7;
         if (args.length < countArguments) {
-            throw new IllegalArgumentException("Invalid startup options. Fix it.\r\n" +
-                    "Try again, e.g.  -d c:/ -n *.txt -m -o log.txt");
+            throw new IllegalArgumentException("Invalid startup options. Fix it.\r\n"
+                    + "Try again, e.g.  -d c:/ -n *.txt -m -o log.txt");
         }
         for (int i = 0; i < args.length; i++) {
             if (args[i].equals("-m")
@@ -118,7 +118,7 @@ public class ArgsParser {
             filePredicate = str -> str.equals(getSearchFile());
         } else if (arguments.containsKey("-r")) {
             filePredicate = str -> {
-                p = Pattern.compile(getSearchFile(),Pattern.UNICODE_CASE | Pattern.CASE_INSENSITIVE);
+                p = Pattern.compile(getSearchFile(), Pattern.UNICODE_CASE | Pattern.CASE_INSENSITIVE);
                 m = p.matcher(str);
                 return m.matches();
             };

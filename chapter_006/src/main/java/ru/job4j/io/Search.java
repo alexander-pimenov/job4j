@@ -22,11 +22,11 @@ public class Search {
 //            e.printStackTrace();
 //        }
         try {
-            search(Paths.get(path), s->
-                    s.equals("pom.xml")
+            search(Paths.get(path), s ->
+                            s.equals("pom.xml")
 //                            ||s.endsWith(".xml")
 //                          ||s.contains("xml")
-                    )
+            )
                     .forEach(System.out::println);
         } catch (IOException e) {
             e.printStackTrace();

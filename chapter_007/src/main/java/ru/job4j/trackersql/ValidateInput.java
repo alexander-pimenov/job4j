@@ -1,8 +1,8 @@
-package ru.job4j.trackerSql;
+package ru.job4j.trackersql;
 
 import java.util.List;
 
-public class ValidateInput implements Input{
+public class ValidateInput implements Input {
 
     private final Input input;
 

@@ -8,14 +8,19 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 /**
- * Сервер работает пока не будет введено Bye или exit.
- * При вводе Bye вызываем server.close(),
- * а при вводе exit выходим из цикла с помощью break
+ * Сервер работает пока не будет введено Bye.
+ * При вводе Bye вызываем server.close().
+ * Тестирование класса EchoServer производим с помощью cUrl.
+ * cUrl используем в качестве клиента.
+ * Запустив cUrl, мы вводим команду:
+ * curl -i http://localhost:9000/?msg=Hello
+ * В консоли видим пришедшие на сервер сообщения от клиента cUrl.
  */
 
 public class EchoServer2 {
     public static void main(String[] args) throws IOException {
         try (ServerSocket server = new ServerSocket(9000)) {
+            System.out.println("Server started");
             while (!server.isClosed()) {
                 Socket socket = server.accept();
                 try (OutputStream out = socket.getOutputStream();
@@ -29,7 +34,9 @@ public class EchoServer2 {
                         server.close();
                     } else {
                         /*Вычитывает оставшиеся строчки из потока in и выводит их*/
-                        while (!(str = in.readLine()).isEmpty()) {
+
+                        while (str != null && !str.isEmpty()) {
+                            str = in.readLine();
                             System.out.println(str);
                         }
                     }

@@ -1,4 +1,4 @@
-package ru.job4j.io.search_by_criteria;
+package ru.job4j.io.searchbycriteria;
 
 import java.io.IOException;
 import java.nio.file.FileVisitResult;

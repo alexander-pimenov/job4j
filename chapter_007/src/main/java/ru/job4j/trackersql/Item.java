@@ -1,4 +1,4 @@
-package ru.job4j.trackerSql;
+package ru.job4j.trackersql;
 
 /**
  * Класс Item описывает бизнес модель заявки.

@@ -1,0 +1,13 @@
+Found files: 
+c:\projects\job4j\chapter_001\src\main\java\ru\job4j\array\Matrix.java
+c:\projects\job4j\chapter_001\src\main\java\ru\job4j\array\MatrixCheck.java
+c:\projects\job4j\chapter_001\src\test\java\ru\job4j\array\MatrixCheckTest.java
+c:\projects\job4j\chapter_001\src\test\java\ru\job4j\array\MatrixTest.java
+c:\projects\job4j\chapter_001\target\classes\ru\job4j\array\Matrix.class
+c:\projects\job4j\chapter_001\target\classes\ru\job4j\array\MatrixCheck.class
+c:\projects\job4j\chapter_001\target\site\jacoco\ru.job4j.array\Matrix.html
+c:\projects\job4j\chapter_001\target\site\jacoco\ru.job4j.array\Matrix.java.html
+c:\projects\job4j\chapter_001\target\site\jacoco\ru.job4j.array\MatrixCheck.html
+c:\projects\job4j\chapter_001\target\site\jacoco\ru.job4j.array\MatrixCheck.java.html
+c:\projects\job4j\chapter_001\target\test-classes\ru\job4j\array\MatrixCheckTest.class
+c:\projects\job4j\chapter_001\target\test-classes\ru\job4j\array\MatrixTest.class

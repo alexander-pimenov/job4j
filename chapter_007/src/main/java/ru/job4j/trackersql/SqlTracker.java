@@ -1,4 +1,4 @@
-package ru.job4j.trackerSql;
+package ru.job4j.trackersql;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -35,8 +35,8 @@ public class SqlTracker implements Store {
     //Создадим отдельно запросы к БД
     private static final String CREATE_TABLE_ITEM = "CREATE TABLE IF NOT EXISTS item "
             + "(id serial primary key,"
-            + "name varchar(255)," +
-            "description text);";
+            + "name varchar(255),"
+            + "description text);";
     private static final String QUERY_INSERT = "INSERT INTO item (name, description) values (?,?);";
     private static final String QUERY_REPLACE = "UPDATE item SET name = ?, description = ? WHERE id = ?;";
     private static final String QUERY_DELETE_BY_ID = "DELETE FROM item WHERE id = ?;";
@@ -130,7 +130,9 @@ public class SqlTracker implements Store {
             preparedStatement.setString(2, item.getDesc());
             preparedStatement.setInt(3, Integer.parseInt(id));
             final int i = preparedStatement.executeUpdate();
-            if (i == 1) rsl = true;
+            if (i == 1) {
+                rsl = true;
+            }
         } catch (SQLException e) {
             LOG.error(e.getMessage(), e);
         }
@@ -150,7 +152,9 @@ public class SqlTracker implements Store {
                 QUERY_DELETE_BY_ID)) {
             preparedStatement.setInt(1, Integer.parseInt(id));
             final int i = preparedStatement.executeUpdate();
-            if (i == 1) rsl = true;
+            if (i == 1) {
+                rsl = true;
+            }
         } catch (SQLException e) {
             LOG.error(e.getMessage(), e);
         }

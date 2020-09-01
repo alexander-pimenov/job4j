@@ -29,7 +29,7 @@ public class Search3Test {
         File file7 = folder.newFile("TempFolder/test7.bbb");
         File folderQQQ = folder.newFolder("TempFolder", "QQQ");
         File file8 = folder.newFile("TempFolder/QQQ/test8.ccc");
-        File folderZZZ = folder.newFolder("TempFolder","ZZZ");
+        File folderZZZ = folder.newFolder("TempFolder", "ZZZ");
         File file9 = folder.newFile("TempFolder/ZZZ/test9.abc");
 
         /* Чтобы в метод search() передать путь по которому искать файлы,
@@ -42,8 +42,8 @@ public class Search3Test {
         List<Path> listExtBBB = Search3.search(Paths.get(parent), "bbb");
         //System.out.println(listExtABC);
 
-        assertThat(listExtABC.toString(),is(List.of("test9.abc", "test1.abc", "test2.abc", "test3.abc" ).toString()));
-        assertThat(listExtBBB.size(),is(2));
+        assertThat(listExtABC.toString(), is(List.of("test9.abc", "test1.abc", "test2.abc", "test3.abc").toString()));
+        assertThat(listExtBBB.size(), is(2));
 
     }
 }
