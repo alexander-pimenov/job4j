@@ -35,6 +35,7 @@
             </properties>
         </profile>
         <profile>
+            <!--Настройки для интеграции PostgreSQL и Travic CI-->
             <id>travis</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
