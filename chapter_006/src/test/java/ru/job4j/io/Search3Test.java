@@ -40,9 +40,11 @@ public class Search3Test {
 
         List<Path> listExtABC = Search3.search(Paths.get(parent), "abc");
         List<Path> listExtBBB = Search3.search(Paths.get(parent), "bbb");
-        //System.out.println(listExtABC);
+        System.out.println(listExtABC);
+        System.out.println(listExtBBB);
 
         assertThat(listExtABC.toString(), is(List.of("test9.abc", "test1.abc", "test2.abc", "test3.abc").toString()));
+        assertThat(listExtABC.size(), is(4));
         assertThat(listExtBBB.size(), is(2));
 
     }

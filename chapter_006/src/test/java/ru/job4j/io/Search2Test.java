@@ -33,15 +33,21 @@ public class Search2Test {
         String parent = file1.getParent();
 
         List<Path> listExt = Search2.search(Paths.get(parent), "abc");
+        //Посмотрим список полных путей
         System.out.println(listExt);
         List<Path> fileNames = new ArrayList<>();
+        //Возмем из полного пути файла тольок его fileName
         for (Path path : listExt) {
             final Path fileName = path.getFileName();
             fileNames.add(fileName);
         }
+        //Метод определяющий полный путь файла, но сразу разбивающий его на fileName и оставшуюся часть
         List<Searcher2> listExt2 = Search2.search2(Paths.get(parent), "abc");
         System.out.println(listExt2);
+        //
+        System.out.println(fileNames);
 
         assertThat(fileNames.toString(), is(List.of("test1.abc", "test2.abc", "test3.abc").toString()));
+
     }
 }
