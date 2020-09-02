@@ -44,7 +44,7 @@
                 <db.url>jdbc:postgresql://localhost/tracker</db.url>
                 <db.username>postgres</db.username>
                 <!--В Travis CI для базы данных не нужно указать пароль.-->
-                <db.password></db.password>
+                <db.password>qwerty</db.password>
                 <db.driver>org.postgresql.Driver</db.driver>
             </properties>
         </profile>
