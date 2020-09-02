@@ -42,7 +42,6 @@ public class UserHashAndEquals {
         return "UserHashAndEquals{"
                 + "name='" + name + '\''
                 + ", children=" + children
-                + ", birthday=" + birthday.getTime().toString()
                 + '}';
     }
 }
