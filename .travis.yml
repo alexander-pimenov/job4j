@@ -1,9 +1,11 @@
 # используем язык java. Travis CI поддерживает другие языки тоже.
 language: java
 
-jdk:
+dist: trusty
+
+#jdk:
   #- jdk-12.0.2
-  - jdk-12
+#  - jdk-12
 
 #jdk:
 #- jdk1.8.0_201
