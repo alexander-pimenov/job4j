@@ -36,4 +36,13 @@ public class UserHashAndEquals {
     public int hashCode() {
         return Objects.hash(name, children, birthday);
     }
+
+    @Override
+    public String toString() {
+        return "UserHashAndEquals{"
+                + "name='" + name + '\''
+                + ", children=" + children
+                + ", birthday=" + birthday.getTime().toString()
+                + '}';
+    }
 }

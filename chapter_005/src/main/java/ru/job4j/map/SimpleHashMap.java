@@ -8,8 +8,8 @@ import java.util.Objects;
 public class SimpleHashMap<K, V> implements SimpleMap<K, V> {
 
     private Node<K, V>[] hashTable;
-    static final int INITIAL_CAPACITY = 16;
-    static final float LOAD_FACTOR = 0.75f;
+    private static final int INITIAL_CAPACITY = 16;
+    private static final float LOAD_FACTOR = 0.75f;
     private int size = 0;
 
     public SimpleHashMap() {

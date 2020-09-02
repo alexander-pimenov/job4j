@@ -86,20 +86,25 @@ public class SimpleHashMapTest {
 
     @Test
     public void whenUseAnotherType2() {
-        SimpleHashMap<UserHashAndEquals, String> simpHashMap = new SimpleHashMap<>();
+        SimpleHashMap<UserHashAndEquals, String> simpHashMap2 = new SimpleHashMap<>();
         UserHashAndEquals user1 = new UserHashAndEquals("Alex", 1, new GregorianCalendar(1990, Calendar.APRIL, 15));
         UserHashAndEquals user2 = new UserHashAndEquals("Petr", 2, new GregorianCalendar(1991, Calendar.APRIL, 15));
         UserHashAndEquals user3 = new UserHashAndEquals("Nick", 3, new GregorianCalendar(1992, Calendar.APRIL, 15));
         UserHashAndEquals user4 = new UserHashAndEquals("Bin", 4, new GregorianCalendar(1993, Calendar.APRIL, 15));
 
-        simpHashMap.insert(user1, "val-10");
-        simpHashMap.insert(user2, "val-20");
-        simpHashMap.insert(user3, "val-30");
+        simpHashMap2.insert(user1, "val-10");
+        simpHashMap2.insert(user2, "val-20");
+        simpHashMap2.insert(user3, "val-30");
+        System.out.println(simpHashMap2.size());
+        System.out.println(simpHashMap2);
 
-        assertThat(simpHashMap.size(), is(3));
-        assertTrue(simpHashMap.delete(user2));
-        assertThat(simpHashMap.get(user1), is("val-10"));
-        assertNull(simpHashMap.get(user4));
+        assertThat(simpHashMap2.size(), is(3));
+        assertTrue(simpHashMap2.delete(user2));
+        System.out.println(simpHashMap2.size());
+        System.out.println(simpHashMap2);
+
+        assertThat(simpHashMap2.get(user1), is("val-10"));
+        assertNull(simpHashMap2.get(user4));
     }
 }
 
