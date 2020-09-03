@@ -32,22 +32,29 @@ public class Search2Test {
          * передадим его в параметр метода: search(Paths.get(parent))*/
         String parent = file1.getParent();
 
+        //Метод search() в указанной директории ищет файлы, которые имеют расширение *.abc
         List<Path> listExt = Search2.search(Paths.get(parent), "abc");
         //Посмотрим список полных путей
         System.out.println(listExt);
         List<Path> fileNames = new ArrayList<>();
-        //Возмем из полного пути файла тольок его fileName
+        //Возмем из полного пути файла только его fileName
         for (Path path : listExt) {
             final Path fileName = path.getFileName();
             fileNames.add(fileName);
         }
-        //Метод определяющий полный путь файла, но сразу разбивающий его на fileName и оставшуюся часть
-        List<Searcher2> listExt2 = Search2.search2(Paths.get(parent), "abc");
-        System.out.println(listExt2);
+
+        //Метод search2() определяющий полный путь файла, но сразу разбивающий его на fileName и оставшуюся часть
+        //Расскомментируй и посмотри на вывод.
+//        List<Searcher2> listExt2 = Search2.search2(Paths.get(parent), "abc");
+//        System.out.println(listExt2);
         //
         System.out.println(fileNames);
+        System.out.println(fileNames.toString());
 
+        assertTrue(fileNames.contains(Paths.get("test1.abc")));
+        assertTrue(fileNames.contains(Paths.get("test2.abc")));
+        assertTrue(fileNames.contains(Paths.get("test3.abc")));
+        assertThat(fileNames.size(), is(3));
         assertThat(fileNames.toString(), is(List.of("test1.abc", "test2.abc", "test3.abc").toString()));
-
     }
 }
