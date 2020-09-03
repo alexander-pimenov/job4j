@@ -4,7 +4,7 @@ language: java
 #dist: trusty
 
 jdk:
-  - openjdk12.0.2
+  - openjdk12
 #- oraclejdk12
 #- jdk12.0.2
 
