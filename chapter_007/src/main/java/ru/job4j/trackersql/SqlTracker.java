@@ -45,16 +45,17 @@ public class SqlTracker implements Store {
     private static final String QUERY_FIND_BY_ID = "SELECT * FROM item WHERE id = ?;";
 
     //Вынося Connection в конструктор, позволит нам создать его вне класса SqlTracker.
+    //Также создаем таблицу item для хранения заявок.
     public SqlTracker(Connection cn) {
         this.cn = cn;
         createTableItem();
-
     }
 
+    //Вызывая конструктор, мы получаем данные для соединения с БД
+    //и создаем таблицу item для хранения заявок.
     public SqlTracker() {
         init();
         createTableItem();
-
     }
 
     /*Для считывания файлов используем ClassLoader*/

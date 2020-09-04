@@ -45,8 +45,9 @@ public class AlertRabbit {
 
     public static void main(String[] args) {
         try {
-            new AlertRabbit();
             //В начале создаем класс, управляющий всеми работами.
+            new AlertRabbit();
+
             //В объект Scheduler добавляем задачи, которые хотим выполнять периодически.
             Scheduler scheduler =
                     StdSchedulerFactory.getDefaultScheduler();
@@ -63,6 +64,7 @@ public class AlertRabbit {
                     .repeatForever();
 
             //Задача выполняется через триггер.
+            //Указываем, когда начинать запуск. Мы хотим сделать это сразу.
             Trigger trigger = newTrigger()
                     .startNow()
                     .withSchedule(times)
