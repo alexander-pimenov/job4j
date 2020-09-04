@@ -10,11 +10,13 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Properties;
 
-import static org.hamcrest.Matchers.notNullValue;
-import static org.junit.Assert.*;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThat;
 
 public class SqlTrackerTest {
+//    private static final Logger LOG = LogManager.getLogger(SqlTracker.class.getName());
 
     public Connection init() {
         try (InputStream in = SqlTracker.class.getClassLoader().getResourceAsStream("app.properties")) {

@@ -47,6 +47,8 @@ public class SqlTracker implements Store {
     //Вынося Connection в конструктор, позволит нам создать его вне класса SqlTracker.
     public SqlTracker(Connection cn) {
         this.cn = cn;
+        createTableItem();
+
     }
 
     public SqlTracker() {
