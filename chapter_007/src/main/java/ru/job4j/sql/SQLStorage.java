@@ -9,30 +9,47 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 /**
- * В этом классе показаны примеры подключения к БД с помощью JDBC,
- * Чтение данных из БД,
- * Добавление данных,
- * Изменение данных, Удаление данных.
+ * В этом классе показаны примеры подключения к БД с помощью JDBC.
+ * Чтение данных из БД, добавление данных, изменение данных, Удаление данных.
+ * <p>
+ * Памятка:
+ * Для выполнения запроса PreparedStatement имеет три метода:
+ * <p>
+ * boolean execute(): выполняет любую SQL-команду
+ * <p>
+ * ResultSet executeQuery(): выполняет команду SELECT, которая
+ * возвращает данные в виде ResultSet
+ * <p>
+ * int executeUpdate(): выполняет такие SQL-команды, как INSERT,
+ * UPDATE, DELETE, CREATE и возвращает количество измененных строк
+ * <p>
+ * В отличие от методов Statement эти методы не принимают SQL-выражение.
  */
 
 public class SQLStorage {
     private static final Logger LOG = LoggerFactory.getLogger(SQLStorage.class);
+    private static Connection conn = null;
+    private static final String URL = "jdbc:postgresql://localhost:5432/tracker";
+    private static final String USERNAME = "postgres";
+    private static final String PASSWORD = "qwerty";
+    //А также можно записать одной строкой, только одним url, в котором будет и DB и name и password:
+    //String url = "jdbc:postgresql://localhost:5432/tracker?user=postgres&password=qwerty&ssl=true";
 
     public static void main(String[] args) {
-        String url = "jdbc:postgresql://localhost:5432/tracker";
-        String username = "postgres";
-        String password = "qwerty";
 
-        //А можно записать одной строкой, только одним url, в котором будет и DB и name и password:
-        //String url = "jdbc:postgresql://localhost:5432/tracker?user=postgres&password=qwerty&ssl=true";
+        showStatementSelect();
+        showPreparedStatementSelect();
+        showPreparedStatementInsert();
+        showPreparedStatementUpdate();
+        showPreparedStatementDelete();
+    }
 
-        Connection conn = null;
-
+    private static void showStatementSelect() {
         System.out.println("#### Пример работы со Statement ####\r\n");
         try {
             //Создаем объект Connection, т.е. подключились к БД.
             //С помощью connection мы осуществляем всю работу с БД.
-            conn = DriverManager.getConnection(url, username, password);
+            conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 
             //Рассмотрим как делать запросы к БД.
             //Создаем объект класса Statement.
@@ -41,7 +58,8 @@ public class SQLStorage {
 
             //Объект ResultSet это итератор, а не коллекция,
             //который помагает проходиться по строкам таблицы.
-            ResultSet rs = st.executeQuery("SELECT * FROM product");
+            ResultSet rs = st.executeQuery("SELECT * FROM product;");
+
 //            while (rs.next()) {
 //                System.out.print("Column 'name' returned: ");
 //                //Всегда используй указание на имя колонки, а не индекс колонки
@@ -86,17 +104,19 @@ public class SQLStorage {
                 }
             }
         }
+    }
 
+    private static void showPreparedStatementSelect() {
         System.out.println("\n#### Пример работы с PreparedStatement ####\r\n");
 
         /*Рассмотрим пример работы с динамическими запросами к БД.
          * Т.е. будем использовать prepareStatement*/
         try {
-            conn = DriverManager.getConnection(url, username, password);
+            conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 
-            //Работаем с PreparedStatement, который позволяет ставлять параметры
+            //Работаем с PreparedStatement, который позволяет вставлять параметры
             //через set__(), т.е. некий валидатор.
-            PreparedStatement st = conn.prepareStatement("SELECT * FROM product as p WHERE p.id IN (? , ?, ?)");
+            PreparedStatement st = conn.prepareStatement("SELECT * FROM product as p WHERE p.id IN (? , ?, ?);");
 
             //Устанавливаем параметры под знаками ?, их индексация начинается с 1
             st.setInt(1, 3);
@@ -131,15 +151,17 @@ public class SQLStorage {
                 }
             }
         }
+    }
 
+    private static void showPreparedStatementInsert() {
         System.out.println("\n#### Пример работы с PreparedStatement, Добавление данных. ####\r\n");
         try {
-            conn = DriverManager.getConnection(url, username, password);
+            conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
             //Когда мы добавим данные в таблицу product нам хорошо бы получить назад
             //сгенерированное id, чтобы потом можно было работать с ним.
             //Поэтому добавим специальный ключ
-            PreparedStatement st = conn.prepareStatement("INSERT INTO product (name, type_id, expired_date, price) " +
-                    "values (?,?,?,?) ", Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement st = conn.prepareStatement("INSERT INTO product (name, type_id, expired_date, price) "
+                    + "values (?,?,?,?);", Statement.RETURN_GENERATED_KEYS);
             //Установим параметры
             st.setString(1, "Картофель");
             st.setInt(2, 5);
@@ -158,7 +180,7 @@ public class SQLStorage {
             }
 
             //Выведем все записи с name Картофель
-            final PreparedStatement preparedStatement = conn.prepareStatement("select * from product as p WHERE p.name = ? ");
+            final PreparedStatement preparedStatement = conn.prepareStatement("select * from product as p WHERE p.name = ?;");
             preparedStatement.setString(1, "Картофель");
             final ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -181,14 +203,16 @@ public class SQLStorage {
                 }
             }
         }
+    }
 
+    private static void showPreparedStatementUpdate() {
         System.out.println("\n#### Пример работы с PreparedStatement, Обновление данных. ####\r\n");
         try {
-            conn = DriverManager.getConnection(url, username, password);
+            conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
             //Когда мы добавим данные в таблицу product нам хорошо бы получить назад
             //сгенерированное id, чтобы потом можно было работать с ним.
             //Поэтому добавим специальный ключ
-            PreparedStatement st = conn.prepareStatement("UPDATE product SET price=? WHERE id=?");
+            PreparedStatement st = conn.prepareStatement("UPDATE product SET price=? WHERE id=?;");
             //Установим параметры
             st.setInt(1, 29); //ставим новую цену
             st.setInt(2, 26); //объект с id = 26
@@ -211,17 +235,19 @@ public class SQLStorage {
                 }
             }
         }
+    }
 
+    private static void showPreparedStatementDelete() {
         System.out.println("\n#### Пример работы с PreparedStatement, Удаление данных. ####\r\n");
         try {
-            conn = DriverManager.getConnection(url, username, password);
+            conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
             //Когда мы добавим данные в таблицу product нам хорошо бы получить назад
             //сгенерированное id, чтобы потом можно было работать с ним.
             //Поэтому добавим специальный ключ
-            PreparedStatement st = conn.prepareStatement("DELETE FROM product WHERE id=?");
+            PreparedStatement st = conn.prepareStatement("DELETE FROM product WHERE id=?;");
             //Установим параметры
-            st.setInt(1, 31); //удалим элемент с индексом 28
-
+            //удалим элемент с индексом 31
+            st.setInt(1, 31);
             //Выполним запрос к БД - executeUpdate
             st.executeUpdate();
 
@@ -242,28 +268,32 @@ public class SQLStorage {
         }
     }
 
-    /*Метод возвращающий java.sql.Date и его вставляем в таблицу БД.
+    /**
+     * Метод возвращающий java.sql.Date и его вставляем в таблицу БД.
      * java.util.Date и java.sql.Date не нужно путать.
-     * Передаем текущую дату.*/
-    private static Date getCurrentDate() {
+     * Передаем текущую дату.
+     */
+    private static java.sql.Date getCurrentDate() {
         java.util.Date today = new java.util.Date();
-        return new Date(today.getTime());
+        return new java.sql.Date(today.getTime());
     }
 
-    /*Метод возвращающий java.sql.Date и его вставляем в таблицу БД.
+    /**
+     * Метод возвращающий java.sql.Date и его вставляем в таблицу БД.
      * java.util.Date и java.sql.Date не нужно путать.
-     * Передаем не текущую дату, а какую нужно в формате "yyyy-MM-dd"*/
-    private static Date getOnlyDate(String strDate) {
+     * Передаем не текущую дату now(), а какую нужно в формате "yyyy-MM-dd"
+     */
+    private static java.sql.Date getOnlyDate(String strDate) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         java.util.Date date = null;
-        Date sqlDate = null;
+        java.sql.Date sqlDate = null;
         try {
             if (strDate != null) {
                 date = sdf.parse(strDate);
-                sqlDate = new Date(date.getTime());
+                sqlDate = new java.sql.Date(date.getTime());
             } else {
                 //Если дата не введена, то передадим текущую дату
-                sqlDate = new Date(System.currentTimeMillis());
+                sqlDate = new java.sql.Date(System.currentTimeMillis());
             }
         } catch (ParseException e) {
             e.printStackTrace();
