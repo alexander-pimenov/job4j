@@ -27,7 +27,6 @@ package ru.job4j.log4j;
  * <dt>java.vm.vendor       <dd>"Oracle Corporation"
  * <dt>java.vendor.url      <dd>"https://java.oracle.com/"
  * <dt>guice.disable.misplaced.annotation.check  <dd>"true"
- * <dt>path.separator       <dd>";"
  * <dt>java.vm.name         <dd>Java HotSpot(TM) 64-Bit Server VM"
  * <dt>sun.os.patch.level   <dd>""
  * <dt>user.script          <dd>""
