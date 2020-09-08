@@ -50,5 +50,6 @@ from
     inner join person as p on c.id=p.company_id
 group by
  	c.name
-order by amount_of_people desc;
+order by amount_of_people desc
+limit 1;
 
