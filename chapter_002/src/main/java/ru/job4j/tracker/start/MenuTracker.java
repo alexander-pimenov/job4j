@@ -10,39 +10,40 @@ import java.util.function.Consumer;
  */
 public class MenuTracker {
     /**
-     * Поле ввода вывода
+     * Поле ввода вывода.
      * <p>
-     * хранит ссылку на объект .
+     * Хранит ссылку на объект .
      */
     private Input input;
     /**
-     * хранит ссылку на объект
-     * из хранилища Tracker
+     * Хранит ссылку на объект
+     * из хранилища Tracker.
      */
     private Tracker tracker;
     /**
-     * хранит ссылку на список типа UserAction.
-     * это те действия, которые описаны в нашей системе
+     * Хранит ссылку на список типа UserAction.
+     * Это те действия, которые описаны в нашей системе.
+     * Доступ private заменили на protected, чтобы из
+     * класса наследника BeautyMenu был доступ к полю actions.
      */
-    private List<UserAction> actions = new ArrayList<>();
+    protected List<UserAction> actions = new ArrayList<>();
 
     private final Consumer<String> output;
 
-    List<Integer> range = new ArrayList<>();
+    private List<Integer> range = new ArrayList<>();
 
     /**
      * Конструктор.
      *
      * @param input   объект типа Input
      * @param tracker объект типа Tracker
-     * @param output
+     * @param output  output
      */
     public MenuTracker(Input input, Tracker tracker, Consumer<String> output) {
         this.input = input;
         this.tracker = tracker;
         this.output = output;
     }
-
 
     /**
      * Метод заполняет список номерами пунктов
@@ -112,8 +113,13 @@ public class MenuTracker {
         System.out.println("-------------- Menu --------------");
         for (UserAction action : this.actions) {
             if (action != null) {
-                System.out.println(action.info());
+                this.showItemMenu(action);
+//                System.out.println(action.info());
             }
         }
+    }
+
+    public void showItemMenu(UserAction action) {
+        System.out.println(action.info());
     }
 }

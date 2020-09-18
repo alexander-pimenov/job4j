@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Employee report for programmers</title>
+</head>
+<body>
+<h1>Employee report</h1>
+
+<table>
+    <caption>Перечень сотрудников</caption>
+    <tr>
+        <th>Name</th>
+        <th>Hired</th>
+        <th>Fired</th>
+        <th>Salary</th>
+    </tr>
+    <tr>
+        <td>Felix</td>
+        <td>2020-09-10 15:10</td>
+        <td>2020-09-10 15:10</td>
+        <td>5000 руб.</td>
+    </tr>
+    <tr>
+        <td>Alex</td>
+        <td>2020-10-10 15:10</td>
+        <td>2020-10-10 15:10</td>
+        <td>6000 руб.</td>
+    </tr>
+    <tr>
+        <td>Petr</td>
+        <td>2020-11-10 15:10</td>
+        <td>2020-11-10 15:10</td>
+        <td>7000 руб.</td>
+    </tr>
+</table>
+<br/>
+<table>
+    <caption>Перечень продуктов</caption>
+    <tr>
+        <th>№ п/п</th>
+        <th>Наименование товара</th>
+        <th>Ед. изм.</th>
+        <th>Количество</th>
+        <th>Цена за ед. изм., руб.</th>
+        <th>Стоимость, руб.</th>
+    </tr>
+    <tr>
+        <td>1.</td>
+        <td>Томаты свежие</td>
+        <td>кг</td>
+        <td>15,20</td>
+        <td>69,00</td>
+        <td>1048,80</td>
+    </tr>
+    <tr>
+        <td>2.</td>
+        <td>Огурцы свежие</td>
+        <td>кг</td>
+        <td>2,50</td>
+        <td>48,00</td>
+        <td>120,00</td>
+    </tr>
+    <tr>
+        <td colspan="5" style="text-align:right">ИТОГО:</td>
+        <td>1168,80</td>
+    </tr>
+</table>
+<br/>
+<table>
+    <caption>Перечень канцтоваров</caption>
+    <colgroup>
+        <col span="2" style="background:Khaki">
+        <!-- С помощью этой конструкции задаем цвет фона для первых двух столбцов таблицы-->
+        <col style="background-color:LightCyan"><!-- Задаем цвет фона для следующего (одного) столбца таблицы-->
+    </colgroup>
+    <tr>
+        <th>№ п/п</th>
+        <th>Наименование</th>
+        <th>Цена, руб.</th>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>Карандаш цветной</td>
+        <td>20,00</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>Линейка 20 см</td>
+        <td>30,00</td>
+    </tr>
+</table>
+</body>
+</html>

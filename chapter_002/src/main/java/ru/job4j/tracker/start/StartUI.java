@@ -41,7 +41,9 @@ public class StartUI {
 
     public void init() {
 
-        MenuTracker menu = new MenuTracker(this.input, this.tracker, this.output);
+        /*MenuTracker заменили на наследника BeautyMenu чтобы выводить красивое меню.*/
+        MenuTracker menu = new BeautyMenu(this.input, this.tracker, this.output);
+//        MenuTracker menu = new MenuTracker(this.input, this.tracker, this.output);
         menu.fillActions(this);
         List<Integer> range = menu.getRangeOfMenu();
 
