@@ -162,4 +162,72 @@ public class ReportEngineTest {
                 .append(LN);
         assertThat(accountingDepartmentReport.generate(em -> true), is(expect.toString()));
     }
+
+    @Test
+    public void whenListEmployeesEmptyJSONGenerated() {
+        final String LN = System.lineSeparator();
+        MemStore store = new MemStore();
+        final JSONReport jsonReport = new JSONReport(store);
+//        System.out.println(jsonReport.generate(em -> true));
+        StringBuilder expect = new StringBuilder();
+        expect.append("{}").append(LN);
+        assertThat(jsonReport.generate(em -> true), is(expect.toString()));
+    }
+
+    @Test
+    public void whenListEmployeesHasOneEmployeeJSONGenerated() {
+        final String LN = System.lineSeparator();
+        MemStore store = new MemStore();
+        Calendar now = Calendar.getInstance();
+        Employee worker1 = new Employee("Ivan", now, now, 100);
+        store.add(worker1);
+        final JSONReport jsonReport = new JSONReport(store);
+//        System.out.println(jsonReport.generate(em -> true));
+        StringBuilder expect = new StringBuilder();
+        expect.append("{")
+                .append(LN)
+                .append("\"name\": ").append("\"").append(worker1.getName()).append("\"").append(",").append(LN)
+                .append("\"hired\": ").append("\"").append(DateConverter.convert(worker1.getHired())).append("\"").append(",").append(LN)
+                .append("\"fired\": ").append("\"").append(DateConverter.convert(worker1.getFired())).append("\"").append(",").append(LN)
+                .append("\"salary\": ").append(worker1.getSalary()).append(LN)
+                .append("}").append(LN);
+        assertThat(jsonReport.generate(em -> true), is(expect.toString()));
+    }
+
+    @Test
+    public void whenListEmployeesHasManyEmployeesJSONGenerated() {
+        final String LN = System.lineSeparator();
+        MemStore store = new MemStore();
+        Calendar now = Calendar.getInstance();
+        Employee worker1 = new Employee("Ivan", now, now, 100);
+        Employee worker2 = new Employee("Alex", now, now, 200);
+        Employee worker3 = new Employee("Petr", now, now, 300);
+        store.add(worker1);
+        store.add(worker2);
+        store.add(worker3);
+        final JSONReport jsonReport = new JSONReport(store);
+//        System.out.println(jsonReport.generate(em -> true));
+        StringBuilder expect = new StringBuilder();
+        expect.append("[").append(LN)
+                .append("{").append(LN)
+                .append("\"name\": ").append("\"").append(worker1.getName()).append("\"").append(",").append(LN)
+                .append("\"hired\": ").append("\"").append(DateConverter.convert(worker1.getHired())).append("\"").append(",").append(LN)
+                .append("\"fired\": ").append("\"").append(DateConverter.convert(worker1.getFired())).append("\"").append(",").append(LN)
+                .append("\"salary\": ").append(worker1.getSalary()).append(LN)
+                .append("},").append(LN)
+                .append("{").append(LN)
+                .append("\"name\": ").append("\"").append(worker2.getName()).append("\"").append(",").append(LN)
+                .append("\"hired\": ").append("\"").append(DateConverter.convert(worker2.getHired())).append("\"").append(",").append(LN)
+                .append("\"fired\": ").append("\"").append(DateConverter.convert(worker2.getFired())).append("\"").append(",").append(LN)
+                .append("\"salary\": ").append(worker2.getSalary()).append(LN)
+                .append("},").append(LN)
+                .append("{").append(LN)
+                .append("\"name\": ").append("\"").append(worker3.getName()).append("\"").append(",").append(LN)
+                .append("\"hired\": ").append("\"").append(DateConverter.convert(worker3.getHired())).append("\"").append(",").append(LN)
+                .append("\"fired\": ").append("\"").append(DateConverter.convert(worker3.getFired())).append("\"").append(",").append(LN)
+                .append("\"salary\": ").append(worker3.getSalary()).append(LN)
+                .append("}").append(LN)
+                .append("]").append(LN);
+        assertThat(jsonReport.generate(em -> true), is(expect.toString()));
+    }
 }
