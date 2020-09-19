@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<employee>
+    <name>Вася</name>
+    <hired>2020-03-15</hired>
+    <fired>2020-12-12</fired>
+    <salary>100.0</salary>
+</employee>

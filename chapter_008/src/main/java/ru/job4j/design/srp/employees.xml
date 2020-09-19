@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<employees>
+    <employee>
+        <name>Ivan</name>
+        <hired>2020-02-10 12:10</hired>
+        <fired>2020-09-20 17:50</fired>
+        <salary>100.0</salary>
+    </employee>
+    <employee>
+        <name>Alex</name>
+        <hired>2020-01-15 10:10</hired>
+        <fired>2020-12-01 17:55</fired>
+        <salary>200.0</salary>
+    </employee>
+    <employee>
+        <name>Petr</name>
+        <hired>2020-04-17 12:50</hired>
+        <fired>2020-11-11 16:50</fired>
+        <salary>300.0</salary>
+    </employee>
+</employees>
