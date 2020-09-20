@@ -5,7 +5,7 @@ import java.util.function.Predicate;
 /**
  * The class responsible for the reporting engine.
  */
-public class ReportEngine implements Report{
+public class ReportEngine implements Report {
 
     private Store store;
 
@@ -15,6 +15,7 @@ public class ReportEngine implements Report{
 
     /**
      * Method that generates the report.
+     *
      * @param filter filter.
      * @return report.
      */

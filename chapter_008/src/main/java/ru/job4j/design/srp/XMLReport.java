@@ -3,6 +3,17 @@ package ru.job4j.design.srp;
 import java.util.List;
 import java.util.function.Predicate;
 
+/**
+ * The class responsible for generating the report in XML form.
+ * Simple XML form:
+ * <employee>
+ * <name>Вася</name>
+ * <hired>2020-03-15</hired>
+ * <fired>2020-12-12</fired>
+ * <salary>100.0</salary>
+ * </employee>
+ */
+
 public class XMLReport implements Report {
     private Store store;
     private static final String LN = System.lineSeparator();
@@ -17,7 +28,7 @@ public class XMLReport implements Report {
         final List<Employee> listEmployees = store.findBy(filter);
         text.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>").append(LN);
         if (listEmployees.size() == 0) {
-            text.append(LN);
+            return text.toString();
         } else if (listEmployees.size() == 1) {
             text.append("<employee>").append(LN)
                     .append("\t<name>").append(listEmployees.get(0).getName()).append("</name>").append(LN)
@@ -27,16 +38,16 @@ public class XMLReport implements Report {
                     .append("</employee>").append(LN);
         } else {
             text.append("<employees>").append(LN);
-            for (int i = 0; i < listEmployees.size(); i++) {
+            for (Employee listEmployee : listEmployees) {
                 text.append("\t<employee>").append(LN)
-                        .append("\t\t<name>").append(listEmployees.get(i).getName()).append("</name>").append(LN)
-                        .append("\t\t<hired>").append(DateConverter.convert(listEmployees.get(i).getHired())).append("</hired>").append(LN)
-                        .append("\t\t<fired>").append(DateConverter.convert(listEmployees.get(i).getFired())).append("</fired>").append(LN)
-                        .append("\t\t<salary>").append(listEmployees.get(i).getSalary()).append("</salary>").append(LN)
+                        .append("\t\t<name>").append(listEmployee.getName()).append("</name>").append(LN)
+                        .append("\t\t<hired>").append(DateConverter.convert(listEmployee.getHired())).append("</hired>").append(LN)
+                        .append("\t\t<fired>").append(DateConverter.convert(listEmployee.getFired())).append("</fired>").append(LN)
+                        .append("\t\t<salary>").append(listEmployee.getSalary()).append("</salary>").append(LN)
                         .append("\t</employee>").append(LN);
             }
+            text.append("</employees>").append(LN);
         }
-        text.append("</employees>").append(LN);
         return text.toString();
     }
 }

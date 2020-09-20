@@ -4,8 +4,8 @@ import org.junit.Test;
 
 import java.util.Calendar;
 
-import static org.junit.Assert.*;
 import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
 
 public class ReportEngineTest {
 
@@ -232,6 +232,37 @@ public class ReportEngineTest {
     }
 
     @Test
+    public void whenListEmployeesIsEmptyXMLGenerated() {
+        final String LN = System.lineSeparator();
+        MemStore store = new MemStore();
+        final XMLReport xmlReport = new XMLReport(store);
+//        System.out.println(xmlReport.generate(em -> true));
+        StringBuilder expect = new StringBuilder();
+        expect.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>").append(LN);
+        assertThat(xmlReport.generate(em -> true), is(expect.toString()));
+    }
+
+    @Test
+    public void whenListEmployeesHasOneEmployeeXMLGenerated() {
+        final String LN = System.lineSeparator();
+        MemStore store = new MemStore();
+        Calendar now = Calendar.getInstance();
+        Employee worker1 = new Employee("Ivan", now, now, 100);
+        store.add(worker1);
+        final XMLReport xmlReport = new XMLReport(store);
+//        System.out.println(xmlReport.generate(em -> true));
+        StringBuilder expect = new StringBuilder();
+        expect.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>").append(LN)
+                .append("<employee>").append(LN)
+                .append("\t<name>").append(worker1.getName()).append("</name>").append(LN)
+                .append("\t<hired>").append(DateConverter.convert(worker1.getHired())).append("</hired").append(LN)
+                .append("\t<fired>").append(DateConverter.convert(worker1.getFired())).append("</fired>").append(LN)
+                .append("\t<salary>").append(worker1.getSalary()).append("</salary>").append(LN)
+                .append("</employee>").append(LN);
+        assertThat(xmlReport.generate(em -> true), is(expect.toString()));
+    }
+
+    @Test
     public void whenListEmployeesHasManyEmployeesXMLGenerated() {
         final String LN = System.lineSeparator();
         MemStore store = new MemStore();
@@ -243,28 +274,29 @@ public class ReportEngineTest {
         store.add(worker2);
         store.add(worker3);
         final XMLReport xmlReport = new XMLReport(store);
-        System.out.println(xmlReport.generate(em -> true));
-//        StringBuilder expect = new StringBuilder();
-//        expect.append("[").append(LN)
-//                .append("{").append(LN)
-//                .append("\"name\": ").append("\"").append(worker1.getName()).append("\"").append(",").append(LN)
-//                .append("\"hired\": ").append("\"").append(DateConverter.convert(worker1.getHired())).append("\"").append(",").append(LN)
-//                .append("\"fired\": ").append("\"").append(DateConverter.convert(worker1.getFired())).append("\"").append(",").append(LN)
-//                .append("\"salary\": ").append(worker1.getSalary()).append(LN)
-//                .append("},").append(LN)
-//                .append("{").append(LN)
-//                .append("\"name\": ").append("\"").append(worker2.getName()).append("\"").append(",").append(LN)
-//                .append("\"hired\": ").append("\"").append(DateConverter.convert(worker2.getHired())).append("\"").append(",").append(LN)
-//                .append("\"fired\": ").append("\"").append(DateConverter.convert(worker2.getFired())).append("\"").append(",").append(LN)
-//                .append("\"salary\": ").append(worker2.getSalary()).append(LN)
-//                .append("},").append(LN)
-//                .append("{").append(LN)
-//                .append("\"name\": ").append("\"").append(worker3.getName()).append("\"").append(",").append(LN)
-//                .append("\"hired\": ").append("\"").append(DateConverter.convert(worker3.getHired())).append("\"").append(",").append(LN)
-//                .append("\"fired\": ").append("\"").append(DateConverter.convert(worker3.getFired())).append("\"").append(",").append(LN)
-//                .append("\"salary\": ").append(worker3.getSalary()).append(LN)
-//                .append("}").append(LN)
-//                .append("]").append(LN);
-//        assertThat(jsonReport.generate(em -> true), is(expect.toString()));
+//        System.out.println(xmlReport.generate(em -> true));
+        StringBuilder expect = new StringBuilder();
+        expect.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>").append(LN)
+                .append("<employees>").append(LN)
+                .append("\t<employee>").append(LN)
+                .append("\t\t<name>").append(worker1.getName()).append("</name>").append(LN)
+                .append("\t\t<hired>").append(DateConverter.convert(worker1.getHired())).append("</hired>").append(LN)
+                .append("\t\t<fired>").append(DateConverter.convert(worker1.getFired())).append("</fired>").append(LN)
+                .append("\t\t<salary>").append(worker1.getSalary()).append("</salary>").append(LN)
+                .append("\t</employee>").append(LN)
+                .append("\t<employee>").append(LN)
+                .append("\t\t<name>").append(worker2.getName()).append("</name>").append(LN)
+                .append("\t\t<hired>").append(DateConverter.convert(worker2.getHired())).append("</hired>").append(LN)
+                .append("\t\t<fired>").append(DateConverter.convert(worker2.getFired())).append("</fired>").append(LN)
+                .append("\t\t<salary>").append(worker2.getSalary()).append("</salary>").append(LN)
+                .append("\t</employee>").append(LN)
+                .append("\t<employee>").append(LN)
+                .append("\t\t<name>").append(worker3.getName()).append("</name>").append(LN)
+                .append("\t\t<hired>").append(DateConverter.convert(worker3.getHired())).append("</hired>").append(LN)
+                .append("\t\t<fired>").append(DateConverter.convert(worker3.getFired())).append("</fired>").append(LN)
+                .append("\t\t<salary>").append(worker3.getSalary()).append("</salary>").append(LN)
+                .append("\t</employee>").append(LN)
+                .append("</employees>").append(LN);
+        assertThat(xmlReport.generate(em -> true), is(expect.toString()));
     }
 }

@@ -3,6 +3,17 @@ package ru.job4j.design.srp;
 import java.util.List;
 import java.util.function.Predicate;
 
+/**
+ * The class responsible for generating the report in JSON form.
+ * Simple JSON form:
+ * {
+ * "name": "Bob",
+ * "hired": "2020-06-16 12:10",
+ * "fired": "2020-12-20 17:50",
+ * "salary": 150.0
+ * }
+ */
+
 public class JSONReport implements Report {
     private Store store;
     private static final String LN = System.lineSeparator();
