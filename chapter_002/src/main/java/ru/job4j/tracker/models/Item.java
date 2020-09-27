@@ -1,12 +1,12 @@
 package ru.job4j.tracker.models;
-/*
+
+import java.util.Objects;
+
+/**
  * Item описывают бизнес модель заявки.
  * id (уникальный ключ), name - имя, desc - описание,
  * time - время создания заявки.
  */
-
-import java.util.Objects;
-
 public class Item {
     private String id;
     private String name;
@@ -17,6 +17,11 @@ public class Item {
         this.name = name;
         this.desc = desc;
         this.time = time;
+    }
+
+    public Item(String name, String desc) {
+        this.name = name;
+        this.desc = desc;
     }
 
     public String getId() {
