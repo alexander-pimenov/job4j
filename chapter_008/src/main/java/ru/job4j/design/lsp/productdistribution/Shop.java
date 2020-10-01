@@ -1,4 +1,4 @@
-package ru.job4j.design.lsp;
+package ru.job4j.design.lsp.productdistribution;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,8 +53,8 @@ public class Shop implements Storage {
 
     @Override
     public String toString() {
-        return "Shop{" +
-                "foodStore=" + foodStore +
-                '}';
+        return "Shop{"
+                + "foodStore=" + foodStore
+                + '}';
     }
 }

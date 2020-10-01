@@ -1,4 +1,4 @@
-package ru.job4j.design.lsp;
+package ru.job4j.design.lsp.productdistribution;
 
 import java.time.Duration;
 import java.time.LocalDate;
