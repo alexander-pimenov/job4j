@@ -1,9 +1,13 @@
 package ru.job4j.tracker.start;
 
-import java.util.List;
+/**
+ * Этот интерфейс расширяет SimpleInput, InputRange
+ * тем самым соблюдаем принцип ISP (из SOLID) -
+ * разбиение толстых интерфейсов на более мелкие,
+ * но нужно учитывать связанность методов в интерфейсе.
+ */
+public interface Input extends SimpleInput, InputRange {
+//    String ask(String question);
 
-public interface Input {
-    String ask(String question);
-
-    int ask(String question, List<Integer> range);
+//    int ask(String question, List<Integer> range);
 }
