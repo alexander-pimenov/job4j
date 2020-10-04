@@ -30,15 +30,28 @@ public class ParkingService implements Parking {
      * Общее количество машин на стоянке.
      */
     private int numberOfCars;
+    /**
+     * Хранилище поступающих транспортных средств на парковку.
+     */
+    private List<Vehicle> vehicles = new ArrayList<>();
 
-    private List<Vehicle> cars = new ArrayList<>();
-    private List<Vehicle> trucks = new ArrayList<>();
-
+    /**
+     * Дефолтный конструктор, в котором количество парковочных
+     * мест для легковых и грузовых авто имеет установленные
+     * значения, согласно DEFAULT_CAR_PLACES и DEFAULT_TRUCK_PLACES
+     */
     public ParkingService() {
         this.carPlaces = DEFAULT_CAR_PLACES;
         this.truckPlaces = DEFAULT_TRUCK_PLACES;
     }
 
+    /**
+     * В этом конструкторе мы можем задавать количество парковочных
+     * мест для легковых и грузовых авто.
+     *
+     * @param carPlaces   количество мест для легковых авто.
+     * @param truckPlaces количество мест для грузовых авто.
+     */
     public ParkingService(int carPlaces, int truckPlaces) {
         this.carPlaces = carPlaces;
         this.truckPlaces = truckPlaces;
@@ -55,7 +68,7 @@ public class ParkingService implements Parking {
         boolean result = false;
         if (vehicle.vehicleSize() == 1) {
             if (carPlaces > 0) {
-                cars.add(vehicle);
+                vehicles.add(vehicle);
                 result = true;
                 carPlaces--;
                 numberOfCars++;
@@ -64,12 +77,12 @@ public class ParkingService implements Parking {
             }
         } else {
             if (truckPlaces > 0) {
-                trucks.add(vehicle);
+                vehicles.add(vehicle);
                 result = true;
                 truckPlaces--;
                 numberOfCars++;
             } else if (truckPlaces == 0 && carPlaces >= vehicle.vehicleSize()) {
-                trucks.add(vehicle);
+                vehicles.add(vehicle);
                 result = true;
                 carPlaces -= vehicle.vehicleSize();
                 numberOfCars++;
@@ -111,24 +124,16 @@ public class ParkingService implements Parking {
         if (getNumberOfCars() == 0) {
             throw new IllegalArgumentException("No vehicles in the parking lot.");
         }
-        if (!cars.isEmpty()) {
-            for (Vehicle v : cars) {
-                if (v.getCarLicensePlate().equals(carLicensePlate)) {
-                    cars.remove(v);
-                    numberOfCars--;
+        for (Vehicle v : vehicles) {
+            if (v.getCarLicensePlate().equals(carLicensePlate)) {
+                vehicles.remove(v);
+                numberOfCars--;
+                if (v.vehicleSize() == 1) {
                     carPlaces++;
-                    return v;
-                }
-            }
-        }
-        if (!trucks.isEmpty()) {
-            for (Vehicle v : trucks) {
-                if (v.getCarLicensePlate().equals(carLicensePlate)) {
-                    trucks.remove(v);
-                    numberOfCars--;
+                } else {
                     truckPlaces++;
-                    return v;
                 }
+                return v;
             }
         }
         return null;
@@ -142,16 +147,39 @@ public class ParkingService implements Parking {
      */
     @Override
     public List<Vehicle> getVehicles() {
-        if (cars.isEmpty()) {
-            return trucks;
+        return vehicles;
+    }
+
+    /**
+     * Метод возвращающий только имеющиеся
+     * на парковке легковые авто.
+     *
+     * @return список легковых авто.
+     */
+    public List<Vehicle> getCars() {
+        List<Vehicle> resultCars = new ArrayList<>();
+        for (Vehicle v : vehicles) {
+            if (v.vehicleSize() == CAR_SIZE) {
+                resultCars.add(v);
+            }
         }
-        if (trucks.isEmpty()) {
-            return cars;
+        return resultCars;
+    }
+
+    /**
+     * Метод возвращающий только имеющиеся
+     * на парковке грузовые авто.
+     *
+     * @return список грузовых авто.
+     */
+    public List<Vehicle> getTrucks() {
+        List<Vehicle> resultTrucks = new ArrayList<>();
+        for (Vehicle v : vehicles) {
+            if (v.vehicleSize() != CAR_SIZE) {
+                resultTrucks.add(v);
+            }
         }
-        List<Vehicle> result = new ArrayList<>();
-        result.addAll(cars);
-        result.addAll(trucks);
-        return result;
+        return resultTrucks;
     }
 
     /**
@@ -163,5 +191,25 @@ public class ParkingService implements Parking {
     @Override
     public int getNumberOfCars() {
         return numberOfCars;
+    }
+
+    /**
+     * Метод возвращающий количество мест
+     * на парковке, занятых легковыми авто.
+     *
+     * @return количество мест.
+     */
+    public int getCarPlaces() {
+        return carPlaces;
+    }
+
+    /**
+     * Метод возвращающий количество мест
+     * на парковке, занятых грузовыми авто.
+     *
+     * @return количество мест.
+     */
+    public int getTruckPlaces() {
+        return truckPlaces;
     }
 }

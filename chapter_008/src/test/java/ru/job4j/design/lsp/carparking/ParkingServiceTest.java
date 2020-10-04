@@ -3,6 +3,8 @@ package ru.job4j.design.lsp.carparking;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.List;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
@@ -27,6 +29,10 @@ public class ParkingServiceTest {
         assertTrue(parkingService.addVehicle(car1));
         assertTrue(parkingService.addVehicle(car2));
         assertTrue(parkingService.addVehicle(truck1));
+        System.out.println(parkingService.getCars());
+//        System.out.println(parkingService.getCars().size());
+        System.out.println(parkingService.getTrucks());
+//        System.out.println(parkingService.getTrucks().size());
         assertThat(parkingService.getNumberOfCars(), is(3));
     }
 
@@ -42,6 +48,11 @@ public class ParkingServiceTest {
         ParkingService parkingService = new ParkingService(2, 1);
         parkingService.addVehicle(truck1);
         parkingService.addVehicle(truck2);
+        //Видим, что truck1 занял места двух car
+        System.out.println(parkingService.getCarPlaces());
+        //И что truck2 занял место одного truck
+        System.out.println(parkingService.getTruckPlaces());
+        System.out.println(parkingService.getTrucks());
         assertThat(parkingService.getNumberOfCars(), is(2));
     }
 
@@ -50,7 +61,11 @@ public class ParkingServiceTest {
         ParkingService parkingService = new ParkingService(2, 1);
         parkingService.addVehicle(car1);
         parkingService.addVehicle(truck1);
+        System.out.println(parkingService.getCarPlaces());
+        System.out.println(parkingService.getTruckPlaces());
         assertThat(parkingService.removeVehicle("A123AA77"), is(car1));
+        System.out.println(parkingService.getCarPlaces());
+        System.out.println(parkingService.getTruckPlaces());
         assertThat(parkingService.getNumberOfCars(), is(1));
     }
 
@@ -58,5 +73,22 @@ public class ParkingServiceTest {
     public void whenRemoveVehicleFromEmptyParking() {
         ParkingService parkingService = new ParkingService(2, 1);
         parkingService.removeVehicle("A123AA77");
+    }
+
+    @Test
+    public void whenAddVehicleList() {
+        List<Vehicle> vehicleList = List.of(car1, car2, truck1, truck2);
+        ParkingService parkingService = new ParkingService(2, 2);
+        assertTrue(parkingService.addVehicleList(vehicleList));
+        System.out.println(parkingService.getCarPlaces());
+        System.out.println(parkingService.getTruckPlaces());
+        assertThat(parkingService.getNumberOfCars(), is(4));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void whenAddedVehicleListMoreThanParkingLots() {
+        List<Vehicle> vehicleList = List.of(car1, car2, truck1, truck2);
+        ParkingService parkingService = new ParkingService(2, 1);
+        parkingService.addVehicleList(vehicleList);
     }
 }
