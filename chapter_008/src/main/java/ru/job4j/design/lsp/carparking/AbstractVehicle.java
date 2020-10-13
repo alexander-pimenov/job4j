@@ -36,6 +36,7 @@ public abstract class AbstractVehicle implements Vehicle {
         this.size = size;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
