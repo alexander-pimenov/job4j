@@ -39,11 +39,11 @@ public class Food {
      *
      * @param name       название продукта.
      * @param createDate дата изготовления продукта.
-     *                   Вводится как LocalDate.parse("2007-09-03"), not null
-     *                   или LocalDate.of(2007,9,3)
+     *                   Вводится как LocalDate.parse("2020-09-03"), not null
+     *                   или LocalDate.of(2020,9,3)
      * @param expiryDate дата до которой годен продукт.
-     *                   Вводится как LocalDate.parse("2007-09-03"), not null
-     *                   или LocalDate.of(2007,9,3), not null
+     *                   Вводится как LocalDate.parse("2020-09-03"), not null
+     *                   или LocalDate.of(2020,9,3), not null
      * @param price      цена продукта.
      */
     public Food(String name, LocalDate createDate, LocalDate expiryDate, double price) {

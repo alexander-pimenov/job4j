@@ -46,6 +46,14 @@ public class Warehouse implements Storage {
         return foodStore.size();
     }
 
+    /**
+     * Метод очищающий список продуктов в хранилище.
+     */
+    @Override
+    public void resetFoodList() {
+        foodStore.clear();
+    }
+
     @Override
     public String toString() {
         return "Warehouse{"

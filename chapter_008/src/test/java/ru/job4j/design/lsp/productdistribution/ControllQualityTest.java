@@ -3,6 +3,7 @@ package ru.job4j.design.lsp.productdistribution;
 import org.junit.Test;
 
 import java.time.LocalDate;
+import java.util.LinkedList;
 import java.util.List;
 
 import static org.hamcrest.core.Is.is;
@@ -97,5 +98,22 @@ public class ControllQualityTest {
         assertThat(trash.getNumberOfProducts(), is(1));
     }
 
+    @Test
+    public void whenAddToStorageManyProductsAndResortThem() {
+        Storage warehouse = new Warehouse();
+        Storage shop = new Shop();
+        Storage trash = new Trash();
+        ControllQuality controllQuality = new ControllQuality(List.of(warehouse, shop, trash));
+        Food butter = new Food("butter", LocalDate.now().minusDays(5), LocalDate.now().plusDays(1), 100);
+        Food milk = new Food("milk", LocalDate.now().minusDays(10), LocalDate.now().plusDays(10), 70);
+        Food meet = new Food("meet", LocalDate.now().minusDays(5), LocalDate.now().plusDays(25), 200);
+        Food bread = new Food("bread", LocalDate.now().minusDays(4), LocalDate.now().plusDays(-1), 25);
+        controllQuality.executeMovementFoodList(List.of(butter, milk, meet, bread));
 
+        controllQuality.resort();
+
+        System.out.println(warehouse.showFood());
+        System.out.println(shop.showFood());
+        System.out.println(trash.showFood());
+    }
 }

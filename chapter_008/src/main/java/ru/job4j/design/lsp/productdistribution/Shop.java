@@ -36,6 +36,12 @@ public class Shop implements Storage {
         return result;
     }
 
+    /**
+     * Метод показывающий все продукты хранилище
+     * одним списоком.
+     *
+     * @return список продуктов.
+     */
     @Override
     public List<Food> showFood() {
         return foodStore;
@@ -49,6 +55,14 @@ public class Shop implements Storage {
     @Override
     public int getNumberOfProducts() {
         return foodStore.size();
+    }
+
+    /**
+     * Метод очищающий список продуктов в хранилище.
+     */
+    @Override
+    public void resetFoodList() {
+        foodStore.clear();
     }
 
     @Override

@@ -2,6 +2,9 @@ package ru.job4j.tracker.start;
 
 import java.util.function.Consumer;
 
+/**
+ * Система обработки событий.
+ */
 public interface UserAction {
     /**
      * Метод возвращает ключ опции.
