@@ -8,5 +8,10 @@ import java.util.Map;
  * и паре ключ-значение.
  */
 public interface Generator {
+    /**
+     * Hello world, ${name}
+     * @param template -starting String where we replace template ${...}
+     * @param args Map, where key equals template, value replaced template
+     */
     String produce(String template, Map<String, String> args);
 }
