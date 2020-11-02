@@ -19,7 +19,7 @@ public class User {
     @Override
     protected void finalize() throws Throwable {
         super.finalize();
-        System.out.printf("Deleting object %s%n", this);
+//        System.out.printf("Deleting object %s%n", this); //закомментировал чтоб не выводилась лишняя информация
     }
 
     @Override
