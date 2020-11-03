@@ -20,6 +20,14 @@ package ru.job4j.gc;
  * -Xmx12m -Xms3m -Xmn1m -XX:+UseParallelOldGC
  * 7) вызываем Concurrent Mark-Sweep (CMS) Collector -XX:+UseConcMarkSweepGC
  * -Xmx12m -Xms3m -Xmn1m -XX:+UseConcMarkSweepGC
+ * <p>
+ * -XX:+PrintGCDetails : Включает расширенный вывод информации о сборках мусора.
+ * -Xlog:gc* : -XX:+PrintGCDetails is deprecated. Will use -Xlog:gc* instead.
+ * <p>
+ * -XX:+PrintFlagsFinal : При старте приложения выводит в stdout значения всех опций,
+ * заданных явно или установленных самой JVM. Сюда же
+ * попадают опции, относящиеся к сборке мусора. Часто
+ * бывает полезно посмотреть на присвоенные им значения.
  */
 public class GCExample {
 
@@ -42,7 +50,7 @@ public class GCExample {
 ////            System.out.println(new User(i, "name" + i));
 ////            System.out.println(new UserEmpty());
         }
-        System.out.println("Объекты созданы.");
+//        System.out.println("Объекты созданы.");
         System.gc();
 //        infoInMB();
 //        infoInBytes();
