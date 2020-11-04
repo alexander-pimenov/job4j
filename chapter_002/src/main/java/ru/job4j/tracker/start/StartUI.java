@@ -7,6 +7,24 @@ import java.util.function.Consumer;
  * @author Alexander Pimenov
  * @version $Id$
  * @since 0.1
+ * <p>
+ * Чтобы выводить некую информацию о GC в VM options прописал команду: -verbose:gc
+ * Включим расширенный вывод информации о сборках мусора: -XX:+PrintGCDetails
+ * Но есть предупреждение:
+ * -XX:+PrintGCDetails is deprecated. Will use -Xlog:gc* instead.
+ * -Xlog:gc* Это лучшая практика для отладки GC или проблем с памятью.
+ * <p>
+ * Вызовем Serial Collector с параматрами для heap:
+ * -Xmx12m -Xms3m -Xmn1m -XX:+UseSerialGC
+ * <p>
+ * Вызовем Parallel Collector с параматрами для heap:
+ * -Xmx12m -Xms3m -Xmn1m -XX:+UseParallelGC
+ * <p>
+ * Вызовем Parallel Compacting Collector с параматрами для heap:
+ * -Xmx12m -Xms3m -Xmn1m -XX:+UseParallelOldGC
+ * <p>
+ * Вызовем Concurrent Mark-Sweep (CMS) Collector с параматрами для heap:
+ * -Xmx12m -Xms3m -Xmn1m -XX:+UseConcMarkSweepGC
  */
 public class StartUI {
     /**
