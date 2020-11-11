@@ -1,5 +1,7 @@
 package ru.job4j.tracker.start;
 
+import ru.job4j.tracker.models.Item;
+
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -15,16 +17,21 @@ import java.util.function.Consumer;
  * -Xlog:gc* Это лучшая практика для отладки GC или проблем с памятью.
  * <p>
  * Вызовем Serial Collector с параматрами для heap:
- * -Xmx12m -Xms3m -Xmn1m -XX:+UseSerialGC
+ * -XX:+UseSerialGC -Xmx12m -Xms3m -Xmn1m
  * <p>
  * Вызовем Parallel Collector с параматрами для heap:
- * -Xmx12m -Xms3m -Xmn1m -XX:+UseParallelGC
+ * -XX:+UseParallelGC -Xmx12m -Xms3m -Xmn1m
  * <p>
  * Вызовем Parallel Compacting Collector с параматрами для heap:
- * -Xmx12m -Xms3m -Xmn1m -XX:+UseParallelOldGC
+ * -XX:+UseParallelOldGC -Xmx12m -Xms3m -Xmn1m
  * <p>
  * Вызовем Concurrent Mark-Sweep (CMS) Collector с параматрами для heap:
- * -Xmx12m -Xms3m -Xmn1m -XX:+UseConcMarkSweepGC
+ * -XX:+UseConcMarkSweepGC -Xmx12m -Xms3m -Xmn1m
+ * <p>
+ * Мы можем использовать такие настройки VM с записью в лог некоторых данных:
+ * -XX:+UseSerialGC -Xms2m -Xmx2m -Xlog:gc*::time -Xlog:gc:C:\projects\job4j\chapter_002\gcTracker.txt
+ * <p>
+ * //C:\projects\job4j\chapter_002\gcTracker.txt - абсолютный путь к логу.
  */
 public class StartUI {
     /**
@@ -84,13 +91,43 @@ public class StartUI {
      *
      * @param args массив строковых аргументов
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
-        new StartUI(new ValidateInput(
-                new ConsoleInput()), new Tracker(), System.out::println).init();
+        /*----------------------------------------------------------
+         * Этот участок кода нужен для того чтобы продемонстрировать
+         * работу GC, переполнение памяти с выбросом исключения
+         * java.lang.OutOfMemoryError: Java heap space
+         * Настройки VM такие:
+         * -XX:+UseSerialGC -Xms256m -Xmx256m -Xlog:gc*::time -Xlog:gc:C:\projects\job4j\chapter_002\gcTracker.txt
+         * Исключение выбрасывается при 1_800_000 item.
+         * При количестве item 1_750_000 исключение еще не выбрасывается.
+         */
+        Thread.sleep(3000);
+        Tracker tracker = new Tracker();
+        for (int i = 0; i < 1_800_000; i++) {
+            Item item = new Item("item", String.valueOf(i));
+            tracker.add(item);
+        }
+        System.out.println(tracker.findAll().size());
+        Thread.sleep(3000);
+        final List<Item> all = tracker.findAll();
+        all.clear();
+        System.out.println(all.size());
+        System.gc();
+        /*----------------------------------------------------------*/
 
+
+        /*----------------------------------------------------------*/
+
+        /* Раскомментировать и запустить для тестирования работы сборщика мусора (GC)*/
+        new StartUI(new ValidateInput(new ConsoleInput()), tracker, System.out::println).init();
+
+        /* Раскомментировать для работы приложения без учета специальных настроек сборщика мусора (GC)*/
+        //        new StartUI(new ValidateInput(new ConsoleInput()), new Tracker(), System.out::println).init();
     }
 }
+
+
 
 
 // Варианты предыдущие. Устаревшие.

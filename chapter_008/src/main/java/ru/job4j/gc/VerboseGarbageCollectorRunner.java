@@ -39,8 +39,11 @@ import java.util.Map;
  * Thus, you need to specify the path to the log file:
  * -Xlog:gc:/path/to/file/gc.log => further, for my file => -Xlog:gc:C:\projects\job4j\chapter_008\gc.log or
  * -Xlog:gc:C:\projects\job4j\chapter_008\gc.txt
+ * <p>
  * Arguments in this time:
- * -XX:+UseG1GC -Xms1024m -Xmx1024m -verbose:gc -Xlog:gc*::time -Xlog:gc:C:\projects\job4j\chapter_008\gc.txt
+ * -XX:+UseG1GC -Xms512m -Xmx512m -verbose:gc -Xlog:gc*::time -Xlog:gc:C:\projects\job4j\chapter_008\gc.txt
+ * <p>
+ * If we want to display information about loaded classes, use the key -verbose:class
  */
 public class VerboseGarbageCollectorRunner {
     private static Map<String, String> stringContainer = new HashMap<>();
@@ -50,7 +53,7 @@ public class VerboseGarbageCollectorRunner {
         String stringWithPrefix = "stringWithPrefix";
 
         // Load Java Heap with 3 M java.lang.String instances
-        for (int i = 0; i < 3000000; i++) {
+        for (int i = 0; i < 3_000_000; i++) {
             String newString = stringWithPrefix + i;
             stringContainer.put(newString, newString);
         }
@@ -60,7 +63,7 @@ public class VerboseGarbageCollectorRunner {
         System.gc();
 
         // Remove 2 M out of 3 M
-        for (int i = 0; i < 2000000; i++) {
+        for (int i = 0; i < 2_000_000; i++) {
             String newString = stringWithPrefix + i;
             stringContainer.remove(newString);
         }
@@ -69,3 +72,15 @@ public class VerboseGarbageCollectorRunner {
         System.out.println("End of program!");
     }
 }
+
+//Результа итогового вывода:
+//[2020-11-11T16:14:30.099+0300] Heap
+//[2020-11-11T16:14:30.099+0300]  def new generation   total 157248K, used 127467K [0x00000000e0000000, 0x00000000eaaa0000, 0x00000000eaaa0000)
+//[2020-11-11T16:14:30.099+0300]   eden space 139776K,  91% used [0x00000000e0000000, 0x00000000e7c7afa0, 0x00000000e8880000)
+//[2020-11-11T16:14:30.099+0300]   from space 17472K,   0% used [0x00000000e8880000, 0x00000000e8880000, 0x00000000e9990000)
+//[2020-11-11T16:14:30.099+0300]   to   space 17472K,   0% used [0x00000000e9990000, 0x00000000e9990000, 0x00000000eaaa0000)
+//[2020-11-11T16:14:30.099+0300]  tenured generation   total 349568K, used 299747K [0x00000000eaaa0000, 0x0000000100000000, 0x0000000100000000)
+//[2020-11-11T16:14:30.099+0300]    the space 349568K,  85% used [0x00000000eaaa0000, 0x00000000fcf58c28, 0x00000000fcf58e00, 0x0000000100000000)
+//[2020-11-11T16:14:30.099+0300]  Metaspace       used 1311K, capacity 4609K, committed 4864K, reserved 1056768K
+//[2020-11-11T16:14:30.100+0300]   class space    used 115K, capacity 424K, committed 512K, reserved 1048576K
+

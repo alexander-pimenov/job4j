@@ -1,0 +1,4 @@
+[0.035s][info][gc] Using Serial
+[2.105s][info][gc] GC(0) Pause Young (Allocation Failure) 136M->118M(494M) 598.553ms
+[3.643s][info][gc] GC(1) Pause Young (Allocation Failure) 254M->246M(494M) 813.611ms
+[5.292s][info][gc] GC(2) Pause Full (System.gc()) 296M->292M(494M) 1520.834ms

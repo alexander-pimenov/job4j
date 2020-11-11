@@ -1,0 +1,68 @@
+Пример настроек виртуальной машины с использованием определенных ключей в "VM options".
+ * Чтобы выводить некую информацию о GC в VM options прописал команду: -verbose:gc
+ * <p>
+ * 1) запуск программы, когда все циклы закомментированны (калибровка)
+ * 2) задаем размер памяти (heap) 4 mB (максимум и начальная)
+ * * -Xmx4m -Xms4m
+ * 3) запуск программы с установками по умолчанию
+ * и потом устанавливаем такие параметры -Xmx12m -Xms3m -Xmn1m -XX:+UseG1GC
+ * 4) вызываем Serial Collector -XX:+UseSerialGC
+ * -Xmx12m -Xms3m -Xmn1m -XX:+UseSerialGC
+ * 5) вызываем Parallel Collector -XX:+UseParallelGC
+ * -Xmx12m -Xms3m -Xmn1m -XX:+UseParallelGC
+ * 6) вызываем Parallel Compacting Collector -XX:+UseParallelOldGC
+ * -Xmx12m -Xms3m -Xmn1m -XX:+UseParallelOldGC
+ * 7) вызываем Concurrent Mark-Sweep (CMS) Collector -XX:+UseConcMarkSweepGC
+ * -Xmx12m -Xms3m -Xmn1m -XX:+UseConcMarkSweepGC
+ * <p>
+ * -XX:+PrintGCDetails : Включает расширенный вывод информации о сборках мусора.
+ * -Xlog:gc* : -XX:+PrintGCDetails is deprecated. Will use -Xlog:gc* instead.
+ * -Xlog:gc* Это лучшая практика для отладки GC или проблем с памятью.
+ * Этот ключ отменяет параметр -verbose:gc
+ * <p>
+ * -XX:+PrintFlagsFinal : При старте приложения выводит в stdout значения всех опций,
+ * заданных явно или установленных самой JVM. Сюда же попадают опции, относящиеся к
+ * сборке мусора. Часто бывает полезно посмотреть на присвоенные им значения.
+ * <p>
+ * Для мониторинга текущих приложений можно использовать программы идущие с jdk
+ * Java VisualVM ("C:\Program Files\Java\jdk1.8.0_201\bin\jvisualvm.exe" и jmc.exe)
+ * Для jvisualvm.exe в приложении в Tools-Plugins во вкладке Available Plugins включим плагин Visual GC
+ * и в его вкладке можно наблюдать изменения в таких разделах памяти:
+ * Metaspace, Eden, S0, S1, Old.
+ * jmc.exe более можщное приложение.
+ * (но это приложение мониторит контейнер целиком, т.е. если будет запущено 25 риложений,
+ * то будет выведена совокупная информация.)
+ * <p>
+ * Исли хотим отображать информацию о загружаемых классах используй ключ -verbose:class
+
+
+  * Запустите эту программу со следующими аргументами, чтобы увидеть подробное ведение журнала GC в его полной форме
+  * /path/to/file/gc.log - абсолютный путь к лог-файлу:
+  *
+  * -XX:+UseSerialGC -Xms1024m -Xmx1024m -verbose:gc -XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:+PrintGCDateStamps -Xloggc:/path/to/file/gc.log
+  *
+  * -XX:+UseSerialGC -Xms1024m -Xmx1024m -Xlog:gc*::time -Xlog:gc:C:\projects\job4j\chapter_002\gc.log
+  *
+  * Где:
+  * <ul>
+  *   <li><code>-XX:+UseSerialGC</code> - specify the serial garbage collector.</li>
+  *   <li><code>-Xms1024m</code> - specify the minimal heap size.</li>
+  *   <li><code>-Xmx1024m</code> - specify the maximal heap size.</li>
+  *   <li><code>-verbose:gc</code> - activate the logging of garbage collection information in its simplest form.</li>
+  *   <li><code>-XX:+PrintGCDetails</code> - activate detailed information about garbage collection (up to Java 9).</li>
+  *   <li><code>-XX:+PrintGCTimeStamps</code> - include a timestamp in the output reflecting the real-time passed in seconds since the JVM started (up to Java 9).</li>
+  *   <li><code>-XX:+PrintGCDateStamps</code> - include the absolute date and time at the start of each line (up to Java 9).</li>
+  *   <li><code>-Xloggc</code> - by default the GC log is written to stdout. Specify an output file via this argument (up to Java 9).</li>
+  *   <li><code>-Xlog:gc*</code> - in Java 9, activate detailed information about garbage collection.</li>
+  *   <li><code>-Xlog:gc*::time</code> - in Java 9, to get detailed information about garbage collection and include the date and time information that will appear in our logs use this argument.</li>
+  *   <li><code>-Xlog:gc:/path/to/file/gc.log</code> - in Java 9 by default the GC log is written to stdout. Specify an output file via this argument.</li>
+  * </ul>
+  * <p>
+  * Следует отметить, что первые три аргумента не являются строго необходимыми, но для целей или примера помогают действительно упростить вещи.
+  * Таким образом, вам нужно указать путь к файлу журнала.:
+  * -Xlog:gc:/path/to/file/gc.log => далее, для моего файла => -Xlog:gc:C:\projects\job4j\chapter_002\gc.log or
+  * -Xlog:gc:C:\projects\job4j\chapter_002\gc.txt и файл будет сохранен в корне данного модуля.
+  * Аргументы для тестирования программы Tracker этот раз:
+  * -XX:+UseSerialGC -Xms512m -Xmx512m -Xlog:gc*::time -Xlog:gc:C:\projects\job4j\chapter_002\gcTracker.txt
+  * <p>
+  * Если мы хотим отображать информацию о загруженных классах, используйте ключ -verbose:class
