@@ -104,7 +104,7 @@ public class StartUI {
          */
         Thread.sleep(3000);
         Tracker tracker = new Tracker();
-        for (int i = 0; i < 1_800_000; i++) {
+        for (int i = 0; i < 1_750_000; i++) {
             Item item = new Item("item", String.valueOf(i));
             tracker.add(item);
         }
