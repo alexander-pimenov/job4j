@@ -94,40 +94,43 @@ public class StartUI {
     public static void main(String[] args) throws InterruptedException {
 
         /*----------------------------------------------------------
+         *
          * Этот участок кода нужен для того чтобы продемонстрировать
          * работу GC, переполнение памяти с выбросом исключения
          * java.lang.OutOfMemoryError: Java heap space
-         * Настройки VM такие:
+         * Нужно его разблокировать и установить для VM options такие настройки:
+         * -XX:+UseSerialGC -Xms256m -Xmx256m -Xlog:gc*::time -Xlog:gc*:C:\projects\job4j\chapter_002\gcTracker.txt
+         * или чтоб было меньше данных в лог файле:
          * -XX:+UseSerialGC -Xms256m -Xmx256m -Xlog:gc*::time -Xlog:gc:C:\projects\job4j\chapter_002\gcTracker.txt
+         *
+         * Абсолютный путь к лог файлу: C:\projects\job4j\chapter_002\gcTracker.txt
+         * (может быть изменен).
+         *
          * Исключение выбрасывается при 1_800_000 item.
          * При количестве item 1_750_000 исключение еще не выбрасывается.
          */
-        Thread.sleep(3000);
-        Tracker tracker = new Tracker();
-        for (int i = 0; i < 1_750_000; i++) {
-            Item item = new Item("item", String.valueOf(i));
-            tracker.add(item);
-        }
-        System.out.println(tracker.findAll().size());
-        Thread.sleep(3000);
-        final List<Item> all = tracker.findAll();
-        all.clear();
-        System.out.println(all.size());
-        System.gc();
-        /*----------------------------------------------------------*/
+//        Thread.sleep(3000);
+//        Tracker tracker = new Tracker();
+//        for (int i = 0; i < 1_750_000; i++) {
+//            Item item = new Item("item", String.valueOf(i));
+//            tracker.add(item);
+//        }
+//        System.out.println(tracker.findAll().size());
+//        Thread.sleep(3000);
+//        final List<Item> all = tracker.findAll();
+//        all.clear();
+//        System.out.println(all.size());
+//        System.gc();
 
-
-        /*----------------------------------------------------------*/
 
         /* Раскомментировать и запустить для тестирования работы сборщика мусора (GC)*/
-        new StartUI(new ValidateInput(new ConsoleInput()), tracker, System.out::println).init();
+//        new StartUI(new ValidateInput(new ConsoleInput()), tracker, System.out::println).init();
+        /*----------------------------------------------------------*/
 
-        /* Раскомментировать для работы приложения без учета специальных настроек сборщика мусора (GC)*/
-        //        new StartUI(new ValidateInput(new ConsoleInput()), new Tracker(), System.out::println).init();
+        /*Для работы приложения без учета специальных настроек сборщика мусора (GC)*/
+        new StartUI(new ValidateInput(new ConsoleInput()), new Tracker(), System.out::println).init();
     }
 }
-
-
 
 
 // Варианты предыдущие. Устаревшие.
