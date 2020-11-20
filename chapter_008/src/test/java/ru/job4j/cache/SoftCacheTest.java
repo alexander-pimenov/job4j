@@ -32,7 +32,7 @@ public class SoftCacheTest {
         assertThat(actual, is(expected));
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void whenInvalidFileNameThenException() {
         SoftCache softCache = new SoftCache(path);
         String actual = softCache.getData("Test.txt");

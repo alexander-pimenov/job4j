@@ -35,21 +35,50 @@ public class SoftCache implements Cache<String, String> {
         this.sourceDir = sourceDir;
     }
 
+    /**
+     * Метод для чтения данных из файла.
+     *
+     * @param name название файла с расширением.
+     * @return содержимое файла в строковом формате.
+     */
+    private String readFile(String name) {
+        StringJoiner content = new StringJoiner(System.lineSeparator());
+        try (BufferedReader reader = new BufferedReader(
+                new FileReader(new File(sourceDir, name)))) {
+            reader.lines().forEach(line -> content.add(line));
+        } catch (IOException e) {
+            LOG.error(e.getMessage(), e);
+        }
+        return content.toString();
+    }
+
+    /**
+     * Метод для получения данных из файла и сохранение его
+     * в кеше.
+     *
+     * @param key название файла с расширением.
+     * @return содержимое файла в строковом формате.
+     */
     @Override
     public String getData(String key) {
-        if (softCache.get(key) == null) {
-            try (BufferedReader reader = new BufferedReader(
-                    new FileReader(new File(sourceDir, key)))) {
-                StringJoiner content = new StringJoiner(System.lineSeparator());
-                reader.lines().forEach(line -> content.add(line));
-                softCache.put(key, new SoftReference<>(content.toString()));
-            } catch (IOException e) {
-                LOG.error(e.getMessage(), e);
-//                e.getMessage();
+        String content = "";
+        //проверяем есть ли ключ в мапе
+        if (softCache.containsKey(key)) {
+            //если есть, то достаем строгую ссылку
+            content = softCache.get(key).get();
+            //проверяем не равна ли она null
+            if (content == null) {
+                //если равна, то читаем файл и добавляем в мапу
+                content = readFile(key);
+                softCache.put(key, new SoftReference<>(content));
             }
+        } else {
+            content = readFile(key);
+            softCache.put(key, new SoftReference<>(content));
         }
-        return softCache.get(key).get();
+        return content;
     }
+
 
     public static void main(String[] args) {
         String path = new File("chapter_008\\src\\main\\resources").getAbsolutePath();
