@@ -9,6 +9,9 @@
         <Logger name="ru.job4j.cache" level="info" additivity="false">
             <AppenderRef ref="Console"/>
         </Logger>
+        <Logger name="ru.job4j.gc" level="info" additivity="false">
+            <AppenderRef ref="Console"/>
+        </Logger>
         <Root level="info">
             <AppenderRef ref="Console"/>
         </Root>

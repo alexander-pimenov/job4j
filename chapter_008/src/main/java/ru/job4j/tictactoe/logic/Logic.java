@@ -13,20 +13,20 @@ public class Logic {
     }
 
     public boolean isWinnerX() {
-        return isWin(character -> character == board.getCell().getSIGN_X());
+        return isWin(character -> character == board.getCell().getSignX());
     }
 
     public boolean isWinnerO() {
-        return isWin(character -> (character == board.getCell().getSIGN_O()));
+        return isWin(character -> (character == board.getCell().getSignO()));
     }
 
     public boolean isWin(Predicate<Character> winCondition) {
         boolean result = false;
         for (int i = 0; i < board.getBoard().length; i++) {
-            if (fillBy(winCondition, i, 0, 0, 1) ||
-                    fillBy(winCondition, 0, i, 1, 0) ||
-                    fillBy(winCondition, 0, 0, 1, 1) ||
-                    fillBy(winCondition, board.size() - 1, 0, -1, 1)) {
+            if (fillBy(winCondition, i, 0, 0, 1)
+                    || fillBy(winCondition, 0, i, 1, 0)
+                    || fillBy(winCondition, 0, 0, 1, 1)
+                    || fillBy(winCondition, board.size() - 1, 0, -1, 1)) {
                 result = true;
                 break;
             }
@@ -58,7 +58,7 @@ public class Logic {
     public boolean isTableFull() {
         for (int row = 0; row < board.size(); row++) {
             for (int col = 0; col < board.size(); col++) {
-                if (board.getBoard()[row][col] == board.getCell().getSIGN_EMPTY()) {
+                if (board.getBoard()[row][col] == board.getCell().getSignEmpty()) {
                     return false;
                 }
             }
@@ -78,7 +78,7 @@ public class Logic {
             System.out.println("Вы вышли за рамки игрового поля. Try again.");
             return false;
         }
-        if (board.getBoard()[x][y] != board.getCell().getSIGN_EMPTY()) {
+        if (board.getBoard()[x][y] != board.getCell().getSignEmpty()) {
             System.out.println("Ячейка занята. Введите другие координаты.");
             return false;
         }
@@ -95,7 +95,7 @@ public class Logic {
      * @return boolean result.
      */
     public boolean isCellValidForRobot(int x, int y) {
-        if (board.getBoard()[x][y] != board.getCell().getSIGN_EMPTY()) {
+        if (board.getBoard()[x][y] != board.getCell().getSignEmpty()) {
             return false;
         }
         return true;

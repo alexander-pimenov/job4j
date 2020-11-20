@@ -1,5 +1,7 @@
 package ru.job4j.gc;
 
+import com.antkorwin.commonutils.gc.GcUtils;
+
 import java.lang.ref.PhantomReference;
 import java.lang.ref.ReferenceQueue;
 import java.util.ArrayList;
@@ -21,7 +23,7 @@ public class CachePhantomRef {
 //        System.gc(); //вызываем GC принудительно
 
         //Лучше вызовем GC через утилитный класс GcUtils
-        GcUtils.fullFinalization();//это гарантирует, что GC точно выполнит полный цикл очистки и завершения.
+        GcUtils.fullFinalization(); //это гарантирует, что GC точно выполнит полный цикл очистки и завершения.
 
         /*------Это блок для какой то работы-------*/
         Thread.sleep(2000);

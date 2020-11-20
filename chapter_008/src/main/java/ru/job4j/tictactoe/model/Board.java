@@ -20,9 +20,11 @@ public class Board implements IBoard {
 
     @Override
     public void initBoard() {
-        for (int row = 0; row < board.length; row++)
-            for (int col = 0; col < board.length; col++)
-                board[row][col] = cell.getSIGN_EMPTY();
+        for (int row = 0; row < board.length; row++) {
+            for (int col = 0; col < board.length; col++) {
+                board[row][col] = cell.getSignEmpty();
+            }
+        }
     }
 
     @Override

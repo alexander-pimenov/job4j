@@ -1,4 +1,4 @@
-package ru.job4j.tictactoeOneBigFile;
+package ru.job4j.tictactoeonebigfile;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -31,10 +31,10 @@ public class TicTacToe {
      * Их значения нельзя изменять,
      * об этом говорит модификатор final
      */
-    private final char SIGN_X = 'x';
+    private final char signX = 'x';
     //    private final char SIGN_X = '\uc6c3'; //корейский символ похожий на человека
-    private final char SIGN_O = 'o';
-    private final char SIGN_EMPTY = '.';
+    private final char signO = 'o';
+    private final char signEmpty = '.';
     private int sizeBoard;
     private static int playerScore = 0;
     private static int computerScore = 0;
@@ -102,7 +102,7 @@ public class TicTacToe {
                 moveHuman(); //ход человека
                 printBoard();
                 //проверка: победа человека или ничья
-                gameOver = checkWin(SIGN_X);
+                gameOver = checkWin(signX);
                 if (gameOver) {
                     playerScore++;
                     System.out.println("GAME OVER.");
@@ -120,7 +120,7 @@ public class TicTacToe {
                 //текущее состояние игровой таблицы
                 printBoard();
                 //проверка: победа компьютера или ничья
-                gameOver = checkWin(SIGN_O);
+                gameOver = checkWin(signO);
                 if (gameOver) {
                     computerScore++;
                     System.out.println("GAME OVER.");
@@ -171,9 +171,11 @@ public class TicTacToe {
      * заполняя его ячейки символами «точка».
      */
     private void initBoard() {
-        for (int row = 0; row < sizeBoard; row++)
-            for (int col = 0; col < sizeBoard; col++)
-                gameBoard[row][col] = SIGN_EMPTY;
+        for (int row = 0; row < sizeBoard; row++) {
+            for (int col = 0; col < sizeBoard; col++) {
+                gameBoard[row][col] = signEmpty;
+            }
+        }
     }
 
     /**
@@ -252,7 +254,9 @@ public class TicTacToe {
         int firstDiagonal = 0;
         for (int i = 0; i < sizeBoard; i++) {
             for (int j = 0; j < sizeBoard; j++) {
-                if (j == i && gameBoard[i][j] == symbol) firstDiagonal++;
+                if (j == i && gameBoard[i][j] == symbol) {
+                    firstDiagonal++;
+                }
             }
         }
         if (firstDiagonal == sizeBoard) {
@@ -261,7 +265,9 @@ public class TicTacToe {
         //проверка выигрыша второй диагонали
         int secondDiagonal = 0;
         for (int i = 0, j = sizeBoard - 1; i < sizeBoard && j >= 0; i++, j--) {
-            if (gameBoard[i][j] == symbol) secondDiagonal++;
+            if (gameBoard[i][j] == symbol) {
+                secondDiagonal++;
+            }
         }
         if (secondDiagonal == sizeBoard) {
             return true;
@@ -281,7 +287,7 @@ public class TicTacToe {
             x = random.nextInt(sizeBoard);
             y = random.nextInt(sizeBoard);
         } while (!isCellValidForComputer(x, y));
-        gameBoard[x][y] = SIGN_O;
+        gameBoard[x][y] = signO;
         System.out.println("Computer moved at position: " + (x + 1) + " - " + (y + 1));
     }
 
@@ -297,7 +303,7 @@ public class TicTacToe {
             y = checkDigitInputAndReturnInt() - 1;
 //            y = scanner.nextInt() - 1;
         } while (!isCellValidForHuman(x, y));
-        gameBoard[x][y] = SIGN_X;
+        gameBoard[x][y] = signX;
         System.out.println("Player moved at position: " + (x + 1) + " - " + (y + 1));
     }
 
@@ -314,7 +320,7 @@ public class TicTacToe {
             return false;
         }
         boolean result = false;
-        if (gameBoard[x][y] == SIGN_EMPTY) {
+        if (gameBoard[x][y] == signEmpty) {
             result = true;
         } else {
             System.out.println("Эта ячейка занята. Введите другую ячейку.");
@@ -336,7 +342,7 @@ public class TicTacToe {
 //            return false;
 //        }
         boolean result = false;
-        if (gameBoard[x][y] == SIGN_EMPTY) {
+        if (gameBoard[x][y] == signEmpty) {
             result = true;
         }
         return result;
@@ -388,10 +394,13 @@ public class TicTacToe {
      * @return boolean result
      */
     private boolean isTableFull() {
-        for (int row = 0; row < sizeBoard; row++)
-            for (int col = 0; col < sizeBoard; col++)
-                if (gameBoard[row][col] == SIGN_EMPTY)
+        for (int row = 0; row < sizeBoard; row++) {
+            for (int col = 0; col < sizeBoard; col++) {
+                if (gameBoard[row][col] == signEmpty) {
                     return false;
+                }
+            }
+        }
         return true;
     }
 
@@ -404,7 +413,7 @@ public class TicTacToe {
     public void resetBoard(char[][] board) {
         for (int row = 0; row < sizeBoard; row++) {
             for (int col = 0; col < sizeBoard; col++) {
-                board[row][col] = SIGN_EMPTY;
+                board[row][col] = signEmpty;
             }
         }
     }

@@ -59,7 +59,7 @@ public class Starter {
             board.initBoard();
             board.printBoard();
             while (true) {
-                players[0].move(board.getCell().getSIGN_X());
+                players[0].move(board.getCell().getSignX());
                 board.printBoard();
                 if (logic.isWinnerX()) {
                     System.out.println("Победили крестики!");
@@ -77,7 +77,7 @@ public class Starter {
                     gameCounter++;
                     break;
                 }
-                players[1].move(board.getCell().getSIGN_O());
+                players[1].move(board.getCell().getSignO());
                 board.printBoard();
                 if (logic.isWinnerO()) {
                     System.out.println("Победили нолики!");

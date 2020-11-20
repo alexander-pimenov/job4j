@@ -4,14 +4,15 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <artifactId>chapter_008</artifactId>
-    <dependencies>
-        <dependency>
-            <groupId>ru.job4j</groupId>
-            <artifactId>chapter_common_utils</artifactId>
-            <version>2.0</version>
-            <scope>compile</scope>
-        </dependency>
-    </dependencies>
+
+<!--    <dependencies>-->
+<!--        <dependency>-->
+<!--            <groupId>ru.job4j</groupId>-->
+<!--            <artifactId>chapter_common_utils</artifactId>-->
+<!--            <version>2.0</version>-->
+<!--            <scope>compile</scope>-->
+<!--        </dependency>-->
+<!--    </dependencies>-->
 
     <parent>
         <artifactId>junior</artifactId>

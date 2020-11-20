@@ -26,7 +26,7 @@ public class GCTestProgram {
         private byte[] bytes = new byte[100_000];
     }
 
-    private static final ConcurrentMap<Integer, MyClass> concurrentMap = new ConcurrentHashMap<>();
+    private static ConcurrentMap<Integer, MyClass> concurrentMap = new ConcurrentHashMap<>();
 
     private static class MyTask implements Callable<Boolean> {
         //пишем в методе ту логику, которую надо выполнить
@@ -40,8 +40,9 @@ public class GCTestProgram {
                 } catch (InterruptedException ie) {
                     ie.printStackTrace();
                 }
+                //описание класса ThreadLocalRandom смотри ниже
                 concurrentMap.put(
-                        ThreadLocalRandom.current().nextInt( //описание это класса смотри ниже
+                        ThreadLocalRandom.current().nextInt(
                                 Integer.MIN_VALUE, Integer.MAX_VALUE),
                         new MyClass());
             }
