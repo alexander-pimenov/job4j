@@ -11,10 +11,7 @@ import ru.job4j.tictactoe.player.Player;
 
 public class Starter {
 
-    public Starter() {
-    }
-
-    private void game() {
+    public void game() {
         int winCounter = 0;
         int xWins = 0;
         int oWins = 0;
@@ -97,10 +94,5 @@ public class Starter {
                 }
             }
         }
-    }
-
-    public static void main(String[] args) {
-        Starter starter = new Starter();
-        starter.game();
     }
 }
