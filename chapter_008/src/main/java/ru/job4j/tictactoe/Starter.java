@@ -11,17 +11,21 @@ import ru.job4j.tictactoe.player.Player;
 
 public class Starter {
 
-    public void game() {
-        int winCounter = 0;
-        int xWins = 0;
-        int oWins = 0;
-        int gameCounter = 1;
+    private IBoard board;
+    private Logic logic;
+    private Player[] players;
+    private int winCounter = 0;
 
+    /**
+     * Метод отвечающий за начальную загрузку игры.
+     * Во время консолтного вывода мы выбирем размер поля,
+     * до скольки побед продолжается игра, кто с кем играет.
+     */
+    public void loadingGame() {
         System.out.println("Welcome to the game TicTacToe!");
         System.out.println("Выберите размер игрового поля.");
         System.out.println("Например, 3х3 или 5х5 или 7х7 или другое.");
         Input input = new InputConsole();
-        IBoard board;
         int sizeBoard = input.ask("Для этого введите целое число от 3 до 9: ");
         if (sizeBoard > 2 && sizeBoard <= 9) {
             System.out.println("Выбрано игровое поле: " + sizeBoard + "x" + sizeBoard);
@@ -33,7 +37,7 @@ public class Starter {
         board.initBoard();
         board.printBoard();
 
-        Logic logic = new Logic(board);
+        logic = new Logic(board);
 
         System.out.println("До скольки побед будете играть? ");
         winCounter = input.ask("Введите целое число. Например, 3, т.е. игра до 3-х побед, или другое: ");
@@ -47,7 +51,20 @@ public class Starter {
         System.out.println("Кто первый ходит, тот играет крестиками.");
 
         Choose choose = new ChoosePlayers();
-        Player[] players = choose.getPlayers(input, board, logic);
+        players = choose.getPlayers(input, board, logic);
+    }
+
+    /**
+     * Метод отвечающий за процесс игры.
+     * Игроки поочередно выполняют заполнение клеток поля
+     * символами X и O.
+     */
+    public void game() {
+        int xWins = 0;
+        int oWins = 0;
+        int gameCounter = 1;
+
+        loadingGame();
 
         boolean exit = false;
         while (!exit) {
