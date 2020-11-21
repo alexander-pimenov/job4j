@@ -5,12 +5,10 @@ public class Wget {
         Thread thread = new Thread(() -> {
             try {
                 for (int i = 0; i <= 100; i++) {
-                    System.out.print("\rLoading : " + i + "%");
-                    //Небольшая задержка перед выводом результата
+                    System.out.print("\rLoading : " + i + " %");
                     Thread.sleep(500);
                 }
-                //символ сердечка "\u2764" в юникоде
-                System.out.print("\rLoaded successfully. " + "\u2764");
+                System.out.print("\rLoaded successfully.");
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
