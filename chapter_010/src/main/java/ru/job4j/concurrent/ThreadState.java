@@ -1,13 +1,15 @@
 package ru.job4j.concurrent;
+
 /**
  * Программа, которая запускает нить и выводит ее состояние.
  * За управление нитями в Java отвечает планировщик задач.
  * Он решает, сколько времени отвести на выполнение одной задачи.
  * Это время зависит от текущей ситуации.
  * Если задач много, то переключение между нитями будет частое.
+ * По состояниям нити можно произвести диагностику, что происходит в нашей программе.
  */
 public class ThreadState {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
         //Создем объект нити first.
         Thread first = new Thread(
@@ -25,7 +27,6 @@ public class ThreadState {
 
         System.out.println("Вызов из " + Thread.currentThread().getName() + " нити -> " + first.getName() + " - " + first.getState());
         System.out.println("Вызов из " + Thread.currentThread().getName() + " нити -> " + second.getName() + " - " + second.getState());
-        System.out.println("==================================");
 
         //У объекта нити вызываем метод start.
         first.start();
@@ -33,29 +34,17 @@ public class ThreadState {
 
         System.out.println("Вызов из " + Thread.currentThread().getName() + " нити -> " + first.getName() + " - " + first.getState());
         System.out.println("Вызов из " + Thread.currentThread().getName() + " нити -> " + second.getName() + " - " + second.getState());
-        System.out.println("==================================");
 
-        int a = 0;
         //В цикле мы проверяем состояние запущенной нити, используем нить first.
-        while (first.getState() != Thread.State.TERMINATED) {
-            System.out.println("итерация a" + a + " " + " вызов из " + Thread.currentThread().getName() + " -> " + first.getName() + " " + first.getState());
-            a++;
+        while (first.getState() != Thread.State.TERMINATED || second.getState() != Thread.State.TERMINATED) {
+            System.out.println(" вызов из " + Thread.currentThread().getName() + " -> " + first.getName() + " " + first.getState());
         }
-
-        int b = 0;
-        //В цикле мы проверяем состояние запущенной нити, используем нить second.
-        while (second.getState() != Thread.State.TERMINATED) {
-            System.out.println("итерация b" + b + " " + " вызов из " + Thread.currentThread().getName() + " -> " + second.getName() + " " + second.getState());
-            b++;
-        }
-
-        System.out.println("==================================");
-
+        first.join();
+        second.join();
         //Нить переходит в состояние TERMINATED, когда все операторы в методе run выполнены.
         //Выводим состояние нити.
-        System.out.println("Вызов из " + Thread.currentThread().getName() + " нити -> " + first.getName() + " - " + first.getState());
-        System.out.println("Вызов из " + Thread.currentThread().getName() + " нити -> " + second.getName() + " - " + second.getState());
-
-        //System.out.println(Thread.currentThread().getName() + " " + Thread.currentThread().getState());
+        System.out.println("Нить " + first.getName() + ", состояние - " + first.getState());
+        System.out.println("Нить " + second.getName() + ", состояние - " + second.getState());
+        System.out.println("Работа завершена.");
     }
 }
