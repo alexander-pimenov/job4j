@@ -13,7 +13,7 @@ public class ConsoleProgress implements Runnable {
                 index++;
             }
         } catch (InterruptedException e) {
-            System.out.println("\rLoaded. \u263A"); //'\u263A' - код смайлика
+            System.out.println("\rLoaded.");
         }
     }
 
