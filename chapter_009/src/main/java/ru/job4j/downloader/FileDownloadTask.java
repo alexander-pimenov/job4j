@@ -57,8 +57,10 @@ public class FileDownloadTask {
         @Override
         public int read() throws IOException {
             long currentTime;
-            if (downloadedWithinOneSecond >= MAX_SPEED
-                    && (((currentTime = System.currentTimeMillis()) - lastTime) < ONE_SECOND)) {
+            if (
+                    downloadedWithinOneSecond >= MAX_SPEED
+                            && (((currentTime = System.currentTimeMillis()) - lastTime) < ONE_SECOND)
+            ) {
                 try {
                     Thread.sleep(ONE_SECOND - (currentTime - lastTime));
                 } catch (InterruptedException e) {

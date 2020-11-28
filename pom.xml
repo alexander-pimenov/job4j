@@ -14,6 +14,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <assertj.version>3.11.1</assertj.version>
         <jmh.version>1.26</jmh.version>
+        <log4j.version>2.14.0</log4j.version>
+        <slf4j.version>1.7.30</slf4j.version>
     </properties>
 
     <profiles>
@@ -79,101 +81,45 @@
             <version>[4.13.1,)</version>
             <scope>test</scope>
         </dependency>
-        <!-- This artifact was moved to: org.apache.logging.log4j » log4j-core -->
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>1.2.17</version>
-        </dependency>
         <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
+        <!-- Библиотека для логирования Log4j1.2, к ней подключаемся через обертку SLF4J -->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
-            <version>2.13.3</version>
+            <version>${log4j.version}</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api -->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
-            <version>2.13.3</version>
+            <version>${log4j.version}</version>
         </dependency>
-        <!--        &lt;!&ndash; https://mvnrepository.com/artifact/org.slf4j/slf4j-api &ndash;&gt;-->
-        <!--        <dependency>-->
-        <!--            <groupId>org.slf4j</groupId>-->
-        <!--            <artifactId>slf4j-api</artifactId>-->
-        <!--            <version>2.0.0-alpha1</version>-->
-        <!--        </dependency>-->
 
-        <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12 -->
-<!--        <dependency>-->
-<!--            <groupId>org.slf4j</groupId>-->
-<!--            <artifactId>slf4j-log4j12</artifactId>-->
-<!--            <version>2.0.0-alpha1</version>-->
-<!--            <scope>test</scope>-->
-<!--        </dependency>-->
-
-
+        <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+        <!-- API - который используется приложением -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <!-- РЕАЛИЗАЦИЯ - которая представлена отдельными JAR-файлами для каждого вида логгирования -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-jdk14</artifactId>
+            <version>${slf4j.version}</version>
+            <scope>test</scope>
+        </dependency>
         <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <version>42.2.14</version>
         </dependency>
-
-
-        <!-- https://mvnrepository.com/artifact/org.openjfx/javafx-fxml -->
-        <!--
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-fxml</artifactId>
-            <version>12</version>
-        </dependency>
-        -->
-
-        <!-- https://mvnrepository.com/artifact/org.openjfx/javafx-graphics -->
-        <!--
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-graphics</artifactId>
-            <version>12</version>
-        </dependency>
-        -->
-
-        <!-- https://mvnrepository.com/artifact/org.openjfx/javafx-base -->
-        <!--
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-base</artifactId>
-            <version>12</version>
-        </dependency>
-        -->
-
-        <!-- https://mvnrepository.com/artifact/org.openjfx/javafx-controls -->
-        <!--
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-controls</artifactId>
-            <version>12</version>
-        </dependency>
-        -->
-
-        <!--Checkstyle - это инструмент разработки, помогающий программистам писать код Java, соответствующий стандарту кодирования.-->
-        <!-- https://mvnrepository.com/artifact/com.puppycrawl.tools/checkstyle -->
-        <!--        <dependency>-->
-        <!--            <groupId>com.puppycrawl.tools</groupId>-->
-        <!--            <artifactId>checkstyle</artifactId>-->
-        <!--            <version>8.29</version>-->
-        <!--        </dependency>-->
-
-
-        <!--&lt;!&ndash; https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-compiler-plugin &ndash;&gt;-->
-
-        <!--<dependency>-->
-        <!--<groupId>org.apache.maven.plugins</groupId>-->
-        <!--<artifactId>maven-compiler-plugin</artifactId>-->
-        <!--<version>3.8.1</version>-->
-        <!--</dependency>-->
-
         <!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
         <dependency>
             <groupId>com.google.guava</groupId>
@@ -222,6 +168,49 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.openjfx/javafx-fxml -->
+        <!--
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-fxml</artifactId>
+            <version>12</version>
+        </dependency>
+        -->
+
+        <!-- https://mvnrepository.com/artifact/org.openjfx/javafx-graphics -->
+        <!--
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-graphics</artifactId>
+            <version>12</version>
+        </dependency>
+        -->
+
+        <!-- https://mvnrepository.com/artifact/org.openjfx/javafx-base -->
+        <!--
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-base</artifactId>
+            <version>12</version>
+        </dependency>
+        -->
+
+        <!-- https://mvnrepository.com/artifact/org.openjfx/javafx-controls -->
+        <!--
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>12</version>
+        </dependency>
+        -->
+
+        <!--Checkstyle - это инструмент разработки, помогающий программистам писать код Java, соответствующий стандарту кодирования.-->
+        <!-- https://mvnrepository.com/artifact/com.puppycrawl.tools/checkstyle -->
+        <!--        <dependency>-->
+        <!--            <groupId>com.puppycrawl.tools</groupId>-->
+        <!--            <artifactId>checkstyle</artifactId>-->
+        <!--            <version>8.29</version>-->
+        <!--        </dependency>-->
 
     </dependencies>
 
