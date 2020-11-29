@@ -1,0 +1,25 @@
+2020-11-29 16:04:31 [INFO ] ru.job4j.fileDownload.FileDownload:run:28 - Вошли в метод.
+2020-11-29 16:04:49 [INFO ] ru.job4j.fileDownload.FileDownload:run:50 - Файл https://raw.githubusercontent.com/peterarsentev/course_test/master/pom.xml загружен
+2020-11-29 16:04:49 [INFO ] ru.job4j.fileDownload.FileDownload:run:51 - Размер https://raw.githubusercontent.com/peterarsentev/course_test/master/pom.xml файла 2712 байт
+2020-11-29 16:04:49 [INFO ] ru.job4j.fileDownload.FileDownload:run:52 - Прошло 18039 милли секунд
+2020-11-29 16:04:49 [INFO ] ru.job4j.fileDownload.FileDownload:run:53 - Метод завершен.
+2020-11-29 16:49:59 [INFO ] ru.job4j.fileDownload.FileDownloadNIO:run:29 - Вошли в метод run().
+2020-11-29 16:49:59 [INFO ] ru.job4j.fileDownload.FileDownload:run:27 - Вошли в метод.
+2020-11-29 16:50:02 [INFO ] ru.job4j.fileDownload.FileDownloadNIO:run:50 - Файл https://raw.githubusercontent.com/peterarsentev/course_test/master/pom.xml загружен
+2020-11-29 16:50:02 [INFO ] ru.job4j.fileDownload.FileDownloadNIO:run:51 - Размер https://raw.githubusercontent.com/peterarsentev/course_test/master/pom.xml файла 0 байт
+2020-11-29 16:50:02 [INFO ] ru.job4j.fileDownload.FileDownloadNIO:run:52 - Прошло 2631 милли секунд (NIO)
+2020-11-29 16:50:02 [INFO ] ru.job4j.fileDownload.FileDownloadNIO:run:53 - Метод завершен.
+2020-11-29 16:50:17 [INFO ] ru.job4j.fileDownload.FileDownload:run:50 - Файл https://raw.githubusercontent.com/peterarsentev/course_test/master/pom.xml загружен
+2020-11-29 16:50:17 [INFO ] ru.job4j.fileDownload.FileDownload:run:51 - Размер https://raw.githubusercontent.com/peterarsentev/course_test/master/pom.xml файла 2712 байт
+2020-11-29 16:50:17 [INFO ] ru.job4j.fileDownload.FileDownload:run:52 - Прошло 18456 милли секунд
+2020-11-29 16:50:17 [INFO ] ru.job4j.fileDownload.FileDownload:run:53 - Метод завершен.
+2020-11-29 16:55:36 [INFO ] ru.job4j.fileDownload.FileDownloadNIO:run:29 - Вошли в метод run().
+2020-11-29 16:55:36 [INFO ] ru.job4j.fileDownload.FileDownload:run:27 - Вошли в метод.
+2020-11-29 16:55:39 [INFO ] ru.job4j.fileDownload.FileDownloadNIO:run:50 - Файл https://raw.githubusercontent.com/peterarsentev/course_test/master/pom.xml загружен
+2020-11-29 16:55:39 [INFO ] ru.job4j.fileDownload.FileDownloadNIO:run:51 - Размер https://raw.githubusercontent.com/peterarsentev/course_test/master/pom.xml файла 2712 байт
+2020-11-29 16:55:39 [INFO ] ru.job4j.fileDownload.FileDownloadNIO:run:52 - Прошло 2634 милли секунд (NIO)
+2020-11-29 16:55:39 [INFO ] ru.job4j.fileDownload.FileDownloadNIO:run:53 - Метод завершен.
+2020-11-29 16:55:55 [INFO ] ru.job4j.fileDownload.FileDownload:run:50 - Файл https://raw.githubusercontent.com/peterarsentev/course_test/master/pom.xml загружен
+2020-11-29 16:55:55 [INFO ] ru.job4j.fileDownload.FileDownload:run:51 - Размер https://raw.githubusercontent.com/peterarsentev/course_test/master/pom.xml файла 2712 байт
+2020-11-29 16:55:55 [INFO ] ru.job4j.fileDownload.FileDownload:run:52 - Прошло 18427 милли секунд
+2020-11-29 16:55:55 [INFO ] ru.job4j.fileDownload.FileDownload:run:53 - Метод завершен.

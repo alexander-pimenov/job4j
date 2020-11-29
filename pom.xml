@@ -63,9 +63,9 @@
         <module>chapter_006</module>
         <module>chapter_007</module>
         <module>chapter_008</module>
-        <module>chapter_009</module>
         <module>chapter_010</module>
         <module>chapter_common_utils</module>
+        <module>chapter_009_</module>
     </modules>
 
     <dependencies>
@@ -89,11 +89,11 @@
             <version>${log4j.version}</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api -->
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-api</artifactId>
-            <version>${log4j.version}</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.apache.logging.log4j</groupId>-->
+<!--            <artifactId>log4j-api</artifactId>-->
+<!--            <version>${log4j.version}</version>-->
+<!--        </dependency>-->
 
         <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
         <!-- API - который используется приложением -->
@@ -108,12 +108,7 @@
             <artifactId>slf4j-log4j12</artifactId>
             <version>${slf4j.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-jdk14</artifactId>
-            <version>${slf4j.version}</version>
-            <scope>test</scope>
-        </dependency>
+
         <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
         <dependency>
             <groupId>org.postgresql</groupId>

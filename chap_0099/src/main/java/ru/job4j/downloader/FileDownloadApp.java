@@ -5,17 +5,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class FileDownloadApp {
-    private static final Logger LOG = LogManager.getLogger(FileDownloadApp.class.getName());
+    private static final Logger LOG = LoggerFactory.getLogger(FileDownloadApp.class.getName());
 
     public static void main(String[] args) {
-        System.setProperty("log4j.configurationFile","C:/projects/job4j/chapter_009/src/main/resources/log4j2.xml");
-//        System.setProperty("log4j.configurationFile","./path_to_the_log4j2_config_file/log4j2.xml");
-//C:\projects\job4j\chapter_009\src\main\resources\log4j2.xml
         String file = args[0];
         //String file = "https://raw.githubusercontent.com/peterarsentev/course_test/master/pom.xml";
         int size = Integer.parseInt(args[1]);
@@ -34,10 +30,8 @@ public class FileDownloadApp {
             }
         } catch (InterruptedException e) {
             LOG.error("Thread {} was interrupted.", Thread.currentThread().getName(), e);
-//            e.printStackTrace();
         } catch (IOException e) {
             LOG.error("Failed to read file {}.", args[0], e);
-//            e.printStackTrace();
         }
     }
 }
