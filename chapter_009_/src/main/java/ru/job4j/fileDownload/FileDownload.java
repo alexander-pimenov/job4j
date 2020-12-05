@@ -24,7 +24,7 @@ public class FileDownload implements Runnable {
 
     @Override
     public void run() {
-//        LOG.info("Вошли в метод.");
+        LOG.info("Вошли в метод.");
         long start = System.currentTimeMillis();
         int sizeFile = 0;
         try (BufferedInputStream in = new BufferedInputStream(new URL(url).openStream());
@@ -37,7 +37,6 @@ public class FileDownload implements Runnable {
                 if (bytesRead > speed) {
                     int secondsToPause = ((bytesRead / speed) + 1) * 1000;
                     System.out.println(bytesRead + " [bytes]");
-//                    System.out.println("-= " + secondsToPause + " =-");
                     Thread.sleep(secondsToPause);
                 }
             }
@@ -47,9 +46,9 @@ public class FileDownload implements Runnable {
             LOG.error(e.getMessage(), e);
         }
         long passedTime = System.currentTimeMillis() - start;
-//        LOG.info("Файл {} загружен", url);
-//        LOG.info("Размер {} файла {} байт", url, sizeFile);
-//        LOG.info("Прошло {} милли секунд", passedTime);
-//        LOG.info("Метод завершен.");
+        LOG.info("Файл {} загружен", url);
+        LOG.info("Размер {} файла {} байт", url, sizeFile);
+        LOG.info("Прошло {} милли секунд", passedTime);
+        LOG.info("Метод завершен.");
     }
 }

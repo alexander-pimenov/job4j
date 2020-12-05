@@ -1,11 +1,13 @@
 package ru.job4j.fileDownload;
 
+/*
+ * Аргументы:
+ * fileURL = "https://raw.githubusercontent.com/peterarsentev/course_test/master/pom.xml"
+ * speed = 200 (скорость скачивания байт/сек)
+ * localFileName = "pom_tmp_10.xml"
+ */
 public class FileDownloadApp {
     public static void main(String[] args) throws InterruptedException {
-//        String fileURL = "https://raw.githubusercontent.com/peterarsentev/course_test/master/pom.xml";
-//        int speed = 200;
-//        String localFileName = "pom_tmp_10.xml";
-
         String fileURL = args[0];
         String localFileName = args[1];
         int speed = Integer.parseInt(args[2]);
