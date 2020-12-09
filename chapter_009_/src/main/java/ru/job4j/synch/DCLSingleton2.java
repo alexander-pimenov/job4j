@@ -16,7 +16,6 @@ public class DCLSingleton2 {
     private static boolean flag2 = true;
     private static boolean flag3 = true;
 
-
     public static DCLSingleton2 instOf() {
         if (inst == null) {
             synchronized (DCLSingleton2.class) {
@@ -69,6 +68,7 @@ public class DCLSingleton2 {
                     }
                 }
         );
+
         Thread thread3 = new Thread(
                 () -> {
                     while (flag3) {
@@ -92,11 +92,11 @@ public class DCLSingleton2 {
         thread1.start();
         thread2.start();
         thread3.start();
-        Thread.sleep(3000);
+        Thread.sleep(2000);
         flag1 = false;
-        Thread.sleep(3000);
+        Thread.sleep(2000);
         flag2 = false;
-        Thread.sleep(3000);
+        Thread.sleep(2000);
         flag3 = false;
         thread1.join();
         thread2.join();
