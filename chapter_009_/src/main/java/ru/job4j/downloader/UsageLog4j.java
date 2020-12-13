@@ -27,6 +27,28 @@ public class UsageLog4j {
         LOG.error("error message. Something failed.");
         try {
             LOG.trace("trace message. Зашли в блок try-catch");
+            System.out.println("\u0000");
+            System.out.println("\u007F");
+            System.out.println(0x00);
+            System.out.println(0x79);
+            String text = "fuck the millenium!";
+            CharSequence charSequence = text.subSequence(1, 6);
+            String substring = text.substring(1, 6);
+            System.out.println(charSequence);
+            System.out.println(substring);
+            String line = "aaabccdddc";
+            System.out.println( line.chars().distinct().count() );
+            //
+            String emojiString = "\uD83D\uDC7B";
+
+//На один emojiString приходится 2 чара (т.к. не влезает в 16 бит)
+            System.out.println(emojiString);
+
+            System.out.println(emojiString.codePoints().count());
+//1
+
+            System.out.println(emojiString.chars().count());
+//2
 
             Files.readAllBytes(Paths.get(FILENAME));
         } catch (IOException e) {

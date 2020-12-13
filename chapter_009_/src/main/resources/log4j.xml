@@ -47,6 +47,18 @@
                    value="%d{yyyy-MM-dd HH:mm:ss} [%-5p] %c:%M:%L - %m%n"/>
         </layout>
     </appender>
+    <appender name="fileAppender3" class="org.apache.log4j.RollingFileAppender">
+        <param name="maxFileSize" value="5MB"/>
+        <param name="maxBackupIndex" value="2"/>
+        <param name="file" value="logging/logfile_general.txt"/>
+        <param name="immediateFlush" value="true"/>
+        <!--        <param name="threshold" value="trace"/>-->
+        <param name="append" value="true"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="%d{yyyy-MM-dd HH:mm:ss} [%-5p] %c:%M:%L - %m%n"/>
+        </layout>
+    </appender>
 
     <logger name="ru.job4j.downloader.UsageLog4j" additivity="false">
         <level value="info"/>
@@ -64,6 +76,12 @@
     <logger name="ru.job4j.fileDownload" additivity="false">
         <level value="info"/>
         <appender-ref ref="fileDownloadAppender"/>
+        <appender-ref ref="console"/>
+    </logger>
+
+    <logger name="ru.job4j" additivity="false">
+        <level value="info"/>
+        <appender-ref ref="fileAppender3"/>
         <appender-ref ref="console"/>
     </logger>
 
