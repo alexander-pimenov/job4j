@@ -1,4 +1,4 @@
-package ru.job4j.synch;
+package ru.job4j.synch.nosharedresources;
 
 public class User {
     private int id;

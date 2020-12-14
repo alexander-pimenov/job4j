@@ -1,4 +1,4 @@
-package ru.job4j.synch;
+package ru.job4j.synch.nosharedresources;
 
 import javax.annotation.concurrent.ThreadSafe;
 import java.util.ArrayList;

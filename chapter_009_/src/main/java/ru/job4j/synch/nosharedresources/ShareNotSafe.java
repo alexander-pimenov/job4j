@@ -1,4 +1,4 @@
-package ru.job4j.synch;
+package ru.job4j.synch.nosharedresources;
 
 /**
  * В классе UserCache нити будут работать с локальным объект user.
