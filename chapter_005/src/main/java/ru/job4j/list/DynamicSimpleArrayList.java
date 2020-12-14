@@ -119,4 +119,11 @@ public class DynamicSimpleArrayList<E> implements Iterable<E> {
             }
         };
     }
+
+    @Override
+    public String toString() {
+        return "DynamicSimpleArrayList{"
+                + "container=" + Arrays.toString(container)
+                + '}';
+    }
 }
