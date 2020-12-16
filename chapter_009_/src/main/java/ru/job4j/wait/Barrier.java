@@ -35,6 +35,11 @@ public class Barrier {
     public void off() {
         synchronized (monitor) {
             flag = false;
+            //Пробуждает поток синхронизированный на объекте this, который ждет.
+            //После этого тот поток который дошел до wait() и отдал монитор и остановил
+            //своё выполнение, продолжит свою работу.
+            //Но должны помнить что notify не освобождает монитор
+            //Монитор объекта освободится, как только выйдем из синхронизованного блока.
             monitor.notifyAll();
         }
     }
@@ -43,7 +48,12 @@ public class Barrier {
         synchronized (monitor) {
             while (!flag) {
                 try {
-                    monitor.wait();
+                    //Вызовем метод wait()
+                    //Он вызывается только на синхронизированном блоке
+                    //вне этого блока он не имеет смысла.
+                    //Метод wait() вызывается на том объекте на котором определен
+                    //синхронизованный блок.
+                    monitor.wait(); // 1 - отдаем intrinsic lock, 2 - ждем пока будет вызван notify()
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
                 }
