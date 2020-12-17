@@ -63,4 +63,10 @@ public class SimpleBlockingQueue<T> {
             return value;
         }
     }
+
+    public int size() {
+        synchronized (lock) {
+            return queue.size();
+        }
+    }
 }
