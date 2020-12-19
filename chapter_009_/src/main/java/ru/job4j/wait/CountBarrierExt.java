@@ -5,7 +5,7 @@ import net.jcip.annotations.ThreadSafe;
 
 @ThreadSafe
 public class CountBarrierExt {
-    @GuardedBy("monitor")
+    @GuardedBy("this")
     private final Object monitor = this;
 
     private final int total;

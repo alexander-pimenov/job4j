@@ -5,8 +5,15 @@ import javax.annotation.concurrent.ThreadSafe;
 import java.util.LinkedList;
 import java.util.Queue;
 
+/*
+ * В классе добавлены логи в виде  System.out.println(...)
+ * только для наглядности происходящего в методах класса
+ * SimpleBlockingQueue2<T>.
+ * В них смысла нет, за этими логами теряется смысл
+ * самой программы.
+ */
 @ThreadSafe
-public class SimpleBlockingQueue<T> {
+public class SimpleBlockingQueue2<T> {
     @GuardedBy("lock")
     private final Object lock = this;
 
@@ -14,7 +21,7 @@ public class SimpleBlockingQueue<T> {
 
     private final int limitBound;
 
-    public SimpleBlockingQueue(int limitBound) {
+    public SimpleBlockingQueue2(int limitBound) {
         this.limitBound = limitBound;
     }
 
@@ -27,9 +34,12 @@ public class SimpleBlockingQueue<T> {
         synchronized (lock) {
             try {
                 while (queue.size() == limitBound) {
+                    System.out.println(String.format("%s waiting...", Thread.currentThread().getName()));
                     lock.wait();
                 }
                 queue.offer(value);
+                System.out.println(String.format("%s put element \"%s\" to the queue. Queue size is %d",
+                        Thread.currentThread().getName(), value, queue.size()));
                 lock.notifyAll();
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
@@ -47,9 +57,12 @@ public class SimpleBlockingQueue<T> {
             T value = null;
             try {
                 while (queue.size() == 0) {
+                    System.out.println(String.format("%s waiting...", Thread.currentThread().getName()));
                     lock.wait();
                 }
                 value = queue.poll();
+                System.out.println(String.format("%s took element \"%s\" from  the queue. Queue size is %d",
+                        Thread.currentThread().getName(), value, queue.size()));
                 lock.notifyAll();
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();

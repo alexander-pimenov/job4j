@@ -5,7 +5,7 @@ import javax.annotation.concurrent.ThreadSafe;
 
 @ThreadSafe
 public class CountBarrier {
-    @GuardedBy("lock")
+    @GuardedBy("this")
     private final Object lock = this;
 
     private final int total;
