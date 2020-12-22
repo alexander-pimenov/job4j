@@ -138,5 +138,6 @@ public class SimpleBlockingQueueApp {
     public static void main(String[] args) {
         start1();
 //        start2();
+
     }
 }

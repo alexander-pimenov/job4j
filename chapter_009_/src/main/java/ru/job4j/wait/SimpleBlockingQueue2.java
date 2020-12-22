@@ -8,9 +8,12 @@ import java.util.Queue;
 /*
  * В классе добавлены логи в виде  System.out.println(...)
  * только для наглядности происходящего в методах класса
- * SimpleBlockingQueue2<T>.
+ * SimpleBlockingQueue2<T>. Т.е. когда добавляем элеиент в
+ * очередь или забираем элемент из очереди, то выводится
+ * сообщение об элементе и количестве элементов в очереди.
  * В них смысла нет, за этими логами теряется смысл
- * самой программы.
+ * самой программы, поэтому в SimpleBlockingQueue<T> они
+ * опущенны.
  */
 @ThreadSafe
 public class SimpleBlockingQueue2<T> {
@@ -75,5 +78,10 @@ public class SimpleBlockingQueue2<T> {
         synchronized (lock) {
             return queue.size();
         }
+    }
+
+    @Override
+    public String toString() {
+        return queue.toString();
     }
 }

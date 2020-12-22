@@ -27,6 +27,7 @@ public class SimpleBlockingQueue<T> {
         synchronized (lock) {
             try {
                 while (queue.size() == limitBound) {
+                    System.out.println(String.format("%s waiting...", Thread.currentThread().getName()));
                     lock.wait();
                 }
                 queue.offer(value);
@@ -47,6 +48,8 @@ public class SimpleBlockingQueue<T> {
             T value = null;
             try {
                 while (queue.size() == 0) {
+//                while (queue.isEmpty()) {
+                    System.out.println(String.format("%s waiting...", Thread.currentThread().getName()));
                     lock.wait();
                 }
                 value = queue.poll();
@@ -62,5 +65,10 @@ public class SimpleBlockingQueue<T> {
         synchronized (lock) {
             return queue.size();
         }
+    }
+
+    @Override
+    public String toString() {
+        return queue.toString();
     }
 }
