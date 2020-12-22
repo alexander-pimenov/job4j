@@ -67,6 +67,11 @@ public class SimpleBlockingQueue<T> {
         }
     }
 
+    public boolean isEmpty(){
+        return queue.isEmpty();
+    }
+
+
     @Override
     public String toString() {
         return queue.toString();
