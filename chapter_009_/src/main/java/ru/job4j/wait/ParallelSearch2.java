@@ -8,15 +8,26 @@ package ru.job4j.wait;
  * Используем длинные логи, чтобы во время экспериментов с размером очереди queue,
  * с временем сна в тредах (Thread consumer и Thread producer), мы смогли наблюдать
  * наполняемость очереди, и ее состояние в конце работы приложения.
+ * Здесь мы проверяем, что очередь пустая или нить выключили.
+ * Двойная проверка в Thread consumer нужна,
+ * если производитель закончил свою работу и сразу подаст сигнал об отключении потребителя,
+ * то мы не сможет прочитать все данные. С другой стороны, если мы успели прочитать все
+ * данные и находимся в режиме wait пришедший сигнал запустит нить и
+ * проверит состояние очереди и завершит цикл. Потребитель закончит свою работу.
  * */
 public class ParallelSearch2 {
     public static void main(String[] args) {
         SimpleBlockingQueue<Integer> queue = new SimpleBlockingQueue<Integer>(5);
         final Thread consumer = new Thread(
                 () -> {
+                    //проверяем, что очередь пустая или нить выключили
                     while (!queue.isEmpty() || !Thread.currentThread().isInterrupted()) {
+//                        if (!queue.isEmpty()) {
+//                            System.out.println(queue.poll());
+//                        }
                         try {
-                            System.out.println(String.format("Took element \'%d\' from the queue. Queue size is %d", queue.poll(), queue.size()));
+                            System.out.println(String.format("%s took element \'%d\' from the queue. Queue size is %d",
+                                    Thread.currentThread().getName(), queue.poll(), queue.size()));
                             Thread.sleep(800);
                         } catch (InterruptedException e) {
                             Thread.currentThread().interrupt();
@@ -25,22 +36,41 @@ public class ParallelSearch2 {
                 }, "Consumer"
         );
         consumer.start();
-        final Thread producer = new Thread(
+        final Thread producer1 = new Thread(
                 () -> {
                     for (int index = 0; index != 13; index++) {
                         try {
                             queue.offer(index);
-                            System.out.println(String.format("put Index \'%d\' into queue. Queue size is %d", index, queue.size()));
+                            System.out.println(String.format("%s put Index \'%d\' into queue. Queue size is %d",
+                                    Thread.currentThread().getName(), index, queue.size()));
                             Thread.sleep(200);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
                     }
-                }, "Producer"
+                }, "Producer-1"
         );
-        producer.start();
+        producer1.start();
+
+        final Thread producer2 = new Thread(
+                () -> {
+                    for (int index = 15; index != 25; index++) {
+                        try {
+                            queue.offer(index);
+                            System.out.println(String.format("%s put Index \'%d\' into queue. Queue size is %d",
+                                    Thread.currentThread().getName(), index, queue.size()));
+                            Thread.sleep(200);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, "Producer-2"
+        );
+        producer2.start();
+
         try {
-            producer.join();
+            producer1.join();
+            producer2.join();
             consumer.interrupt();
             consumer.join();
         } catch (InterruptedException e) {
