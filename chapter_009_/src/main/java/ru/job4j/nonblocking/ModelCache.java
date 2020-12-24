@@ -26,32 +26,6 @@ public class ModelCache {
                 });
     }
 
-    public void update2(Base model) {
-        cache.computeIfPresent(model.getId(),
-                (key, oldValue) -> {
-                    int newVersion = model.getVersion();
-                    if (oldValue.getVersion() != newVersion) {
-                        throw new OptimisticException("Invalid version");
-                    }
-                    model.setVersion(++newVersion);
-                    model.setName(model.getName());
-                    return model;
-                });
-    }
-
-    public void update3(Base model) {
-        cache.computeIfPresent(model.getId(),
-                (key, oldValue) -> {
-                    if (oldValue.getVersion() != model.getVersion()) {
-                        throw new OptimisticException("Invalid version");
-                    }
-                    int version = model.getVersion();
-                    oldValue.setVersion(++version);
-                    oldValue.setName(model.getName());
-                    return oldValue;
-                });
-    }
-
     public void print() {
         cache.forEach((i, data) -> System.out.println(data));
     }
