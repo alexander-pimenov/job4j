@@ -81,8 +81,14 @@ public class SoftCache implements Cache<String, String> {
 
 
     public static void main(String[] args) {
-        String path = new File("chapter_008\\src\\main\\resources").getAbsolutePath();
+
+        /*Так путь к файлу не будем указывать, т.к. Travis CI не нашел файлов в папке resources*/
+//        String path = new File("chapter_008/src/main/resources").getAbsolutePath();
 //        System.out.println(path);
+
+        /*Укажем путь к папке resources через .class.getResource("/").*/
+        String path = new File(SoftCache.class.getResource("/").getPath()).getAbsolutePath();
+
         SoftCache softCache = new SoftCache(path);
         String addresses = softCache.getData("Address.txt");
         String names = softCache.getData("Names.txt");
