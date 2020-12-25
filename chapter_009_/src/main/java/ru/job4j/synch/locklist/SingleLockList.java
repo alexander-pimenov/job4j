@@ -36,8 +36,8 @@ public class SingleLockList<T> implements Iterable<T> {
 
     @Override
     public synchronized String toString() {
-        return "SingleLockList{" +
-                "list=" + list +
-                '}';
+        return "SingleLockList{"
+                + "list=" + list
+                + '}';
     }
 }

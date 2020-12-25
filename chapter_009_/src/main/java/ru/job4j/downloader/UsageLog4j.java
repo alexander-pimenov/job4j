@@ -37,7 +37,7 @@ public class UsageLog4j {
             System.out.println(charSequence);
             System.out.println(substring);
             String line = "aaabccdddc";
-            System.out.println( line.chars().distinct().count() );
+            System.out.println(line.chars().distinct().count());
             //
             String emojiString = "\uD83D\uDC7B";
 

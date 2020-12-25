@@ -1,4 +1,4 @@
-package ru.job4j.fileDownload;
+package ru.job4j.filedownload;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

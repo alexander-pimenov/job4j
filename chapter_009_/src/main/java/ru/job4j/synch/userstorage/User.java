@@ -38,8 +38,8 @@ public class User {
             return false;
         }
         User user = (User) o;
-        return id == user.id &&
-                amount == user.amount;
+        return id == user.id
+                && amount == user.amount;
     }
 
     @Override

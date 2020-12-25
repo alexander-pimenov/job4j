@@ -72,8 +72,8 @@
         <appender-ref ref="console"/>
     </logger>
 
-<!--    <logger name="ru.job4j.fileDownload.FileDownload" additivity="false">-->
-    <logger name="ru.job4j.fileDownload" additivity="false">
+<!--    <logger name="ru.job4j.filedownload.FileDownload" additivity="false">-->
+    <logger name="ru.job4j.filedownload" additivity="false">
         <level value="info"/>
         <appender-ref ref="fileDownloadAppender"/>
         <appender-ref ref="console"/>
