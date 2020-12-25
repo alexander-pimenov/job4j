@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
+    <!-- GAV параметры описания проекта -->
     <modelVersion>4.0.0</modelVersion>
     <groupId>ru.job4j</groupId>
     <artifactId>junior</artifactId>
-    <packaging>pom</packaging>
     <version>2.0</version>
+    <packaging>pom</packaging>
     <name>junior</name>
     <url>http://job4j.ru/</url>
 
+    <!-- Секция свойств -->
     <properties>
         <maven.compiler.source>12</maven.compiler.source>
         <maven.compiler.target>12</maven.compiler.target>
@@ -63,11 +65,12 @@
         <module>chapter_006</module>
         <module>chapter_007</module>
         <module>chapter_008</module>
+        <module>chapter_009_</module>
         <module>chapter_010</module>
         <module>chapter_common_utils</module>
-        <module>chapter_009_</module>
     </modules>
 
+    <!-- Секция зависимостей -->
     <dependencies>
         <dependency>
             <groupId>org.hamcrest</groupId>
@@ -217,6 +220,7 @@
 
     </dependencies>
 
+    <!-- Секция сборки -->
     <build>
         <plugins>
             <plugin>

@@ -1,4 +1,4 @@
-package ru.job4j.log4j;
+package ru.job4j.io;
 
 /**
  * System properties. The following properties are guaranteed to be defined:
