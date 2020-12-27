@@ -6,9 +6,11 @@ import static ru.job4j.colorsccheme.ColorScheme.*;
  * Разбираем модель памяти при работе с Thread.
  * С помощью ключевого слова volatile решаем проблему видимости (share visibility problem).
  * Когерентность кешей. Это когда переменная должна быть видна всем потокам, т.е.
- * будет помещена в RAM, а не закешированна одним из ядер процессора.
+ * будет помещена в RAM, а не закеширована одним из ядер процессора.
  * Приведен код синглтона - double check locking (двойная проверка блокировки).
- * Для удодства чтения вывода использован класс ColorScheme.
+ * Для удобства чтения вывода использован класс ColorScheme.
+ * В примере видно, что не смотря на работу трех потоков, объект DCLSingleton2
+ * будет создан всего лишь один раз, что и нужно для синглтона.
  */
 public class DCLSingleton2 {
     private static volatile DCLSingleton2 inst;
@@ -28,6 +30,7 @@ public class DCLSingleton2 {
         return inst;
     }
 
+    /*Приватный конструктор*/
     private DCLSingleton2() {
     }
 
