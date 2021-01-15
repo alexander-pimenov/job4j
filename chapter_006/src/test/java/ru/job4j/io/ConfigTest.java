@@ -3,13 +3,15 @@ package ru.job4j.io;
 import org.junit.Test;
 
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 public class ConfigTest {
     @Test
     public void whenPairWithoutComment() {
         String path = "./src/main/resources/app2.properties";
 //        String path = ".\\src\\main\\resources\\app2.properties";
+//        System.out.println("Путь к файлу: " + Paths.get(path).toAbsolutePath());
+
         Config config = new Config(path);
         config.load();
         //System.out.println(config.toString());

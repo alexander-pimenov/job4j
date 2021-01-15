@@ -4,7 +4,7 @@
 # Repository of Alexander Pimenov
 <!--Прохожу обучение по курсу _Job4j_. https://job4j.ru/-->
 ## Repo's description
-This repository was created to perform tasks for course _[Job4j](http://job4j.ru/)._
+This repository was created to perform tasks for course _[`Job4j`](http://job4j.ru/)._
 
 ## Course's chapters description:
 * *chapter_001* - Basic syntax
@@ -16,9 +16,13 @@ This repository was created to perform tasks for course _[Job4j](http://job4j.ru
 * *chapter_007* - SQL, JDBC
 * *chapter_008* - OOD, Garbage Collection 
 * *chapter_009* - Multithreading
+<!--
 * *chapter_010* - 
 * *chapter_011* - 
 * *chapter_012* - 
+* *chapter_013* - 
+* *chapter_014* - 
+--> 
 
 <!--
 * *chapter_001* - Basic syntax
@@ -33,4 +37,6 @@ This repository was created to perform tasks for course _[Job4j](http://job4j.ru
 * *chapter_010* - Garbage Collection
 * *chapter_011* - Advanced algorithms
 * *chapter_012* - Servlet/JSP 
+* *chapter_013* - Hibernate 
+* *chapter_014* - Spring 
 -->

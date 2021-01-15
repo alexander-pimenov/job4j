@@ -21,6 +21,7 @@ public class AnalizyTest {
             out.println("200 10:59:01");
             out.println("500 11:01:02");
             out.println("200 11:02:02");
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -39,6 +40,4 @@ public class AnalizyTest {
             e.printStackTrace();
         }
     }
-
-
 }

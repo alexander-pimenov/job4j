@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Paths;
 
 public class FileDownload implements Runnable {
     private static final Logger LOG = LoggerFactory.getLogger(FileDownload.class.getName());
