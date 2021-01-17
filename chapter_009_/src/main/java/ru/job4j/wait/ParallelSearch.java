@@ -2,7 +2,7 @@ package ru.job4j.wait;
 
 public class ParallelSearch {
     public static void main(String[] args) {
-        SimpleBlockingQueue<Integer> queue = new SimpleBlockingQueue<>(5);
+        SimpleBlockingQueue3<Integer> queue = new SimpleBlockingQueue3<>(5);
         final Thread consumer = new Thread(
                 () -> {
                     while (!queue.isEmpty() || !Thread.currentThread().isInterrupted()) {

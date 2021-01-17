@@ -35,5 +35,10 @@ public class TrackerSingle5 {
 
     public static void main(String[] args) {
         TrackerSingle5 tracker = TrackerSingle5.getInstance();
+
+
+        int size = Runtime.getRuntime().availableProcessors();
+        System.out.println(size);
+
     }
 }

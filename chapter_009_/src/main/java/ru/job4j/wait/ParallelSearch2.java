@@ -17,7 +17,7 @@ package ru.job4j.wait;
  * */
 public class ParallelSearch2 {
     public static void main(String[] args) {
-        SimpleBlockingQueue<Integer> queue = new SimpleBlockingQueue<Integer>(5);
+        SimpleBlockingQueue3<Integer> queue = new SimpleBlockingQueue3<Integer>(5);
         final Thread consumer = new Thread(
                 () -> {
                     //проверяем, что очередь пустая или нить выключили

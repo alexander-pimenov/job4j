@@ -17,17 +17,63 @@ public class SimpleBlockingQueueTest {
     private List<Integer> result = new ArrayList<>();
 
     @Test
-    public void whenAddTenNumbersAndGetSizeQueueAfterConsumer() {
+    public void whenAddTenNumbersAndGetSizeQueueAfterConsumer2() {
         Thread producer = new Thread(
                 () -> {
-                    IntStream.range(0, 10).forEach(
-                            queue::offer);
+                    IntStream.range(0, 10).forEach(i -> {
+                        try {
+                            queue.offer(i);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    });
                 }, "Producer"
         );
         producer.start();
         Thread consumer = new Thread(
                 () -> {
+                    try {
+                        while (queue.size() > 0 || !Thread.currentThread().isInterrupted()) {
+                            if (queue.size() > 0) {
+                                result.add(queue.poll());
+                            }
+                        }
+                    } catch (Exception e) {
+                        Thread.currentThread().interrupt();
+                    }
+                }, "Consumer"
+        );
+        consumer.start();
+        try {
+            producer.join();
+            Thread.sleep(2000);
+            consumer.interrupt();
+            consumer.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        assertThat(queue.size(), is(0));
+        assertThat(result.size(), is(10));
+        assertThat(result, is(Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)));
+    }
 
+
+    @Test
+    public void whenAddTenNumbersAndGetSizeQueueAfterConsumer() {
+        Thread producer = new Thread(
+                () -> {
+                    IntStream.range(0, 10).forEach(i -> {
+                        try {
+                            queue.offer(i);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    });
+                }, "Producer"
+        );
+        producer.start();
+        Thread consumer = new Thread(
+                () -> {
                     try {
                         while (queue.size() > 0 || !Thread.currentThread().isInterrupted()) {
                             if (queue.size() > 0) {
@@ -57,12 +103,14 @@ public class SimpleBlockingQueueTest {
     public void whenAdd10ElementsThemGetSizeWillGetSize5() {
         Thread producer = new Thread(
                 () -> {
-                    try {
-                        IntStream.range(0, 10).forEach(
-                                queue::offer);
-                    } catch (Exception e) {
-                        Thread.currentThread().interrupt();
-                    }
+                    IntStream.range(0, 10).forEach(i -> {
+                        try {
+                            queue.offer(i);
+                        } catch (InterruptedException e) {
+                            Thread.currentThread().interrupt();
+//                            e.printStackTrace();
+                        }
+                    });
                 }, "Producer"
         );
         producer.start();
@@ -80,7 +128,7 @@ public class SimpleBlockingQueueTest {
     @Test
     public void whenFetchAllThenGetIt() throws InterruptedException {
         final CopyOnWriteArrayList<Integer> buffer = new CopyOnWriteArrayList<>();
-        final SimpleBlockingQueue<Integer> queue = new SimpleBlockingQueue<>(5);
+        final SimpleBlockingQueue3<Integer> queue = new SimpleBlockingQueue3<>(5);
         Thread producer = new Thread(
                 () -> {
                     IntStream.range(0, 5).forEach(queue::offer);
