@@ -5,13 +5,22 @@ import javax.annotation.concurrent.ThreadSafe;
 import java.util.LinkedList;
 import java.util.Queue;
 
+/**
+ * Класс блокирующей очереди.
+ *
+ * @param <T> параметризованный типом дженериком T.
+ */
 @ThreadSafe
 public class SimpleBlockingQueue<T> {
-    @GuardedBy("lock")
-    private final Object lock = this;
 
+    //Создадим обычную очередь для работы с ней.
     private Queue<T> queue = new LinkedList<>();
 
+    //Создадим объект для синхронизации
+    @GuardedBy("lock")
+    private final Object lock = new Object();
+
+    //максимальное количество элементов в очереди
     private final int limitBound;
 
     public SimpleBlockingQueue(int limitBound) {
@@ -23,40 +32,32 @@ public class SimpleBlockingQueue<T> {
      *
      * @param value значение.
      */
-    public void offer(T value) {
+    public void offer(T value) throws InterruptedException {
         synchronized (lock) {
-            try {
-                while (queue.size() == limitBound) {
-                    System.out.println(String.format("%s waiting...", Thread.currentThread().getName()));
-                    lock.wait();
-                }
-                queue.offer(value);
-                lock.notifyAll();
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
+            while (queue.size() == limitBound) {
+                System.out.println(String.format("%s waiting...", Thread.currentThread().getName()));
+                lock.wait();
             }
+            queue.offer(value);
+            lock.notifyAll();
         }
     }
+
 
     /**
      * Берем элемент из очереди.
      *
      * @return значение.
      */
-    public T poll() {
+    public T poll() throws InterruptedException {
         synchronized (lock) {
             T value = null;
-            try {
-                while (queue.size() == 0) {
-//                while (queue.isEmpty()) {
-                    System.out.println(String.format("%s waiting...", Thread.currentThread().getName()));
-                    lock.wait();
-                }
-                value = queue.poll();
-                lock.notifyAll();
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
+            while (queue.size() == 0) {
+                System.out.println(String.format("%s waiting...", Thread.currentThread().getName()));
+                lock.wait();
             }
+            value = queue.poll();
+            lock.notifyAll();
             return value;
         }
     }
@@ -68,9 +69,10 @@ public class SimpleBlockingQueue<T> {
     }
 
     public boolean isEmpty() {
-        return queue.isEmpty();
+        synchronized (lock) {
+            return queue.isEmpty();
+        }
     }
-
 
     @Override
     public String toString() {
