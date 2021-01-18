@@ -109,5 +109,16 @@ public class ThreadPoolApp {
         }
         //закрываем пул потоков ThreadPool (шаг 4)
         threadPool.shutdown();
+
+        //Возвращает {@code true}, если все задачи были выполнены после завершения работы.
+        //Обратите внимание, что {@code isTerminated} никогда не будет {@code true}, если
+        //сначала не было вызвано {@code shutdown} или {@code shutdownNow}.
+//        while (!threadPool.isTerminated()) {
+//            try {
+//                Thread.sleep(100);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//        }
     }
 }
