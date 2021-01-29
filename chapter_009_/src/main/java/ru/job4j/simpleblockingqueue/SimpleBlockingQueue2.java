@@ -1,4 +1,4 @@
-package ru.job4j.wait;
+package ru.job4j.simpleblockingqueue;
 
 import javax.annotation.concurrent.GuardedBy;
 import javax.annotation.concurrent.ThreadSafe;

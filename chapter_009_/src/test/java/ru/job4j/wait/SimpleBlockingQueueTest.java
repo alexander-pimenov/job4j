@@ -1,6 +1,8 @@
 package ru.job4j.wait;
 
 import org.junit.Test;
+import ru.job4j.simpleblockingqueue.SimpleBlockingQueue;
+import ru.job4j.simpleblockingqueue.SimpleBlockingQueue3;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -137,7 +139,7 @@ public class SimpleBlockingQueueTest {
         producer.start();
         Thread consumer = new Thread(
                 () -> {
-                    while (!queue.isEmpty() || !Thread.currentThread().isInterrupted()) {
+                    while (queue.isEmpty() || !Thread.currentThread().isInterrupted()) {
                         try {
                             buffer.add(queue.poll());
                             Thread.sleep(100);

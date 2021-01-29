@@ -1,12 +1,14 @@
 package ru.job4j.wait;
 
+import ru.job4j.simpleblockingqueue.SimpleBlockingQueue3;
+
 public class ParallelSearch {
     public static void main(String[] args) {
         SimpleBlockingQueue3<Integer> queue = new SimpleBlockingQueue3<>(5);
         final Thread consumer = new Thread(
                 () -> {
-                    while (!queue.isEmpty() || !Thread.currentThread().isInterrupted()) {
-                        if (!queue.isEmpty()) {
+                    while (queue.isEmpty() || !Thread.currentThread().isInterrupted()) {
+                        if (queue.isEmpty()) {
                             System.out.println(queue.poll());
                         }
 //                        System.out.println(queue.poll());

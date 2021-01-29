@@ -1,4 +1,4 @@
-package ru.job4j.wait;
+package ru.job4j.simpleblockingqueue;
 
 import java.util.Random;
 

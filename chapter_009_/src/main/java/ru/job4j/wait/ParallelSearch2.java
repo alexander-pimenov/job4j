@@ -1,5 +1,7 @@
 package ru.job4j.wait;
 
+import ru.job4j.simpleblockingqueue.SimpleBlockingQueue3;
+
 /*
  * В этом примере мы видим, что если запустим этот код, то на консоли мы увидим,
  * что нить производитель закончила работу, а нить потребитель продолжает ждать событий.
@@ -21,7 +23,7 @@ public class ParallelSearch2 {
         final Thread consumer = new Thread(
                 () -> {
                     //проверяем, что очередь пустая или нить выключили
-                    while (!queue.isEmpty() || !Thread.currentThread().isInterrupted()) {
+                    while (queue.isEmpty() || !Thread.currentThread().isInterrupted()) {
 //                        if (!queue.isEmpty()) {
 //                            System.out.println(queue.poll());
 //                        }

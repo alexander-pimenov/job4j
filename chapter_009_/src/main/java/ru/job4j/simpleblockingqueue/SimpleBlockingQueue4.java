@@ -1,10 +1,12 @@
-package ru.job4j.wait;
+package ru.job4j.simpleblockingqueue;
 
 import javax.annotation.concurrent.GuardedBy;
 import javax.annotation.concurrent.ThreadSafe;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 /*
  * Класс SimpleBlockingQueue3<T> отличается от класса SimpleBlockingQueue<T> лишь
@@ -12,13 +14,11 @@ import java.util.concurrent.TimeUnit;
  * а обрабатывают их внутри.
  */
 @ThreadSafe
-public class SimpleBlockingQueue3<T> {
+public class SimpleBlockingQueue4<T> {
 
     //Создадим объект для синхронизации
-    @GuardedBy("lock")
-    private final Object lock = new Object();
-
-//    private final Object lock = this;
+    @GuardedBy("this")
+    private final Object lock = this;
 
     //Создадим обычную очередь для работы с ней.
     private Queue<T> queue = new LinkedList<>();
@@ -26,7 +26,7 @@ public class SimpleBlockingQueue3<T> {
     //максимальное количество элементов в очереди
     private final int limitBound;
 
-    public SimpleBlockingQueue3(int limitBound) {
+    public SimpleBlockingQueue4(int limitBound) {
         this.limitBound = limitBound;
     }
 
@@ -35,18 +35,19 @@ public class SimpleBlockingQueue3<T> {
      *
      * @param value значение.
      */
-    public void offer(T value) {
-        synchronized (lock) {
-            try {
-                while (queue.size() == limitBound) {
-                    System.out.println(String.format("%s waiting...", Thread.currentThread().getName()));
-                    lock.wait();
-                }
-                queue.offer(value);
-                lock.notifyAll();
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
+    public synchronized void offer(T value) {
+        try {
+            while (queue.size() == limitBound) {
+                System.out.println(String.format("%s waiting...", Thread.currentThread().getName()));
+                this.wait();
             }
+            if (queue.size() == 0) {
+                this.notifyAll();
+            }
+            queue.offer(value);
+            this.notifyAll();
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
         }
     }
 
@@ -55,31 +56,34 @@ public class SimpleBlockingQueue3<T> {
      *
      * @return значение.
      */
-    public T poll() {
-        synchronized (lock) {
-            T value = null;
-            try {
-                while (queue.size() == 0) {
-                    System.out.println(String.format("%s waiting...", Thread.currentThread().getName()));
-                    lock.wait();
-                }
-                value = queue.poll();
-                lock.notifyAll();
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
+    public synchronized T poll() {
+        T value = null;
+        try {
+            while (queue.size() == 0) {
+                System.out.println(String.format("%s waiting...", Thread.currentThread().getName()));
+                this.wait();
             }
-            return value;
+            if (queue.size() == limitBound) {
+                this.notifyAll();
+            }
+            value = queue.poll();
+            this.notifyAll();
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
         }
+        return value;
     }
 
-    public int size() {
-        synchronized (lock) {
-            return queue.size();
-        }
+    public synchronized int size() {
+        return queue.size();
     }
 
-    public boolean isEmpty() {
+    public synchronized boolean isEmpty() {
         return queue.isEmpty();
+    }
+
+    public synchronized void clear() {
+        this.queue.clear();
     }
 
     @Override
@@ -89,7 +93,7 @@ public class SimpleBlockingQueue3<T> {
 
     public static void main(String[] args) {
         System.out.println(Thread.currentThread().getName() + " started.");
-        SimpleBlockingQueue3<String> queue3 = new SimpleBlockingQueue3<>(3);
+        SimpleBlockingQueue4<String> queue3 = new SimpleBlockingQueue4<>(3);
 
         //поток ПРОИЗВОДИТЕЛЬ.
         //Он в цикле добавляет в очередь слова из массива words, с задержкой в 3 сек.

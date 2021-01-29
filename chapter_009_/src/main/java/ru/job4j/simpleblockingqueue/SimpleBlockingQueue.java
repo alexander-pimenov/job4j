@@ -1,4 +1,4 @@
-package ru.job4j.wait;
+package ru.job4j.simpleblockingqueue;
 
 import javax.annotation.concurrent.GuardedBy;
 import javax.annotation.concurrent.ThreadSafe;
@@ -34,11 +34,15 @@ public class SimpleBlockingQueue<T> {
      */
     public void offer(T value) throws InterruptedException {
         synchronized (lock) {
-            while (queue.size() == limitBound) {
-                System.out.println(String.format("%s waiting...", Thread.currentThread().getName()));
+            while (this.queue.size() == this.limitBound) {
+//                System.out.println(String.format("%s waiting...", Thread.currentThread().getName()));
                 lock.wait();
             }
-            queue.offer(value);
+            if (this.queue.size() == 0) {
+//                System.out.println("[BlockingQueue] queue is empty, notify");
+                lock.notifyAll();
+            }
+            this.queue.offer(value);
             lock.notifyAll();
         }
     }
@@ -52,11 +56,15 @@ public class SimpleBlockingQueue<T> {
     public T poll() throws InterruptedException {
         synchronized (lock) {
             T value = null;
-            while (queue.size() == 0) {
-                System.out.println(String.format("%s waiting...", Thread.currentThread().getName()));
+            while (this.queue.size() == 0) {
+//                System.out.println(String.format("%s waiting...", Thread.currentThread().getName()));
                 lock.wait();
             }
-            value = queue.poll();
+            if (this.queue.size() == this.limitBound) {
+//                System.out.println("[BlockingQueue] queue is full, notify");
+                lock.notifyAll();
+            }
+            value = this.queue.poll();
             lock.notifyAll();
             return value;
         }
@@ -64,18 +72,24 @@ public class SimpleBlockingQueue<T> {
 
     public int size() {
         synchronized (lock) {
-            return queue.size();
+            return this.queue.size();
         }
     }
 
     public boolean isEmpty() {
         synchronized (lock) {
-            return queue.isEmpty();
+            return this.queue.isEmpty();
+        }
+    }
+
+    public void clear() {
+        synchronized (lock) {
+            this.queue.clear();
         }
     }
 
     @Override
     public String toString() {
-        return queue.toString();
+        return this.queue.toString();
     }
 }

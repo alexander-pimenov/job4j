@@ -3,6 +3,9 @@ package ru.job4j.wait;
 import javax.annotation.concurrent.GuardedBy;
 import javax.annotation.concurrent.ThreadSafe;
 
+/**
+ * Класс, который блокирует выполнение по условию счетчика.
+ */
 @ThreadSafe
 public class CountBarrier {
     @GuardedBy("this")
