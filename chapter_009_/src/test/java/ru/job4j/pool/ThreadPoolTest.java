@@ -44,12 +44,7 @@ public class ThreadPoolTest {
         ThreadPool threadPool = new ThreadPool();
 
         threadPool.work(task1);
-        //ждем 5 секунд
-        try {
-            TimeUnit.SECONDS.sleep(5);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
         threadPool.shutdown();
     }
 }
