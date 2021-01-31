@@ -4,7 +4,13 @@ import net.jcip.annotations.ThreadSafe;
 
 import java.util.concurrent.atomic.AtomicReference;
 
-/*Здесь нет синхронизации, но класс потокобезопасный.*/
+/*Здесь нет синхронизации, но класс потокобезопасный.
+* Процессоры на уровне ядра поддерживают операцию CAS - compare-and-swap (сравнивать и менять местами).
+* Эта операция атомарная. В Java есть структуры данных, которые реализуют этот механизм.
+* Например, Stack.
+* Метод push и poll используют шаблон check-then-act.
+* Метод compareAndSet атомарный!!!
+* */
 @ThreadSafe
 public class CASStack<T> {
     private final AtomicReference<Node<T>> head = new AtomicReference<>();

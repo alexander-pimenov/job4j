@@ -53,6 +53,7 @@ public class CountBarrier {
         Thread th1 = new Thread(
                 () -> {
                     System.out.println("-= " + Thread.currentThread().getName() + " =-");
+
                     for (int i = 0; i < totalCall; i++) {
                         countBarrier.count();
                     }
