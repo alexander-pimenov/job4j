@@ -9,12 +9,12 @@ public class ThreadPoolDemo {
 
         ThreadPool threadPool = new ThreadPool();
 
-        threadPool.work(new Task(1));
-        threadPool.work(new Task(2));
-        threadPool.work(new Task(3));
-        threadPool.work(new Task(4));
-        threadPool.work(new Task(5));
-        threadPool.work(new Task(6));
+        threadPool.work(new Task(100));
+        threadPool.work(new Task(200));
+        threadPool.work(new Task(300));
+        threadPool.work(new Task(400));
+        threadPool.work(new Task(500));
+        threadPool.work(new Task(600));
 
         //задержка 15 сек, чтоб проверить работу с ней и без неё.
 //        try {
@@ -23,6 +23,14 @@ public class ThreadPoolDemo {
 //            e.printStackTrace();
 //        }
 
+        int runnableCount = 15;
+        Runnable r;
+        for (int i = 0; i < runnableCount; i++) {
+            r = new Task(i);
+            threadPool.work(r);
+        }
+
+        threadPool.waitUntilAllTasksFinished();
         threadPool.shutdown();
 
         System.out.println("The Main thread has finished running!");

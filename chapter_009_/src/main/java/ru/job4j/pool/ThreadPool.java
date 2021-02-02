@@ -16,7 +16,7 @@ public class ThreadPool {
     private AtomicBoolean execute;
 
     // Контейнер для рабочих потоков в пуле
-    private final List<Thread> threads;
+    private final List<WorkerThread> threads;
 
     // Очередь запускаемых файлов (Runnable)
     private final SimpleBlockingQueue<Runnable> tasksQueue;
@@ -32,25 +32,10 @@ public class ThreadPool {
         //количество ядер в системе
         int poolSize = Runtime.getRuntime().availableProcessors();
         for (int i = 0; i < poolSize; i++) {
-
-            Thread thread = new Thread(
-                    () -> {
-                        while (!Thread.currentThread().isInterrupted()
-                                || this.execute.get() || !this.tasksQueue.isEmpty()) {
-                            Runnable runnable;
-                            try {
-                                while ((runnable = this.tasksQueue.poll()) != null) {
-                                    runnable.run();
-                                }
-                                Thread.sleep(1);
-                            } catch (InterruptedException e) {
-                                Thread.currentThread().interrupt();
-                            }
-                        }
-                        //Зададим имя пула потоков и рабочего потока
-                    }, "ThreadPool-" + poolCount.get() + "-Thread-" + i);
-            thread.start();
-            this.threads.add(thread);
+            WorkerThread workerThread = new WorkerThread(tasksQueue);
+            workerThread.setName("ThreadPool-" + poolCount.get() + "-Thread-" + i);
+            workerThread.start();
+            this.threads.add(workerThread);
         }
     }
 
@@ -66,6 +51,8 @@ public class ThreadPool {
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
+        } else {
+            throw new IllegalStateException("Thread is stopped.");
         }
     }
 
@@ -73,10 +60,23 @@ public class ThreadPool {
      * Метод устанавливает флаг execute в false, и работа пула потоков
      * продолжается до тех пор, пока очередь имеет Runnable объекты.
      */
-    public synchronized void shutdown() {
+    public void shutdown() {
         execute.set(false);
-        for (Thread thread : threads) {
-            thread.interrupt();
+        for (WorkerThread thread : threads) {
+            thread.doStop();
+        }
+    }
+
+    /**
+     * Метод ожидает пока есть задания в очереди.
+     */
+    public void waitUntilAllTasksFinished() {
+        while (tasksQueue.size() > 0) {
+            try {
+                Thread.sleep(1);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
         }
     }
 }
