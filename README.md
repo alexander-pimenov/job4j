@@ -18,6 +18,10 @@ This repository was created to perform tasks for course _[`Job4j`](http://job4j.
 * *chapter_009* - Multithreading
 * *chapter_010* - Servlet JSP
 
+---
+Создание ветки из IDEA
+
+
 <!--
 * *chapter_011* - 
 * *chapter_012* - 
