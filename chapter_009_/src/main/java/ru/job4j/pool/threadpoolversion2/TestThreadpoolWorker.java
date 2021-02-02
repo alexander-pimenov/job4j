@@ -1,4 +1,4 @@
-package ru.job4j.pool.threadpoolnew;
+package ru.job4j.pool.threadpoolversion2;
 
 public class TestThreadpoolWorker {
     public static void main(String[] args) {
