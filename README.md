@@ -2,7 +2,7 @@
 [![codecov](https://codecov.io/gh/alexander-pimenov/job4j/branch/master/graph/badge.svg)](https://codecov.io/gh/alexander-pimenov/job4j)
 
 # Repository of Alexander Pimenov
-<!--Прохожу обучение по курсу _Job4j_. https://job4j.ru/-->
+<!--Курс _Job4j_. https://job4j.ru/-->
 ## Repo's description
 This repository was created to perform tasks for course _[`Job4j`](http://job4j.ru/)._
 
@@ -16,13 +16,15 @@ This repository was created to perform tasks for course _[`Job4j`](http://job4j.
 * *chapter_007* - SQL, JDBC
 * *chapter_008* - OOD, Garbage Collection 
 * *chapter_009* - Multithreading
+* *chapter_010* - Servlet JSP
+
 <!--
-* *chapter_010* - 
 * *chapter_011* - 
 * *chapter_012* - 
 * *chapter_013* - 
 * *chapter_014* - 
 --> 
+
 
 <!--
 * *chapter_001* - Basic syntax
