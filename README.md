@@ -23,6 +23,7 @@ This repository was created to perform tasks for course _[`Job4j`](http://job4j.
 ## change README.md
 ## В курсе производилась работа с ветками git.
 ## Конфликты слияния.
+## добавлена ветка hotfix
 
 <!--
 * *chapter_011* - 
