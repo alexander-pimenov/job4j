@@ -25,6 +25,11 @@ This repository was created to perform tasks for course _[`Job4j`](http://job4j.
 ## Конфликты слияния.
 ## добавлена ветка hotfix
 
+---
+Создание ветки из IDEA
+Ветка task_139840#301856
+
+
 <!--
 * *chapter_011* - 
 * *chapter_012* - 
