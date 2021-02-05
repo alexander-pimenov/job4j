@@ -13,7 +13,7 @@ public class ThreadPool {
     private static AtomicInteger poolCount = new AtomicInteger(0);
 
     // Флаг для управления рабочими потоками пула
-    private AtomicBoolean execute;
+    private volatile boolean execute;
 
     // Контейнер для рабочих потоков в пуле
     private final List<WorkerThread> threads;
@@ -26,7 +26,7 @@ public class ThreadPool {
     public ThreadPool() {
         poolCount.incrementAndGet();
         this.tasksQueue = new SimpleBlockingQueue<>(8);
-        this.execute = new AtomicBoolean(true);
+        this.execute = true;
         this.threads = new ArrayList<>();
 
         //количество ядер в системе
@@ -45,14 +45,15 @@ public class ThreadPool {
      * @param job Runnable объект
      */
     public void work(Runnable job) {
-        if (this.execute.get()) {
-            try {
-                this.tasksQueue.offer(job);
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-            }
-        } else {
+
+        if (!this.execute) {
             throw new IllegalStateException("Thread is stopped.");
+        }
+
+        try {
+            this.tasksQueue.offer(job);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
         }
     }
 
@@ -61,7 +62,8 @@ public class ThreadPool {
      * продолжается до тех пор, пока очередь имеет Runnable объекты.
      */
     public void shutdown() {
-        execute.set(false);
+        this.execute = false;
+//        execute.set(false);
         for (WorkerThread thread : threads) {
             thread.doStop();
         }

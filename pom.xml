@@ -6,8 +6,10 @@
     <artifactId>junior</artifactId>
     <version>2.0</version>
     <packaging>pom</packaging>
+
     <name>junior</name>
     <url>http://job4j.ru/</url>
+
 
     <!-- Секция свойств -->
     <properties>
@@ -18,8 +20,9 @@
         <jmh.version>1.26</jmh.version>
         <log4j.version>2.14.0</log4j.version>
         <slf4j.version>1.7.30</slf4j.version>
-		<compiler.version>3.8.1</compiler.version>
+        <compiler.version>3.8.1</compiler.version>
     </properties>
+
 
     <profiles>
         <!-- Настройки для подключения к тестовой базе -->
