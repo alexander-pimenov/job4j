@@ -4,13 +4,8 @@ import ru.job4j.simpleblockingqueue.SimpleBlockingQueue;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class ThreadPool {
-
-    // Количество созданных пулов потоков
-    private static int poolCount = 0;
 
     // Флаг для управления рабочими потоками пула
     private volatile boolean execute;
@@ -24,7 +19,6 @@ public class ThreadPool {
     //Инициализация пула должна быть по количеству ядер в системе.
     //устанавливаем размер внутренней блокирующей очереди, например, равной 8.
     public ThreadPool() {
-        ++poolCount;
         this.tasksQueue = new SimpleBlockingQueue<>(8);
         this.execute = true;
         this.threads = new ArrayList<>();
@@ -33,7 +27,7 @@ public class ThreadPool {
         int poolSize = Runtime.getRuntime().availableProcessors();
         for (int i = 0; i < poolSize; i++) {
             WorkerThread workerThread = new WorkerThread(tasksQueue);
-            workerThread.setName("ThreadPool-" + poolCount + "-Thread-" + i);
+            workerThread.setName("ThreadPool-1-Thread-" + i);
             workerThread.start();
             this.threads.add(workerThread);
         }
@@ -63,7 +57,6 @@ public class ThreadPool {
      */
     public void shutdown() {
         this.execute = false;
-//        execute.set(false);
         for (WorkerThread thread : threads) {
             thread.doStop();
         }
