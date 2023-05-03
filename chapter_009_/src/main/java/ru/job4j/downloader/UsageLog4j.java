@@ -33,7 +33,7 @@ public class UsageLog4j {
             System.out.println(0x79);
             String text = "fuck the millenium!";
             CharSequence charSequence = text.subSequence(1, 6);
-            String substring = text.substring(1, 6);
+            String substring = text.substring(2, 8);
             System.out.println(charSequence);
             System.out.println(substring);
             String line = "aaabccdddc";

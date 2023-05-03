@@ -76,3 +76,29 @@ java.nio.file.NoSuchFileException: \file\does\not\exist
 	at java.base/java.nio.file.Files.newByteChannel(Files.java:424)
 	at java.base/java.nio.file.Files.readAllBytes(Files.java:3280)
 	at ru.job4j.downloader.UsageLog4j.main(UsageLog4j.java:53)
+2023-05-03 19:41:58 [INFO ] UsageLog4j - info message. Application works. Just a log message.
+2023-05-03 19:41:58 [WARN ] UsageLog4j - warn message. Something to warn
+2023-05-03 19:41:58 [ERROR] UsageLog4j - error message. Something failed.
+2023-05-03 19:41:58 [ERROR] UsageLog4j - Error message from catch-block. Failed to read file /file/does/not/exist.
+java.nio.file.NoSuchFileException: \file\does\not\exist
+	at java.base/sun.nio.fs.WindowsException.translateToIOException(WindowsException.java:85)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:103)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:108)
+	at java.base/sun.nio.fs.WindowsFileSystemProvider.newByteChannel(WindowsFileSystemProvider.java:235)
+	at java.base/java.nio.file.Files.newByteChannel(Files.java:371)
+	at java.base/java.nio.file.Files.newByteChannel(Files.java:422)
+	at java.base/java.nio.file.Files.readAllBytes(Files.java:3206)
+	at ru.job4j.downloader.UsageLog4j.main(UsageLog4j.java:53)
+2023-05-03 19:44:10 [INFO ] UsageLog4j - info message. Application works. Just a log message.
+2023-05-03 19:44:10 [WARN ] UsageLog4j - warn message. Something to warn
+2023-05-03 19:44:10 [ERROR] UsageLog4j - error message. Something failed.
+2023-05-03 19:44:10 [ERROR] UsageLog4j - Error message from catch-block. Failed to read file /file/does/not/exist.
+java.nio.file.NoSuchFileException: \file\does\not\exist
+	at java.base/sun.nio.fs.WindowsException.translateToIOException(WindowsException.java:85)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:103)
+	at java.base/sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:108)
+	at java.base/sun.nio.fs.WindowsFileSystemProvider.newByteChannel(WindowsFileSystemProvider.java:235)
+	at java.base/java.nio.file.Files.newByteChannel(Files.java:371)
+	at java.base/java.nio.file.Files.newByteChannel(Files.java:422)
+	at java.base/java.nio.file.Files.readAllBytes(Files.java:3206)
+	at ru.job4j.downloader.UsageLog4j.main(UsageLog4j.java:53)
